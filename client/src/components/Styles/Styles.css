@@ -1,0 +1,22 @@
+.select-console{
+    color:white;
+    background-color:#131618;
+    cursor: pointer;
+}
+
+.product-price{
+    /* color: #0d6efd; */
+    color: #6c757d;
+    /* color: rgb(24, 146, 13); */
+    font-weight: bold;
+}
+
+.product-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill , 210px);
+    height: auto;
+    gap: 30px;
+    justify-content: center;
+    margin: 2%;
+    flex-wrap: wrap;
+}

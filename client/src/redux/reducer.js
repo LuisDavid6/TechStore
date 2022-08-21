@@ -1,6 +1,6 @@
 import { GET_PRODUCTS, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
-         GET_USERS, CREATE_USER, GET_CATEGORIES} from "./actionTypes";
+         GET_USERS, CREATE_USER, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
 
 const initialState = {
     products: [],
@@ -38,9 +38,26 @@ export default function Reducer(state = initialState, action){
         case FILTER_BY_CATEGORY:
             return{
                 ...state,
-                productsFilter:  state.products.filter(e => e.category.name === action.payload),
-                categorySelect: state.categories.find(e=> e.name === action.payload),
+                productsFilter: action.payload.products,
+                categorySelect: action.payload,
                 refresh: !state.refresh
+            }
+
+        case FILTER_BY_SUBCATEGORY:
+            let filter = []
+            if(action.payload[1]) {
+                if(state.categorySelect.products.length === state.productsFilter.length){
+                    filter = state.categorySelect.products.filter(e=> e.type === action.payload[0])
+
+                }else filter = state.productsFilter.concat(state.categorySelect.products.filter(e=> e.type === action.payload[0]))
+
+            }else filter = state.productsFilter.filter(e => e.type!== action.payload[0])
+
+            if(filter.length === 0) filter = state.categorySelect.products
+
+            return{
+                ...state,
+                productsFilter: filter
             }
 
         case FILTER_BY_PRICE:

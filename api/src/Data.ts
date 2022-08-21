@@ -79,6 +79,26 @@ const pc = {
     image: "https://www.alianzaparacrecer.com/wp-content/uploads/2019/05/22-23.jpg",
     categoryId: id
 }
+const pc2 = {
+    name: "Pc Portatil Gamer Asus",
+    price: 2599900,
+    totalPrice: 2599900,
+    discount: 10,
+    type: "Asus",
+    image: "https://www.elespectador.com/resizer/j9NoeYdt_fYoKLlsXx6G_H9EBNQ=/631x420/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/B6UMTSSJ7VE6DFPWW4TXL6DCUY.jpg",
+    categoryId: id
+}
+
+const pc3 = {
+    name: "Computador Dell Inspiron",
+    price: 2199900,
+    totalPrice: 2199900,
+    discount: 30,
+    type: "Dell",
+    image: "https://i.dell.com/das/dih.ashx/547w/sites/imagecontent/consumer/merchandizing/en/PublishingImages/Franchise-category/desktop-inspiron-polaris-pdp-design-1.jpg",
+    categoryId: id
+}
+
 const pcMesa = {
     name: "Computador de escritorio",
     price: 1599900,
@@ -90,6 +110,9 @@ const pcMesa = {
 }
 
 
-const Games = [GtaV, GodOfWar, Horizon, Uncharted4, Spiderman, Halo5, Destiny, pc, pcMesa]
+
+
+
+const Games = [GtaV, GodOfWar, Horizon, Uncharted4, Spiderman, Halo5, Destiny, pc, pc2, pc3, pcMesa]
 
 export default Games

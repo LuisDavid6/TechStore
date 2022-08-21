@@ -2,10 +2,9 @@ import axios from "axios"
 
 import { GET_PRODUCTS, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
-         GET_USERS, CREATE_USER, GET_CATEGORIES} from "./actionTypes";
+         GET_USERS, CREATE_USER, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
 
 export function getProducts(){
-
   return async function(dispatch){
     try{
       const {data} = await axios.get("http://localhost:3001/products")
@@ -14,7 +13,7 @@ export function getProducts(){
         payload: data
       })
     }catch(e){
-      throw "Error"
+      throw Error
     }
   }
 }
@@ -32,9 +31,24 @@ export function deleteFromCart(id){
 }
 
 export function FilterByCategory(category){
-  return{
-    type: FILTER_BY_CATEGORY, payload: category
-  }
+  return async function(dispatch){
+    try {
+      const {data} = await axios.get(`http://localhost:3001/categories?category=${category}`)
+      return dispatch({
+        type: FILTER_BY_CATEGORY,
+        payload: data
+      })
+    }catch (error) {
+      throw Error
+    }
+  }  
+}
+
+export function FilterBySubcategory(category, action){
+    return {
+      type: FILTER_BY_SUBCATEGORY,
+      payload: [category,action]
+    }
 }
 
 export function FilterByPrice(order){
@@ -52,7 +66,7 @@ export function getProductDetail(id){
         payload: data
       })
     }catch (error) {
-      throw "Error"
+      throw Error
     }
   }  
 }
@@ -66,7 +80,7 @@ export function getUsers(){
         payload: data
       })
     }catch(e){
-      throw "Error"
+      throw Error
     }
   }
 }
@@ -79,7 +93,7 @@ export function createUser(user){
         type: CREATE_USER
       }) 
     } catch(e){
-        throw "Error"
+        throw Error
     }
   }
 }
@@ -93,15 +107,14 @@ export function getCategories(){
         payload: data
       }) 
     } catch(e){
-      throw "Error"
+      throw Error
     }
   }
 }
 
 
 // export function getUsers(){  
-//     return function(dispatch){
-//         console.log("HOLA")  
+//     return function(dispatch){ 
 //         return fetch("http://localhost:3001/users")
 //             .then(data => data.json())
 //             .then( json =>{

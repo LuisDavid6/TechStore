@@ -1,6 +1,7 @@
 .select-console{
     color:white;
     background-color:#131618;
+    /* background-color:#ff5d11; */
     cursor: pointer;
 }
 
@@ -13,10 +14,16 @@
 
 .product-list{
     display: grid;
-    grid-template-columns: repeat(auto-fill , 210px);
+    /* grid-template-columns: repeat(auto-fill , 200px); */
+    grid-template-columns: repeat(auto-fill , minmax(11rem, 1fr));
     height: auto;
-    gap: 30px;
+    gap: 20px;
     justify-content: center;
     margin: 2%;
     flex-wrap: wrap;
+}
+
+.bg-global{
+    background-color:rgb(48, 45, 45)
+    
 }

@@ -1,6 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
-// import NavBar from "./NavBar";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
@@ -23,7 +22,6 @@ export default function Login() {
 
   return (
     <div>
-      {/* <NavBar /> */}
       <Formik
         initialValues={{
           email: "",

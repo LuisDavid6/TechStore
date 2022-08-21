@@ -17,10 +17,10 @@ export default function Details(){
   },[])
 
   return(
-    <div>
+    <div >
       {/* <NavBar/> */}
       <div className="row mx-5">
-        <div className="col-7 bg-black me-2 rounded-4 p-4">
+        <div className="col-7 bg-global me-1 rounded-0 p-4">
           <div className="row">
             <div className="col-4"></div>
             <div className="col"></div>
@@ -32,13 +32,13 @@ export default function Details(){
           </div>
         </div>
 
-        <div className="col bg-black ms-2 rounded-4">
+        <div className="col bg-global ms-0 rounded-0">
 
         </div>
       </div>
 
-      <div className="bg-black mt-3 mx-5 rounded-4 p-5">
-        <h3 className="dropdown-toggle mb-3 w-25 text-white text-start" data-bs-toggle="collapse" data-bs-target="#collapseEspec" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
+      <div className="bg-global mt-1 mx-5 rounded-0 p-5">
+        <h3 className="dropdown-toggle mb-0 w-25 text-black text-start" data-bs-toggle="collapse" data-bs-target="#collapseEspec" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
           Especificaciones
         </h3>
         <div className="collapse" id="collapseEspec">
@@ -52,7 +52,7 @@ export default function Details(){
           </div>
         </div>
 
-        <h3 className="dropdown-toggle my-5 w-25 text-white text-start" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
+        <h3 className="dropdown-toggle my-5 w-25 text-black text-start" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
           Descripción
         </h3>
         <div className="collapse" id="collapseDesc">

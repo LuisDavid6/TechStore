@@ -2,7 +2,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar';
 import Cart from './components/Cart';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import HomeProducts from './components/HomeProducts';
 import ProductDetail from './components/ProductDetail';
 import Register from './components/Register';
@@ -28,7 +28,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Redirect to="/home" />}/>
         <Route exact path='/home' element={<Home/>}/>
-        <Route exact path='/ofertas' element={<HomeProducts/>}/>
+        <Route exact path='/products/:category' element={<HomeProducts/>}/>
         <Route exact path='/shoppingCart' element={<Cart/>}/>
         <Route path='/product/:id' element={<ProductDetail/>} />
         <Route path='/register' element={<Register/>} />

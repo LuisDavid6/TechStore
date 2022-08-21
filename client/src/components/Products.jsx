@@ -1,13 +1,13 @@
 import "./Styles/Styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getProducts, addToCart } from "../redux/actions";
+import { getProducts, addToCart, FilterByCategory } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Products() {
+export default function Products({ category }) {
   const convertPrice = (price) => {
     const priceLong = "" + price;
     let punt = 0;
@@ -26,6 +26,8 @@ export default function Products() {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.productsFilter);
+  const categorySelect = useSelector(state => state.categorySelect)
+
   const refresh = useSelector((state) => state.refresh);
 
   const notifyAddToCart = () => {
@@ -42,7 +44,8 @@ export default function Products() {
   };
 
   useEffect(() => {
-    dispatch(getProducts());
+    // dispatch(getProducts())
+    dispatch(FilterByCategory(category))
   }, []);
 
   return (
@@ -51,27 +54,24 @@ export default function Products() {
         {products &&
           products.map((e) => {
             return (
-              <div key={e.id} className="card rounded border-dark border-3">
-                <img
-                  src={e.image}
-                  className="card-img-top"
-                  alt={e.name}
-                  style={{ width: "204.5px", height: "240px" }}
-                />
+              <div key={e.id} className="card rounded">
+                <div className="card-body p-0 h-100">
+                  <img
+                    src={e.image}
+                    className="rounded"
+                    alt={e.name}
+                    width="100%"
+                    height="100%"
+                    // style={{ height: "240px" }}
+                  />
+                </div>
                 <div className="card-body">
-                  <h5 className="card-title" style={{ height: "50px" }}>
-                    {e.name}
-                  </h5>
+                  <h6 className="card-title" style={{ height: "50px" }}>{e.name}</h6>
                   <div className="card-body">
-                    <p className="card-text h5 product-price">
-                      ${convertPrice(e.price)}
-                    </p>
+                    <p className="card-text h5 product-price">${convertPrice(e.price)}</p>
                   </div>
                 </div>
-                <div
-                  className="card-body d-flex"
-                  style={{ justifyContent: "right", gap: "12px" }}
-                >
+                <div className="card-body d-flex" style={{ justifyContent: "right", gap: "12px" }}>
                   <Link to={`/product/${e.id}`}>
                     <a
                       href="#"

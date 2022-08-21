@@ -3,25 +3,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { FilterByCategory, getCategories } from "../redux/actions";
 import "./Styles/Styles.css"
 import { useEffect } from "react";
+import { useState } from "react";
 
 export default function NavBar() {
   const cont = useSelector((state) => state.cart);
   const categories = useSelector(state => state.categories)
   const dispatch = useDispatch();
 
+  const [search, setSearch] = useState("")
+
   const handleCategory = (category) => {
     dispatch(FilterByCategory(category));
   };
+
+  const handleSearch = (e) =>{
+    e.preventDefault()
+    alert(search)
+  }
 
   useEffect(()=>{
     dispatch(getCategories())
   },[])
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-black mx-5 my-3 px-3 h5 rounded-5">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-global px-3 h5 m-0">
       <div className="container-fluid py-2">
         <Link className="navbar-brand me-5" to="/">
-          GAMESTORE
+          TECHSTORE
         </Link>
         <button
           className="navbar-toggler"
@@ -51,35 +59,35 @@ export default function NavBar() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >Categorias</a>
-              <ul className="dropdown-menu bg-dark p-0" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu bg-dark p-0 mx-auto" aria-labelledby="navbarDropdown" style={{maxWidth:"200px"}}>
                 <div className="list-group">
                   {categories && categories.map(e=>{
                     return (
-                      <li className="list-group-item list-group-item-action list-group-item-dark select-console" key={e.id} onClick={() => handleCategory(e.name)}>{e.name}</li>
+                      <Link to={`/products/${e.name}`} className="text-decoration-none" key={e.id}> <li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={() => handleCategory(e.name)}>{e.name}</li></Link>
                       )
                   })}
-                
                 </div>
               </ul>
             </li>
           </ul>          
           <form className="d-flex mx-5">
-            <div className="input-group flex-nowrap">
-                <input type="text" className="form-control" placeholder="Buscar..." aria-label="buscar" aria-describedby="addon-wrapping"/>
-                <button className="input-group-text btn-outline-light bg-dark" type="submit" id="addon-wrapping"><i className="bi bi-search"></i></button>
+            <div className="input-group flex-nowrap mx-auto" style={{maxWidth:"250px"}}>
+                <input type="text" className="form-control" placeholder="Buscar..." aria-label="buscar" aria-describedby="addon-wrapping" onChange={e=> setSearch(e.target.value)}/>
+                <button className="input-group-text btn-outline-light bg-dark" type="submit" id="addon-wrapping" onClick={handleSearch}>
+                  <i className="bi bi-search text-white"></i>
+                </button>
             </div>
           </form> 
-
           <Link to="/shoppingCart">
-            <i className="bi bi-cart-check h2 mb-0 mx-3 position-relative" style={{color:"white"}}>
-              <span className={cont.length>0 ? "position-absolute top-1 p-2 start-100 translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"14px"}}>
+            <i className="bi bi-cart-check h2 mb-0 mx-3 position-relative text-white" >
+              <span className={cont.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
                 {cont.length>0 && cont.length}
-                  <span className="visually-hidden">productos en el carrito</span>
+
               </span>
             </i>
           </Link>        
           <div className="dropdown">
-            <i className="bi bi-person-circle h2 mb-0 mx-3" data-bs-toggle="dropdown" aria-expanded="false" style={{color:"white", cursor:"pointer"}}></i>
+            <i className="bi bi-person-circle h2 mb-0 mx-3 text-white" data-bs-toggle="dropdown" aria-expanded="false" style={{cursor:"pointer"}}></i>
             <ul className="dropdown-menu dropdown-menu-end bg-dark p-0 mt-2" aria-labelledby="navbarDropdown">
               <div className="list-group">
                 <li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li>

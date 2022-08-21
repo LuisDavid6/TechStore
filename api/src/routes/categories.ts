@@ -14,7 +14,7 @@ router.post("/", async (req, res) =>{
                 name
             }
         })
-        res.json("category creted")
+        res.json("category created")
         
     } catch (error:any) {
         res.json(error.message)
@@ -23,10 +23,32 @@ router.post("/", async (req, res) =>{
 })
 
 router.get("/", async (req, res) =>{
+
+    const {category} = req.query
+    if(category){
+        try {
+            const filterCategory = await prisma.category.findFirst({
+                where:{
+                    // @ts-ignore
+                    name: category
+                },
+                include:{
+                    subCategories:true,
+                    products: true
+                }
+                
+            }) 
+            return res.json(filterCategory)
+        } catch (error) {
+            return res.json("ERROR")
+        }
+
+    }
     try {
         const categories =  await prisma.category.findMany({
             include:{
-                subCategories:true
+                subCategories:true,
+                products:true
             }
         })
         res.json(categories)

@@ -4,14 +4,14 @@ import s from "./Styles/Cart.module.css"
 import {GrAddCircle, GrSubtractCircle} from "react-icons/gr"
 import {RiDeleteBinLine} from "react-icons/ri"
 import {deleteFromCart} from "../redux/actions"
-// import NavBar from "./NavBar"
+import NavBar from "./NavBar"
 
 export class Cart extends Component{
 
     render(){
         return(
             <div>
-                {/* <NavBar/> */}
+                <NavBar/>
                 <div className={s.main}>
                     {this.props.cart.length > 0 ? this.props.cart.map(e =>{
                         return(

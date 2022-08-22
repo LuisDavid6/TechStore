@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FilterByCategory, getCategories } from "../redux/actions";
+import { filterByCategory, getCategories } from "../redux/actions";
 import "./Styles/Styles.css"
 import { useEffect } from "react";
 import { useState } from "react";
@@ -13,7 +13,7 @@ export default function NavBar() {
   const [search, setSearch] = useState("")
 
   const handleCategory = (category) => {
-    dispatch(FilterByCategory(category));
+    dispatch(filterByCategory(category));
   };
 
   const handleSearch = (e) =>{
@@ -28,7 +28,7 @@ export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-global px-3 h5 m-0">
       <div className="container-fluid py-2">
-        <Link className="navbar-brand me-5" to="/">
+      <Link className="navbar-brand me-5" to="/">
           TECHSTORE
         </Link>
         <button
@@ -48,7 +48,7 @@ export default function NavBar() {
               <Link to="/home" className="text-decoration-none"><a className="nav-link mx-3 active" aria-current="page" href="#">Inicio</a></Link>
             </li>
             <li className="nav-item">
-              <Link to="/ofertas" className="text-decoration-none"><a className="nav-link mx-3 active" aria-current="page" href="#">Ofertas</a></Link>
+              <Link to="/offers" className="text-decoration-none"><a className="nav-link mx-3 active" aria-current="page" href="#">Ofertas</a></Link>
             </li>
             <li className="nav-item dropdown">
               <a

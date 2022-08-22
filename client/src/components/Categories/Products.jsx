@@ -1,7 +1,7 @@
-import "./Styles/Styles.css";
+import "../Styles/Styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getProducts, addToCart, FilterByCategory } from "../redux/actions";
+import { getProducts, addToCart, filterByCategory } from "../../redux/actions";
 import { Link } from "react-router-dom";
 
 import { toast } from "react-toastify";
@@ -44,8 +44,7 @@ export default function Products({ category }) {
   };
 
   useEffect(() => {
-    // dispatch(getProducts())
-    dispatch(FilterByCategory(category))
+    dispatch(filterByCategory(category))
   }, []);
 
   return (
@@ -65,14 +64,15 @@ export default function Products({ category }) {
                     // style={{ height: "240px" }}
                   />
                 </div>
-                <div className="card-body">
-                  <h6 className="card-title" style={{ height: "50px" }}>{e.name}</h6>
+                <div className="card-body ">
+                  <h6 className="card-title text-wrap lh-base text-truncate" style={{ height: "50px" }}>{e.name}</h6>
+                </div>
                   <div className="card-body">
+                    <p className="card-text h6 product-price text-decoration-line-through fw-normal opacity-50 m-0">${convertPrice(e.totalPrice)}</p>
                     <p className="card-text h5 product-price">${convertPrice(e.price)}</p>
                   </div>
-                </div>
-                <div className="card-body d-flex" style={{ justifyContent: "right", gap: "12px" }}>
-                  <Link to={`/product/${e.id}`}>
+                <div className="card-body px-0" >
+                  <Link to={`/product/${e.id}`}>  
                     <a
                       href="#"
                       className="btn"
@@ -81,13 +81,13 @@ export default function Products({ category }) {
                         backgroundColor: "black",
                         color: "white",
                       }}
-                    >
+                      >
                       Ver producto
                     </a>
                   </Link>
                   <i
-                    className="bi bi-cart-check h2"
-                    style={{ color: "black", cursor: "pointer" }}
+                    className="bi bi-cart-check h2 m-0 text-black float-end pe-1"
+                    style={{ cursor: "pointer" }}
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title="Agregar al carrito"

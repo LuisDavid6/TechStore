@@ -18,6 +18,20 @@ export function getProducts(){
   }
 }
 
+export function getProductDetail(id){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.get(`http://localhost:3001/products/details/${id}`)
+      return dispatch({
+        type: GET_PRODUCT_DETAIL,
+        payload: data
+      })
+    }catch (error) {
+      throw Error
+    }
+  }  
+}
+
 export function addToCart(product){
   return{
     type: ADD_TO_CART, payload: product
@@ -30,7 +44,21 @@ export function deleteFromCart(id){
   }
 }
 
-export function FilterByCategory(category){
+export function getCategories(){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.get("http://localhost:3001/categories")
+      return dispatch({
+        type: GET_CATEGORIES,
+        payload: data
+      }) 
+    } catch(e){
+      throw Error
+    }
+  }
+}
+
+export function filterByCategory(category){
   return async function(dispatch){
     try {
       const {data} = await axios.get(`http://localhost:3001/categories?category=${category}`)
@@ -44,31 +72,17 @@ export function FilterByCategory(category){
   }  
 }
 
-export function FilterBySubcategory(category, action){
+export function filterBySubcategory(category, action){
     return {
       type: FILTER_BY_SUBCATEGORY,
       payload: [category,action]
     }
 }
 
-export function FilterByPrice(order){
+export function filterByPrice(order){
   return{
     type: FILTER_BY_PRICE, payload: order
   }
-}
-
-export function getProductDetail(id){
-  return async function(dispatch){
-    try {
-      const {data} = await axios.get(`http://localhost:3001/products/details/${id}`)
-      return dispatch({
-        type: GET_PRODUCT_DETAIL,
-        payload: data
-      })
-    }catch (error) {
-      throw Error
-    }
-  }  
 }
 
 export function getUsers(){
@@ -94,20 +108,6 @@ export function createUser(user){
       }) 
     } catch(e){
         throw Error
-    }
-  }
-}
-
-export function getCategories(){
-  return async function(dispatch){
-    try {
-      const {data} = await axios.get("http://localhost:3001/categories")
-      return dispatch({
-        type: GET_CATEGORIES,
-        payload: data
-      }) 
-    } catch(e){
-      throw Error
     }
   }
 }

@@ -1,6 +1,6 @@
 export default function Footer(){
   return(
-    <div className="p-4 bg-global text-white">
+    <div className="p-4 pb-2 bg-global text-white">
       <div className="row">
         <div className="col text-start">
           <h6>Quienes somos</h6>

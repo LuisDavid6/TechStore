@@ -1,6 +1,6 @@
-import "./Styles/Styles.css"
+import "../Styles/Styles.css"
 import { useDispatch, useSelector } from "react-redux"
-import { FilterByPrice, FilterBySubcategory } from "../redux/actions"
+import { filterByPrice, filterBySubcategory } from "../../redux/actions"
 import { useState } from "react"
 import { useEffect } from "react"
 
@@ -11,17 +11,17 @@ export default function Filters(){
     const [subCateg, setSubCateg] = useState([])
     const handleFilter = (e) =>{
       const value = e.target.value
-      dispatch(FilterByPrice(value))
+      dispatch(filterByPrice(value))
     }
 
     const handleSubCategory = (category) =>{
       const categ = subCateg.find(e=> e === category)
       if(categ){
         setSubCateg(subCateg.filter(e=> e!==category))
-        dispatch(FilterBySubcategory(category, false))
+        dispatch(filterBySubcategory(category, false))
       }else {
         setSubCateg([...subCateg, category])
-        dispatch(FilterBySubcategory(category, true))
+        dispatch(filterBySubcategory(category, true))
       }
     } 
 
@@ -53,16 +53,6 @@ export default function Filters(){
     </div>
   </div>
 </div> */}
-
-
-
-
-
-
-
-
-
-
 
 
 

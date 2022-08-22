@@ -3,7 +3,8 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getProductDetail } from "../redux/actions"
-// import NavBar from "./NavBar"
+import NavBar from "./NavBar"
+import Footer from "./Footer"
 
 
 export default function Details(){
@@ -18,7 +19,7 @@ export default function Details(){
 
   return(
     <div >
-      {/* <NavBar/> */}
+      <NavBar/>
       <div className="row mx-5">
         <div className="col-7 bg-global me-1 rounded-0 p-4">
           <div className="row">
@@ -70,6 +71,7 @@ export default function Details(){
         </div>
 
       </div>
+      <Footer/>
     </div>
     )
 }

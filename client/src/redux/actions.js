@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { GET_PRODUCTS, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
+import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
          GET_USERS, CREATE_USER, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
 
@@ -16,6 +16,20 @@ export function getProducts(){
       throw Error
     }
   }
+}
+
+export function deleteProduct(id){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.delete(`http://localhost:3001/products/delete/${id}`)
+      return dispatch({
+        type: DELETE_PRODUCT,
+        payload: data
+      })
+    }catch (error) {
+      throw Error
+    }
+  }  
 }
 
 export function getProductDetail(id){

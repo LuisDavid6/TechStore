@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
+import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
          GET_USERS, CREATE_USER, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
 
@@ -10,7 +10,8 @@ const initialState = {
     refresh: false,
     productDetail:{},
     users: [],
-    categorySelect: {}
+    categorySelect: {},
+    categoryProductsAdmin: []
 }
 
 export default function Reducer(state = initialState, action){
@@ -21,6 +22,13 @@ export default function Reducer(state = initialState, action){
                 ...state,
                 products: action.payload,
                 productsFilter: action.payload
+            }
+        
+        case DELETE_PRODUCT:
+            return{
+                ...state,
+                categoryProductsAdmin: state.categoryProductsAdmin.filter(e=> e.id !== action.payload.id),
+                refresh: !state.refresh
             }
 
         case ADD_TO_CART:
@@ -40,6 +48,7 @@ export default function Reducer(state = initialState, action){
                 ...state,
                 productsFilter: action.payload.products,
                 categorySelect: action.payload,
+                categoryProductsAdmin: action.payload.products,
                 refresh: !state.refresh
             }
 

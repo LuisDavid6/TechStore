@@ -5,6 +5,7 @@ import categories from "./routes/categories"
 import { PrismaClient } from '@prisma/client'
 import cors from "cors"
 import cookieParser from 'cookie-parser';
+import morgan from "morgan"
 import datas from "./Data"
 
 
@@ -22,6 +23,7 @@ app.use(cors({
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
 }))
 app.use(cookieParser())
+app.use(morgan('dev'));
 
 
 //rutes
@@ -48,9 +50,9 @@ app.listen(PORT, async()=>{
         })
     }    
 
-    // await prisma.product.createMany({
-    //     data: datas
-    // })
+    await prisma.product.createMany({
+        data: datas
+    })
         
     console.log(`server running on port ${PORT}`)
 })

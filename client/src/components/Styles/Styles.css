@@ -23,7 +23,19 @@
     flex-wrap: wrap;
 }
 
+.product-list-admin{
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(25rem, 1fr));
+    /* height: auto; */
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .bg-global{
-    background-color:rgb(48, 45, 45)
-    
+    /* background-color:rgb(48, 45, 45); */
+    background-color: #343a40
+}
+
+.cursor{
+    cursor: pointer;
 }

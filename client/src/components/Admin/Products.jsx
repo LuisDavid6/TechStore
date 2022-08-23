@@ -3,14 +3,14 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { filterByCategory, getCategories, getProducts } from "../../redux/actions"
 import { useState } from "react"
+import ProductCard from "./ProductCard"
 
 
 export default function Products(){
     
   const dispatch = useDispatch()
-  const products = useSelector((state)=> state.products)
   const categories = useSelector((state)=> state.categories)
-  const categorySelect = useSelector((state)=> state.categorySelect)
+  const refresh = useSelector(state => state.refresh)
 
   const [search, setSearch] = useState()
   const [filterCategory, setFilterCategory] = useState(false)
@@ -27,7 +27,7 @@ export default function Products(){
   useEffect(()=>{
     dispatch(getProducts())
     dispatch(getCategories())
-  },[])
+  },[refresh])
 
   return (
     <div className="">
@@ -57,21 +57,10 @@ export default function Products(){
             </form> 
             <button className="btn btn-outline-secondary text-white py-2">Agregar Producto</button>
           </div>
-          {filterCategory ?
-            categorySelect.products && categorySelect.products.map(e =>{
-              return(
-                // <h5 className="text-white">{e.name}</h5>
-                <img className="m-3" src={e.image} width="150px" height="200px"></img>
-              )
-            })
-            :
-            products && products.map(e =>{
-              return(
-                // <h5 className="text-white">{e.name}</h5>
-                <img className="m-3" src={e.image} width="150px" height="200px"></img>
-              )
-            })
-          }
+          <div className="product-list-admin">
+            <ProductCard filter={filterCategory}/>
+
+          </div>
         </div>
       </div>
     </div>

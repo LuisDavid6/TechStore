@@ -42,9 +42,9 @@ router.get("/details/:id", async (req,res) =>{
 // localhost:3001/products/
 router.post("/:categoryId", async (req, res) =>{
 
-    const {name,price,discount,type,image} = req.body
+    const {name,price,discount,type,stock,image} = req.body
     const {categoryId} = req.params
-    const totalPrice = price
+    const totalPrice = price-(price*(Number(discount)/100))
 
     try {
         const newProduct = await prisma.product.create({
@@ -53,6 +53,7 @@ router.post("/:categoryId", async (req, res) =>{
                 price,
                 discount,
                 type,
+                stock,
                 image,
                 category:{
                     connect: {id: categoryId}

@@ -2,7 +2,7 @@ import axios from "axios"
 
 import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
-         GET_USERS, CREATE_USER, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
+         GET_USERS, CREATE_USER, VERIFY_ROLE, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
 
 export function getProducts(){
   return async function(dispatch){
@@ -122,6 +122,42 @@ export function createUser(user){
       }) 
     } catch(e){
         throw Error
+    }
+  }
+}
+
+export function login(user){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.post("http://localhost:3001/users/login", user)
+      if(data.token) window.localStorage.setItem("token", data.token)
+      return data
+    } catch (e) {
+      throw Error
+    }
+  }
+}
+
+export function logout(){
+  return async function(){
+    window.localStorage.removeItem("token")
+  }
+}
+
+export function verifyRole(){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.get("http://localhost:3001/users/verifyRole",{
+        headers : {
+          Authorization : `Bearer ${window.localStorage.getItem("token")}`
+        }
+      })
+      return dispatch({
+        type: VERIFY_ROLE,
+        payload: data
+      })
+    } catch (e) {
+      throw Error
     }
   }
 }

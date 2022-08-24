@@ -68,8 +68,8 @@ export default function Products({ category }) {
                   <h6 className="card-title text-wrap lh-base text-truncate" style={{ height: "50px" }}>{e.name}</h6>
                 </div>
                   <div className="card-body">
-                    <p className="card-text h6 product-price text-decoration-line-through fw-normal opacity-50 m-0">${convertPrice(e.totalPrice)}</p>
-                    <p className="card-text h5 product-price">${convertPrice(e.price)}</p>
+                    <p className="card-text h6 product-price text-decoration-line-through opacity-50 m-0">${convertPrice(e.price)}</p>
+                    <p className="card-text h5 product-price">${convertPrice(e.totalPrice)}</p>
                   </div>
                 <div className="card-body px-0" >
                   <Link to={`/product/${e.id}`}>  

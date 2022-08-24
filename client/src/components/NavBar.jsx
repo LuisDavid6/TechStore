@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory, getCategories } from "../redux/actions";
+import { filterByCategory, getCategories, logout, verifyRole } from "../redux/actions";
 import "./Styles/Styles.css"
 import { useEffect } from "react";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function NavBar() {
   const cont = useSelector((state) => state.cart);
   const categories = useSelector(state => state.categories)
+  const role = useSelector(state => state.role)
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState("")
@@ -23,6 +24,7 @@ export default function NavBar() {
 
   useEffect(()=>{
     dispatch(getCategories())
+    dispatch(verifyRole())
   },[])
 
   return (
@@ -89,10 +91,22 @@ export default function NavBar() {
           <div className="dropdown">
             <i className="bi bi-person-circle h2 mb-0 mx-3 text-white" data-bs-toggle="dropdown" aria-expanded="false" style={{cursor:"pointer"}}></i>
             <ul className="dropdown-menu dropdown-menu-end bg-dark p-0 mt-2" aria-labelledby="navbarDropdown">
-              <div className="list-group">
-                <li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li>
-                <li className="list-group-item list-group-item-action list-group-item-dark select-console">Cerrar Sesión</li>
-              </div>
+              {role ==="admin" ?
+                <div className="list-group">
+                  <Link to="/admin" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Panel de Admin</li></Link>
+                  <Link to="/" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={logout()}>Cerrar Sesión</li></Link>
+                </div>
+              : role === "user" ?
+                <div className="list-group">
+                  <li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li>
+                  <Link to="/" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={logout()}>Cerrar Sesión</li></Link>
+                </div>
+              : 
+                <div className="list-group">
+                  <Link to="/login" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Iniciar Sesión</li></Link>
+                  <Link to="/register" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Registrarme</li></Link>
+                </div>
+              }
             </ul>
           </div>      
         </div>

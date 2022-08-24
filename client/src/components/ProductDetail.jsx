@@ -39,7 +39,7 @@ export default function Details(){
       </div>
 
       <div className="bg-global mt-1 mx-5 rounded-0 p-5">
-        <h3 className="dropdown-toggle mb-0 w-25 text-black text-start" data-bs-toggle="collapse" data-bs-target="#collapseEspec" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
+        <h3 className="dropdown-toggle mb-0 w-25 text-white text-start" data-bs-toggle="collapse" data-bs-target="#collapseEspec" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
           Especificaciones
         </h3>
         <div className="collapse" id="collapseEspec">
@@ -53,7 +53,7 @@ export default function Details(){
           </div>
         </div>
 
-        <h3 className="dropdown-toggle my-5 w-25 text-black text-start" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
+        <h3 className="dropdown-toggle my-5 w-25 text-white text-start" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
           Descripción
         </h3>
         <div className="collapse" id="collapseDesc">

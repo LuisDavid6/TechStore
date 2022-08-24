@@ -28,13 +28,13 @@ export default function ProductCard({filter}){
                 <i className="bi bi-pencil-fill h5 text-white cursor" title="Modificar"></i>
               </div>
               <div className="col-1 my-auto">
-                <i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)} onClick={()=>console.log("#p"+e.id.slice(0,3))}></i>
+                <i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)}></i>
               </div>
               <div className="modal fade" id={"p"+e.id.slice(0,3)} tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                   <div className="modal-content bg-global">
                     <div className="modal-header">
-                      <h5 className="modal-title text-white" id="deleteModalLabel">¿Esta seguro de eliminar el producto?{e.name}</h5>
+                      <h5 className="modal-title text-white" id="deleteModalLabel">¿Esta seguro de eliminar el producto?</h5>
                       <button type="button" className="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-footer">

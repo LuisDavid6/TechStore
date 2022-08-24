@@ -8,23 +8,33 @@ datasource db {
 }
 
 model User {
-  id          String      @id @default(uuid()) @db.Uuid
+  id          String    @id @default(uuid()) @db.Uuid
   userName    String
-  email       String   @unique
+  email       String    @unique
   password    String
-  date        DateTime @default(now()) @db.Timestamptz(5)
+  role        String    @default("user")
+  active      Boolean   @default(true)
+  date        DateTime  @default(now()) @db.Timestamptz()
+  cart        Cart?   
+  comments    Comment[]  
 }
 
 model Product {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          String     @id @default(uuid()) @db.Uuid
   name        String
   price       Int
-  discount    Int?      @default(0)
+  discount    Int?       @default(0)
   totalPrice  Int
   type        String
   image       String
-  categoryId String @db.Uuid
-  category   Category @relation(fields: [categoryId], references: [id])
+  stock       Int        @default(0)
+  active      Boolean    @default(true)
+  date        DateTime   @default(now()) @db.Timestamptz()
+  categoryId  String     @db.Uuid
+  // cartId      String?    @db.Uuid
+  category    Category   @relation(fields: [categoryId], references: [id])
+  carts        Cart[]   
+  comments    Comment[]
 }
 
 model Category{
@@ -37,7 +47,24 @@ model Category{
 model SubCategory{
   id          String    @id @default(uuid()) @db.Uuid
   name        String
-  categoryId String @db.Uuid
-  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId  String    @db.Uuid
+  category   Category   @relation(fields: [categoryId], references: [id])
+}
 
+model Cart{
+  id          String    @id @default(uuid()) @db.Uuid
+  date        DateTime  @default(now()) @db.Timestamptz()
+  userId      String    @db.Uuid @unique
+  user        User      @relation(fields: [userId], references: [id])
+  products    Product[] 
+}
+
+model Comment{
+  id          String    @id @default(uuid()) @db.Uuid
+  text        String
+  date        DateTime  @default(now()) @db.Timestamptz()
+  userId      String    @db.Uuid
+  productId   String    @db.Uuid
+  user        User      @relation(fields: [userId], references: [id])
+  product     Product   @relation(fields: [productId], references: [id])
 }

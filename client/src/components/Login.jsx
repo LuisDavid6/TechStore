@@ -5,11 +5,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from 'react';
+import { login, verifyRole } from '../redux/actions';
 
 export default function Login() {
 
+  const history =  useNavigate()
+  const dispatch = useDispatch()
+
   const errorNotify = () =>{
-    toast.error('Datos incorrectos', {
+    toast.error('Usuario o Contraseña incorrectos', {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: true,
@@ -21,6 +25,7 @@ export default function Login() {
     });
   } 
 
+
   return (
     <div>
       <Formik
@@ -29,31 +34,33 @@ export default function Login() {
           password: "",
         }}
         validate={(values) => {
-          let errors = {};
+          let errors = "";
 
-          if (!values.email) errors.email = "Debes ingresar un email";
+          if (!values.email) errors = "Debes ingresar un email";
 
-          if (!values.password) errors.password = "La contraseña no puede estar vacia";
+          if (!values.password) errors = "La contraseña no puede estar vacia";
 
           return errors;
         }}
-        onSubmit={(values, { resetForm }) => {
-          // const email = users.find((e) => e.email === values.email);
-          // if (!email) {
-          //   resetForm();
-          //   dispatch(createUser(values));
-          //   registerNotify();
-          //   setTimeout(() => {
-          //     history("/login", { replace: true });
-          //   }, 1000);
-          // } else errorNotify();
-          // try {
-          //   const { data } = await axios.post('/auth/login',
-          //   {
-          //       email: values.email,
-          //       password: values.password
-          //   }
-          // )}
+        onSubmit={ async(values, { resetForm }) => {
+          if(values.email && values.password){
+
+            try {
+              const resp = await dispatch(login(values));
+              const role = await dispatch(verifyRole());
+              
+              if(resp.token){  
+                setTimeout(() => {
+                  history("/home", { replace: true });
+                }, 500);
+              }
+              else errorNotify()
+            } catch (error) {
+              throw Error
+            }
+
+
+          } else errorNotify();
 
         }}
       >
@@ -71,7 +78,7 @@ export default function Login() {
               <Field
                 type="text"
                 name="email"
-                className="form-control fs-5"
+                className="form-control fs-6"
                 id="emailValue"
                 placeholder="email"
                 style={{ maxWidth: "360px"}}
@@ -79,29 +86,19 @@ export default function Login() {
               <label for="emailValue" className="text-secondary text-start">
                 Usuario
               </label>
-              {/* <ErrorMessage
-                className="text-danger fs-6 fst-italic text-wrap"
-                name="email"
-                component="div"
-              /> */}
             </div>
             <div className="form-floating my-3 w-75">
               <Field
                 type="password"
                 name="password"
-                className="form-control fs-5"
+                className="form-control fs-6"
                 id="passwordValue"
                 placeholder="contraseña"
                 style={{ maxWidth: "360px"}}
               />
-              <label for="passwordValue" className="text-secondary">
+              <label for="passwordValue" className="text-secondary text-start">
                 Contraseña
               </label>
-              {/* <ErrorMessage
-                className="text-danger fs-6 fst-italic text-wrap"
-                name="password"
-                component="div"
-              /> */}
             </div>
             <button
               type="submit"

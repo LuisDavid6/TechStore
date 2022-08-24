@@ -50,9 +50,9 @@ app.listen(PORT, async()=>{
         })
     }    
 
-    await prisma.product.createMany({
-        data: datas
-    })
+    // await prisma.product.createMany({
+    //     data: datas
+    // })
         
     console.log(`server running on port ${PORT}`)
 })

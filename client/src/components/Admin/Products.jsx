@@ -59,7 +59,6 @@ export default function Products(){
           </div>
           <div className="product-list-admin">
             <ProductCard filter={filterCategory}/>
-
           </div>
         </div>
       </div>

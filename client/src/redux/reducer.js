@@ -1,6 +1,7 @@
 import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL, GET_USERS, CREATE_USER,
-         VERIFY_ROLE, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
+         VERIFY_ROLE, GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY,
+         FILTER_BY_SUBCATEGORY} from "./actionTypes";
 
 const initialState = {
     products: [],
@@ -120,6 +121,18 @@ export default function Reducer(state = initialState, action){
             return{
                 ...state,
                 categories: action.payload,
+            }
+
+        case ADD_CATEGORY:
+            return{
+                ...state,
+                refresh: !state.refresh
+            }
+
+        case ADD_SUBCATEGORY:
+            return{
+                ...state,
+                refresh: !state.refresh
             }
 
         default:

@@ -2,7 +2,8 @@ import axios from "axios"
 
 import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
-         GET_USERS, CREATE_USER, VERIFY_ROLE, GET_CATEGORIES, FILTER_BY_SUBCATEGORY} from "./actionTypes";
+         GET_USERS, CREATE_USER, VERIFY_ROLE, GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY,
+         FILTER_BY_SUBCATEGORY} from "./actionTypes";
 
 export function getProducts(){
   return async function(dispatch){
@@ -64,6 +65,35 @@ export function getCategories(){
       const {data} = await axios.get("http://localhost:3001/categories")
       return dispatch({
         type: GET_CATEGORIES,
+        payload: data
+      }) 
+    } catch(e){
+      throw Error
+    }
+  }
+}
+
+export function addCategory(category){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.post("http://localhost:3001/categories", category)
+      return dispatch({
+        type: ADD_CATEGORY,
+        payload: data
+      }) 
+    } catch(e){
+      throw Error
+    }
+  }
+}
+
+export function addSubCategory(subcategory){
+  return async function(dispatch){
+    try {
+      const {categoryId} = subcategory
+      const {data} = await axios.post(`http://localhost:3001/categories/subcategory/${categoryId}`, subcategory)
+      return dispatch({
+        type: ADD_SUBCATEGORY,
         payload: data
       }) 
     } catch(e){

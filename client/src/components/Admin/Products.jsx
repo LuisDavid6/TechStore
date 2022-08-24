@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { filterByCategory, getCategories, getProducts } from "../../redux/actions"
 import { useState } from "react"
 import ProductCard from "./ProductCard"
+import AddCategory from "./AddCategory"
 
 
 export default function Products(){
@@ -32,17 +33,22 @@ export default function Products(){
   return (
     <div className="">
       <div className="row mx-0">
-        <div className="col-2 mt-2 py-4 ps-5 text-start text-white bg-global">
-          <h6> Filtrar por categoria</h6>
-          <div class="btn-group-vertical pt-4" role="group" aria-label="Vertical radio toggle button group">
-            {categories && categories.map(e =>{
-              return(
-                <>
-                  <input type="radio" class="btn-check" name="btnradio" id={e.name} autocomplete="off"/>
-                  <label class="btn btn-outline-secondary text-white rounded-2" for={e.name} onClick={()=>handleCategory(e.name)}>{e.name}</label>
-                </>
-              )
-            })}
+        <div className="col-3 mt-2 py-4 text-white bg-global">
+          <div className="">
+            <AddCategory/>
+          </div>
+          <div className="pt-5 ">
+            <h6> Filtrar por categoria</h6>
+            <div className="btn-group-vertical pt-4" role="group" aria-label="Vertical radio toggle button group">
+              {categories && categories.map(e =>{
+                return(
+                  <>
+                    <input type="radio" className="btn-check" name="btnradio" id={e.name} autocomplete="off"/>
+                    <label className="btn btn-outline-secondary text-white rounded-2" for={e.name} onClick={()=>handleCategory(e.name)}>{e.name}</label>
+                  </>
+                )
+              })}
+            </div>
           </div>
         </div>
         <div className="col">

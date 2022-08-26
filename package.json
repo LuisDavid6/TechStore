@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev api/src/index.ts",
-    "start": "node api/dist/index.js",
+    "start": "node api/src/index.ts",
     "build": "prisma generate",
     "tsc": "tsc",
     "generate": "tsc --build"

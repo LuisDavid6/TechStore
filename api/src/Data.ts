@@ -1,9 +1,11 @@
-var idVJ = "04a9ebf9-e34f-4e37-9718-b772b79065ce"
-var idPC = "6cf52ae2-bcd0-4305-b623-9f29bd0890ec"
+var idVJ = "123e13d8-8f3a-4b83-b3b5-f05b8b186b5d"
+var idPC = "e5fbc5d4-16f0-4e74-a35f-216e91604f72"
+var idCelu = "ff18b18d-7ca6-40f3-a273-79867802f609"
 
 const GtaV = { 
     name: "Grand Theft Auto V",
     price: 99900,
+    totalPrice: 89990,
     discount: 10,
     type: "PS4",
     stock: 1,
@@ -14,6 +16,7 @@ const GtaV = {
 const GodOfWar = {
     name: "God Of War",
     price: 99900,
+    totalPrice: 89990,
     discount: 0,
     type: "PS4",
     stock: 1,
@@ -24,6 +27,7 @@ const GodOfWar = {
 const Horizon = {
     name: "Horizon Zero Dawn",
     price: 119900,
+    totalPrice: 99990,
     discount: 20,
     type: "PS4",
     stock: 3,
@@ -34,6 +38,7 @@ const Horizon = {
 const Uncharted4 = {
     name: "Uncharted 4",
     price: 79900,
+    totalPrice: 79900,
     discount: 0,
     type: "PS4",
     stock: 5,
@@ -44,6 +49,7 @@ const Uncharted4 = {
 const Spiderman = {
     name: "Spiderman",
     price: 130900,
+    totalPrice: 119990,
     discount: 20,
     type: "PS4",
     stock: 7,
@@ -54,6 +60,7 @@ const Spiderman = {
 const Halo5 = {
     name: "Halo 5",
     price: 115900,
+    totalPrice: 89990,
     discount: 20,
     type: "Xbox One",
     stock: 1,
@@ -64,6 +71,7 @@ const Halo5 = {
 const Destiny = {
     name: "Destiny",
     price: 109900,
+    totalPrice: 89990,
     discount: 10,
     type: "Xbox One",
     stock: 5,
@@ -73,7 +81,8 @@ const Destiny = {
 
 const pc = {
     name: "Portatil Asus",
-    price: 109900,
+    price: 1609900,
+    totalPrice: 1489990,
     discount: 30,
     type: "Asus",
     stock: 4,
@@ -83,6 +92,7 @@ const pc = {
 const pc2 = {
     name: "Pc Portatil Gamer Asus",
     price: 2599900,
+    totalPrice: 2449990,
     discount: 10,
     type: "Asus",
     stock: 3,
@@ -93,6 +103,7 @@ const pc2 = {
 const pc3 = {
     name: "Computador Dell Inspiron",
     price: 2199900,
+    totalPrice: 2009990,
     discount: 30,
     type: "Dell",
     stock: 6,
@@ -103,6 +114,7 @@ const pc3 = {
 const pcMesa = {
     name: "Computador de escritorio",
     price: 1599900,
+    totalPrice: 1129990,
     discount: 40,
     type: "Acer",
     stock: 8,
@@ -110,10 +122,32 @@ const pcMesa = {
     categoryId: idPC
 }
 
+const MotoG22 = {
+    name: "Motorola G 22",
+    price: 899900,
+    totalPrice: 699900,
+    discount: 20,
+    type: "Motorola",
+    stock: 8,
+    image: "https://cdn.shopify.com/s/files/1/0074/2290/2323/products/Celular-Motorola-G22-128Gb-4Gb-RAM_420x.png?v=1655543008",
+    categoryId: idCelu
+}
+
+const SamsungA12 = {
+    name: "Samsung Galaxy A12",
+    price: 849900,
+    totalPrice: 649900,
+    discount: 20,
+    type: "Samsung",
+    stock: 8,
+    image: "https://compras.tigo.com.co/arquivos/ids/159151-1000-1000/Samsung-Galaxy-A12-Azul.1.png?v=637546331653900000",
+    categoryId: idCelu
+}
 
 
 
 
-const Games = [GtaV, GodOfWar, Horizon, Uncharted4, Spiderman, Halo5, Destiny, pc, pc2, pc3, pcMesa]
+
+const Games = [GtaV, GodOfWar, Horizon, Uncharted4, Spiderman, Halo5, Destiny, pc, pc2, pc3, pcMesa, MotoG22, SamsungA12]
 
 export default Games

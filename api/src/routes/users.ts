@@ -10,7 +10,15 @@ const router = express()
 router.get("/", async (req, res) =>{
 
     try{
-        const users = await prisma.user.findMany()
+        const users = await prisma.user.findMany({
+            include:{
+                cart:{
+                    include:{
+                        products: true
+                    }
+                }
+            }
+        })
         res.json(users)
 
     }catch(e:any){
@@ -27,7 +35,7 @@ router.post("/", async (req, res) =>{
         const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS))
 
         try{
-            await prisma.user.create({
+            const user = await prisma.user.create({
                 data:{
                     userName,
                     email,
@@ -35,6 +43,15 @@ router.post("/", async (req, res) =>{
                     role
                 }
             })
+
+            //creamos el carrito al usuario
+        
+            const cart = await prisma.cart.create({
+                data:{
+                    userId: user.id
+                }
+            })
+            
             res.json("usuario creado")
             
         }catch(e:any){

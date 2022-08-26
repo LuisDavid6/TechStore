@@ -68,7 +68,7 @@ export default function AddUser(){
           if (!values.password) {
             errors.password = "La contraseña no puede estar vacia";
 
-          } else if (values.password.length<8) errors.password = "La contraseña debe tener al menos 8 caracteres"
+          } else if (values.password.length<3) errors.password = "La contraseña debe tener al menos 3 caracteres"
           
           if (!values.passwordConfirm) {
             errors.passwordConfirm = "Debes confirmar la contraseña";

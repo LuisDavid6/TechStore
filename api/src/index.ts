@@ -2,6 +2,7 @@ import express,{Request,Response} from "express"
 import products from "./routes/products"
 import users from "./routes/users"
 import categories from "./routes/categories"
+import cart from "./routes/cart"
 import { PrismaClient } from '@prisma/client'
 import cors from "cors"
 import cookieParser from 'cookie-parser';
@@ -30,6 +31,7 @@ app.use(morgan('dev'));
 app.use("/products", products)
 app.use("/users", users)
 app.use("/categories", categories)
+app.use("/cart", cart)
 
 
 app.listen(PORT, async()=>{

@@ -57,6 +57,24 @@ router.get("/", async (req, res) =>{
     }
 })
 
+router.delete("/delete/:id", async (req, res) =>{
+
+    const {id} = req.params
+    try {
+        const category = await prisma.category.delete({
+            where:{
+                id
+            }                
+            
+        })
+        res.json("Category deleted")
+        
+    } catch (error:any) {
+        res.json(error.message)
+    }
+
+})
+
 router.post("/subcategory/:categoryId", async (req, res) =>{
 
     const {name} = req.body
@@ -69,6 +87,24 @@ router.post("/subcategory/:categoryId", async (req, res) =>{
             }
         })
         res.json("Subcategory created")
+        
+    } catch (error:any) {
+        res.json(error.message)
+    }
+
+})
+
+router.delete("/subcategory/delete/:id", async (req, res) =>{
+
+    const {id} = req.params
+    try {
+        const subCategory = await prisma.subCategory.delete({
+            where:{
+                id
+            }                
+            
+        })
+        res.json("subCategory deleted")
         
     } catch (error:any) {
         res.json(error.message)

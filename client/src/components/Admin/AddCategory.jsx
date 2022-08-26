@@ -77,7 +77,7 @@ export default function AddCategory(){
 								</div>
 								<div className="modal-body text-start">
 										<label htmlFor="nameCategory">Nombre</label>
-										<input type="text" id="nameCategory" value={category} className="form-control mb-2 w-75" required="true" onChange={e=> setCategory(e.target.value)}/>
+										<input type="text" id="nameCategory" value={category} className="form-control mb-2 w-75" onChange={e=> setCategory(e.target.value)}/>
 								</div>
 								<div className="modal-footer">
 									<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
@@ -98,7 +98,7 @@ export default function AddCategory(){
 							</div>
 							<div className="modal-body text-start">
 									<label htmlFor="nameSubCategory">Nombre</label>
-									<input type="text" id="nameSubCategory" value={subcategory.name} className="form-control mb-2 w-75" required="true" onChange={e => setSubcategory({...subcategory, name: e.target.value})}/>
+									<input type="text" id="nameSubCategory" value={subcategory.name} className="form-control mb-2 w-75" onChange={e => setSubcategory({...subcategory, name: e.target.value})}/>
 									<label htmlFor="category">Seleccione la Categoria</label><br/>
 									<select id="category" className="form-select w-50 p-2" onChange={e => setSubcategory({...subcategory, categoryId: e.target.value})}>
 										<option selected disabled>---------</option>
@@ -107,9 +107,7 @@ export default function AddCategory(){
 												<option value={e.id} className="outline-secondary">{e.name}</option>
 											)
 										})}
-
 									</select>
-									{/* <button type="submit">ENVIAR</button> */}
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Volver</button>

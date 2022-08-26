@@ -6,7 +6,6 @@ import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_
 const initialState = {
     products: [],
     categories: [],
-    cart: [],
     productsFilter:[],
     refresh: false,
     productDetail:{},
@@ -14,7 +13,8 @@ const initialState = {
     categorySelect: {},
     categoryProductsAdmin: [],
     currentUser: "",
-    role: ""
+    role: "",
+    cart: []
 }
 
 export default function Reducer(state = initialState, action){
@@ -114,7 +114,8 @@ export default function Reducer(state = initialState, action){
             return{
                 ...state,
                 currentUser: action.payload,
-                role: action.payload.role
+                role: action.payload.role,
+                cart: action.payload.cart
             }
 
         case GET_CATEGORIES:

@@ -8,26 +8,63 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String
-  lastName String?
-  email    String  @unique
-  password String
+  id          String    @id @default(uuid()) @db.Uuid
+  userName    String
+  email       String    @unique
+  password    String
+  role        String    @default("user")
+  active      Boolean   @default(true)
+  date        DateTime  @default(now()) @db.Timestamptz()
+  cart        Cart?   
+  comments    Comment[]  
 }
 
 model Product {
-  id         Int      @id @default(autoincrement())
-  name       String
-  price      String
-  discount   Int?
-  console    Consoles
-  categories String
-  image      String
+  id          String     @id @default(uuid()) @db.Uuid
+  name        String
+  price       Int
+  discount    Int?       @default(0)
+  totalPrice  Int
+  type        String
+  image       String
+  stock       Int        @default(0)
+  active      Boolean    @default(true)
+  date        DateTime   @default(now()) @db.Timestamptz()
+  categoryId  String     @db.Uuid
+  // cartId      String?    @db.Uuid
+  category    Category   @relation(fields: [categoryId], references: [id])
+  carts        Cart[]   
+  comments    Comment[]
 }
 
-enum Consoles {
-  PS4
-  PS5
-  XBOX_ONE
-  NINTENDO_SWITCH
+model Category{
+  id              String    @id @default(uuid()) @db.Uuid
+  name            String
+  products        Product[]
+  subCategories   SubCategory[]
+}
+
+model SubCategory{
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  categoryId  String    @db.Uuid
+  category   Category   @relation(fields: [categoryId], references: [id])
+}
+
+model Cart{
+  id          String    @id @default(uuid()) @db.Uuid
+  date        DateTime  @default(now()) @db.Timestamptz()
+  userId      String    @db.Uuid @unique
+  user        User      @relation(fields: [userId], references: [id])
+  products    Product[] 
+}
+
+model Comment{
+  id          String    @id @default(uuid()) @db.Uuid
+  text        String
+  date        DateTime  @default(now()) @db.Timestamptz()
+  userId      String    @db.Uuid
+  productId   String    @db.Uuid
+  user        User      @relation(fields: [userId], references: [id])
+  product     Product   @relation(fields: [productId], references: [id])
 }

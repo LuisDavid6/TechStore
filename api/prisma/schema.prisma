@@ -8,63 +8,26 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid()) @db.Uuid
-  userName String
-  email    String    @unique
+  id       Int     @id @default(autoincrement())
+  name     String
+  lastName String?
+  email    String  @unique
   password String
-  role     String    @default("user")
-  active   Boolean   @default(true)
-  date     DateTime  @default(now()) @db.Timestamptz(3)
-  cart     Cart?
-  comments Comment[]
 }
 
 model Product {
-  id         String    @id @default(uuid()) @db.Uuid
+  id         Int      @id @default(autoincrement())
   name       String
-  price      Int
-  discount   Int?      @default(0)
-  totalPrice Int
-  type       String
+  price      String
+  discount   Int?
+  console    Consoles
+  categories String
   image      String
-  stock      Int       @default(0)
-  active     Boolean   @default(true)
-  date       DateTime  @default(now()) @db.Timestamptz(6)
-  categoryId String    @db.Uuid
-  cartId     String?   @db.Uuid
-  cart       Cart?     @relation(fields: [cartId], references: [id])
-  category   Category  @relation(fields: [categoryId], references: [id])
-  comments   Comment[]
 }
 
-model Category {
-  id            String        @id @default(uuid()) @db.Uuid
-  name          String
-  products      Product[]
-  subCategories SubCategory[]
-}
-
-model SubCategory {
-  id         String   @id @default(uuid()) @db.Uuid
-  name       String
-  categoryId String   @db.Uuid
-  category   Category @relation(fields: [categoryId], references: [id])
-}
-
-model Cart {
-  id       String    @id @default(uuid()) @db.Uuid
-  userId   String    @unique @db.Uuid
-  date     DateTime  @default(now()) @db.Timestamptz(6)
-  user     User      @relation(fields: [userId], references: [id])
-  products Product[]
-}
-
-model Comment {
-  id        String   @id @default(uuid()) @db.Uuid
-  text      String
-  userId    String   @db.Uuid
-  productId String   @db.Uuid
-  date      DateTime @default(now()) @db.Timestamptz(6)
-  product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+enum Consoles {
+  PS4
+  PS5
+  XBOX_ONE
+  NINTENDO_SWITCH
 }

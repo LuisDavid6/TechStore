@@ -8,8 +8,7 @@
     "start": "node api/dist/index.js",
     "build": "prisma generate",
     "tsc": "tsc",
-    "generate": "tsc --build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "tsc --build"
   },
   "keywords": [],
   "author": "",

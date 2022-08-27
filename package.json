@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev api/src/index.ts",
     "start": "node api/compilation/index.js",
-    "build": "prisma generate",
+    "build": "prisma generate --schema=./api/prisma/schema.prisma",
     "tsc": "tsc",
     "generate": "tsc --build",
     "test": "echo \"Error: no test specified\" && exit 1",

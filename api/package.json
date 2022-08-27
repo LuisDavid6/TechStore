@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
-    "start": "node dist/index.js",
+    "dev": "ts-node-dev api/src/index.ts",
+    "start": "node api/build/index.js",
     "build": "prisma generate",
     "tsc": "tsc",
     "generate": "tsc --build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev2": "nodemon index.ts"
   },
   "keywords": [],
   "author": "",

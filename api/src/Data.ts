@@ -146,9 +146,6 @@ const SamsungA12 = {
 
 
 
-
-
-
 const Games = [GtaV, GodOfWar, Horizon, Uncharted4, Spiderman, Halo5, Destiny, pc, pc2, pc3, pcMesa, MotoG22, SamsungA12]
 
 export default Games

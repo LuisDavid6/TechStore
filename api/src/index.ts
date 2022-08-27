@@ -13,12 +13,12 @@ import datas from "./Data"
 const prisma = new PrismaClient()
 const app = express()
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 //middlewares
 app.use(express.json())  //middleware que transforma la req.body a json
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],

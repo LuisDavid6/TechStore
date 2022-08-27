@@ -34,6 +34,7 @@ app.use("/categories", categories)
 app.use("/cart", cart)
 
 
+
 app.listen(PORT, async()=>{
 
     const user = await prisma.user.findUnique({

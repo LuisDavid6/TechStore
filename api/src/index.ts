@@ -57,5 +57,5 @@ app.listen(PORT, async()=>{
     //     data: datas
     // })
         
-    console.log(`server running on port ${PORT}`)
+    console.log(`servering running on port ${PORT}`)
 })

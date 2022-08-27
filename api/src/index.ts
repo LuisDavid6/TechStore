@@ -37,25 +37,25 @@ app.use("/cart", cart)
 
 app.listen(PORT, async()=>{
 
-    const user = await prisma.user.findUnique({
-        where:{
-            email : "juan@gmail.com"
-        }
-    })
+    // const user = await prisma.user.findUnique({
+    //     where:{
+    //         email : "juan@gmail.com"
+    //     }
+    // })
     
-    if(!user){
-        await prisma.user.create({
-            data:{
-                userName:"juan",
-                email:"juan@gmail.com",
-                password:"123"
-            }
-        })
-    }    
+    // if(!user){
+    //     await prisma.user.create({
+    //         data:{
+    //             userName:"juan",
+    //             email:"juan@gmail.com",
+    //             password:"123"
+    //         }
+    //     })
+    // }    
 
     // await prisma.product.createMany({
     //     data: datas
     // })
         
-    console.log(`servering running on port ${PORT}`)
+    console.log(`server running on port ${PORT}`)
 })

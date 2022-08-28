@@ -15,7 +15,7 @@ export default function(){
 
   return(
     <div className="mx-5 mb-4">
-      {categories && categories.map(e =>{
+      {categories && categories.slice(0,4).map(e =>{
         return(
           <div className="card bg-global mx-5 mt-3 rounded-4" key={e.name}>
             <div className="card-header text-white">

@@ -13,7 +13,7 @@ import datas from "./Data"
 const prisma = new PrismaClient()
 const app = express()
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 //middlewares
 app.use(express.json())  //middleware que transforma la req.body a json

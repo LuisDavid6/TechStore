@@ -82,8 +82,8 @@ export default function NavBar() {
           </form> 
           <Link to="/shoppingCart">
             <i className="bi bi-cart-check h2 mb-0 mx-3 position-relative text-white" >
-              <span className={cont.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
-                {cont.length>0 && cont.length}
+              <span className={cont && cont.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
+                {cont && cont.length>0 && cont.length}
 
               </span>
             </i>

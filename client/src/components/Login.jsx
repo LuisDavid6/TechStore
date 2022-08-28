@@ -44,11 +44,9 @@ export default function Login() {
         }}
         onSubmit={ async(values, { resetForm }) => {
           if(values.email && values.password){
-
             try {
               const resp = await dispatch(login(values));
               const role = await dispatch(verifyRole());
-              
               if(resp.token){  
                 setTimeout(() => {
                   history("/home", { replace: true });
@@ -60,7 +58,7 @@ export default function Login() {
             }
 
 
-          } else errorNotify();
+          } else {errorNotify(); console.log("BAD")}
 
         }}
       >
@@ -109,7 +107,7 @@ export default function Login() {
             </button>
             <ErrorMessage
                 className="text-danger fs-6 fst-italic text-wrap"
-                name="email"
+                name="value"
                 component="div"
               />
 

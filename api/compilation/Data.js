@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var idVJ = "123e13d8-8f3a-4b83-b3b5-f05b8b186b5d";
-var idPC = "e5fbc5d4-16f0-4e74-a35f-216e91604f72";
-var idCelu = "ff18b18d-7ca6-40f3-a273-79867802f609";
+var idVJ = "64de5016-d95a-4a25-bc43-cbda90cd8dc3";
+var idPC = "31784bfe-9bb2-4f50-b321-b1f15cfb0258";
+var idCelu = "5575d2d9-d5ca-4f22-a4cc-71553b3fb905";
 const GtaV = {
     name: "Grand Theft Auto V",
     price: 99900,
-    totalPrice: 89990,
+    totalPrice: 89910,
     discount: 10,
     type: "PS4",
     stock: 1,
@@ -16,8 +16,8 @@ const GtaV = {
 const GodOfWar = {
     name: "God Of War",
     price: 99900,
-    totalPrice: 89990,
-    discount: 0,
+    totalPrice: 89910,
+    discount: 10,
     type: "PS4",
     stock: 1,
     image: "https://www.gamereactor.es/media/62/godwar_2126213b.png",
@@ -26,7 +26,7 @@ const GodOfWar = {
 const Horizon = {
     name: "Horizon Zero Dawn",
     price: 119900,
-    totalPrice: 99990,
+    totalPrice: 95920,
     discount: 20,
     type: "PS4",
     stock: 3,
@@ -46,7 +46,7 @@ const Uncharted4 = {
 const Spiderman = {
     name: "Spiderman",
     price: 130900,
-    totalPrice: 119990,
+    totalPrice: 104720,
     discount: 20,
     type: "PS4",
     stock: 7,
@@ -56,7 +56,7 @@ const Spiderman = {
 const Halo5 = {
     name: "Halo 5",
     price: 115900,
-    totalPrice: 89990,
+    totalPrice: 92720,
     discount: 20,
     type: "Xbox One",
     stock: 1,
@@ -65,8 +65,8 @@ const Halo5 = {
 };
 const Destiny = {
     name: "Destiny",
-    price: 109900,
-    totalPrice: 89990,
+    price: 115900,
+    totalPrice: 92720,
     discount: 10,
     type: "Xbox One",
     stock: 5,
@@ -76,7 +76,7 @@ const Destiny = {
 const pc = {
     name: "Portatil Asus",
     price: 1609900,
-    totalPrice: 1489990,
+    totalPrice: 1126930,
     discount: 30,
     type: "Asus",
     stock: 4,
@@ -85,8 +85,8 @@ const pc = {
 };
 const pc2 = {
     name: "Pc Portatil Gamer Asus",
-    price: 2599900,
-    totalPrice: 2449990,
+    price: 2590900,
+    totalPrice: 2331810,
     discount: 10,
     type: "Asus",
     stock: 3,
@@ -96,7 +96,7 @@ const pc2 = {
 const pc3 = {
     name: "Computador Dell Inspiron",
     price: 2199900,
-    totalPrice: 2009990,
+    totalPrice: 1539930,
     discount: 30,
     type: "Dell",
     stock: 6,
@@ -104,10 +104,10 @@ const pc3 = {
     categoryId: idPC
 };
 const pcMesa = {
-    name: "Computador de escritorio",
-    price: 1599900,
-    totalPrice: 1129990,
-    discount: 40,
+    name: "Computador de escritorio Acer",
+    price: 2599900,
+    totalPrice: 1819930,
+    discount: 30,
     type: "Acer",
     stock: 8,
     image: "https://liquimarcas.co/wp-content/uploads/2021/06/computador-barato-powergroup-j4040-1.jpg",
@@ -115,8 +115,8 @@ const pcMesa = {
 };
 const MotoG22 = {
     name: "Motorola G 22",
-    price: 899900,
-    totalPrice: 699900,
+    price: 990900,
+    totalPrice: 792720,
     discount: 20,
     type: "Motorola",
     stock: 8,
@@ -126,7 +126,7 @@ const MotoG22 = {
 const SamsungA12 = {
     name: "Samsung Galaxy A12",
     price: 849900,
-    totalPrice: 649900,
+    totalPrice: 896720,
     discount: 20,
     type: "Samsung",
     stock: 8,

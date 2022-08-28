@@ -23,7 +23,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const prisma = new client_1.PrismaClient();
 const app = (0, express_1.default)();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 //middlewares
 app.use(express_1.default.json()); //middleware que transforma la req.body a json
 app.use((0, cors_1.default)({

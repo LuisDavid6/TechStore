@@ -8,7 +8,7 @@ import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_
 export function getProducts(){
   return async function(dispatch){
     try{
-      const {data} = await axios.get("http://localhost:3001/products")
+      const {data} = await axios.get("/products")
       return dispatch({
         type: GET_PRODUCTS,
         payload: data
@@ -22,7 +22,7 @@ export function getProducts(){
 export function deleteProduct(id){
   return async function(dispatch){
     try {
-      const {data} = await axios.delete(`http://localhost:3001/products/delete/${id}`)
+      const {data} = await axios.delete(`/products/delete/${id}`)
       return dispatch({
         type: DELETE_PRODUCT,
         payload: data
@@ -36,7 +36,7 @@ export function deleteProduct(id){
 export function getProductDetail(id){
   return async function(dispatch){
     try {
-      const {data} = await axios.get(`http://localhost:3001/products/details/${id}`)
+      const {data} = await axios.get(`/products/details/${id}`)
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: data
@@ -62,7 +62,7 @@ export function deleteFromCart(id){
 export function getCategories(){
   return async function(dispatch){
     try {
-      const {data} = await axios.get("http://localhost:3001/categories")
+      const {data} = await axios.get("/categories")
       return dispatch({
         type: GET_CATEGORIES,
         payload: data
@@ -76,7 +76,7 @@ export function getCategories(){
 export function addCategory(category){
   return async function(dispatch){
     try {
-      const {data} = await axios.post("http://localhost:3001/categories", category)
+      const {data} = await axios.post("/categories", category)
       return dispatch({
         type: ADD_CATEGORY,
         payload: data
@@ -91,7 +91,7 @@ export function addSubCategory(subcategory){
   return async function(dispatch){
     try {
       const {categoryId} = subcategory
-      const {data} = await axios.post(`http://localhost:3001/categories/subcategory/${categoryId}`, subcategory)
+      const {data} = await axios.post(`/categories/subcategory/${categoryId}`, subcategory)
       return dispatch({
         type: ADD_SUBCATEGORY,
         payload: data
@@ -105,7 +105,7 @@ export function addSubCategory(subcategory){
 export function filterByCategory(category){
   return async function(dispatch){
     try {
-      const {data} = await axios.get(`http://localhost:3001/categories?category=${category}`)
+      const {data} = await axios.get(`/categories?category=${category}`)
       return dispatch({
         type: FILTER_BY_CATEGORY,
         payload: data
@@ -132,7 +132,7 @@ export function filterByPrice(order){
 export function getUsers(){
   return async function(dispatch){
     try{
-      const {data} = await axios.get("http://localhost:3001/users")
+      const {data} = await axios.get("/users")
       return dispatch({
         type: GET_USERS,
         payload: data
@@ -146,7 +146,7 @@ export function getUsers(){
 export function createUser(user){
   return async function(dispatch){
     try {
-      const {data} = await axios.post("http://localhost:3001/users", user)
+      const {data} = await axios.post("/users", user)
       return dispatch({
         type: CREATE_USER
       }) 
@@ -159,7 +159,7 @@ export function createUser(user){
 export function login(user){
   return async function(dispatch){
     try {
-      const {data} = await axios.post("http://localhost:3001/users/login", user)
+      const {data} = await axios.post("/users/login", user)
       if(data.token) window.localStorage.setItem("token", data.token)
       return data
     } catch (e) {
@@ -177,7 +177,7 @@ export function logout(){
 export function verifyRole(){
   return async function(dispatch){
     try {
-      const {data} = await axios.get("http://localhost:3001/users/verifyRole",{
+      const {data} = await axios.get("/users/verifyRole",{
         headers : {
           Authorization : `Bearer ${window.localStorage.getItem("token")}`
         }
@@ -195,7 +195,7 @@ export function verifyRole(){
 
 // export function getUsers(){  
 //     return function(dispatch){ 
-//         return fetch("http://localhost:3001/users")
+//         return fetch("/users")
 //             .then(data => data.json())
 //             .then( json =>{
 //                 dispatch({ type:GET_USERS, payload: json })

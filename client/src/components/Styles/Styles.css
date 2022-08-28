@@ -40,3 +40,9 @@
 .cursor{
     cursor: pointer;
 }
+
+@media (max-width: 680px) {
+    .product-list{
+            grid-template-columns: repeat(auto-fill , 200px);
+    }
+}

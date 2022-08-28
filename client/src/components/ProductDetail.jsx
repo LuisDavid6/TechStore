@@ -15,6 +15,7 @@ export default function Details(){
 
   useEffect(()=>{
       dispatch(getProductDetail(id))
+      window.scrollTo({ top: 0, behavior: 'smooth' })
   },[])
 
   return(
@@ -26,7 +27,7 @@ export default function Details(){
             <div className="col-4"></div>
             <div className="col"></div>
             <div className="col-6">
-              {product && <img src={product.image} width="max-content" height="350px"></img>}
+              {product && <img src={product.image} className="img-fluid"></img>}
 
             </div>
             <div className="col"></div>

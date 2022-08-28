@@ -10,7 +10,7 @@ export default function Cart(){
 		<div>
 			<NavBar/>
 			<div className={s.main}>
-				{cart.length > 0 ? cart.map(e =>{
+				{cart && cart.length > 0 ? cart.map(e =>{
 					return(
 						<div key={e.id} className={s.product}>
 							<img src={e.image} alt={e.name}></img>
@@ -21,7 +21,7 @@ export default function Cart(){
 							<button className="" >DELETE</button>
 						</div>
 					)
-				}) : <h4>No hay productos</h4>}
+				}) : <h4 className="text-white">No hay productos</h4>}
 			</div>
 		</div>
   )

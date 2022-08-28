@@ -28,7 +28,7 @@ export default function NavBar() {
   },[])
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-global px-3 h5 m-0">
+    <nav className="navbar navbar-expand-lg navbar-dark sticky-top bg-global px-3 h5 m-0">
       <div className="container-fluid py-2">
       <Link className="navbar-brand me-5" to="/">
           TECHSTORE

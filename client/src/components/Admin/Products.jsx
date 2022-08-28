@@ -31,9 +31,9 @@ export default function Products(){
   },[refresh])
 
   return (
-    <div className="">
+    <div className="text-center">
       <div className="row mx-0">
-        <div className="col-3 mt-2 py-4 text-white bg-global">
+        <div className="col-md-3 mt-2 py-4 text-white bg-global">
           <div className="">
             <AddCategory/>
           </div>

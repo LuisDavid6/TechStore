@@ -26,20 +26,20 @@ export default function Users(){
   },[])
 
 return (
-  <div className="">
+  <div className="text-center">
     <div className="row mx-0">
-      <div className="col-2 mt-2 py-4 ps-5 text-start text-white bg-global">
+      <div className="col-md-3 mt-2 py-4 text-white bg-global">
         <h6> Filtrar por tipo</h6>
         <div class="btn-group-vertical pt-4" role="group" aria-label="Vertical radio toggle button group">
-          <input type="radio" class="btn-check" name="btnradio" id="all" autocomplete="off"/>
-          <label class="btn btn-outline-secondary text-white rounded-2" for="all" onClick={()=>handleCategory()}>Todos</label>
-          <input type="radio" class="btn-check" name="btnradio" id="user" autocomplete="off"/>
-          <label class="btn btn-outline-secondary text-white rounded-2" for="user" onClick={()=>handleCategory()}>Usuarios</label>
-          <input type="radio" class="btn-check" name="btnradio" id="admin" autocomplete="off"/>
-          <label class="btn btn-outline-secondary text-white rounded-2" for="admin" onClick={()=>handleCategory()}>Administradores</label>
+          <input type="radio" className="btn-check" name="btnradio" id="all" autocomplete="off"/>
+          <label className="btn btn-outline-secondary text-white rounded-2" for="all" onClick={()=>handleCategory()}>Todos</label>
+          <input type="radio" className="btn-check" name="btnradio" id="user" autocomplete="off"/>
+          <label className="btn btn-outline-secondary text-white rounded-2" for="user" onClick={()=>handleCategory()}>Usuarios</label>
+          <input type="radio" className="btn-check" name="btnradio" id="admin" autocomplete="off"/>
+          <label className="btn btn-outline-secondary text-white rounded-2" for="admin" onClick={()=>handleCategory()}>Administradores</label>
         </div>
       </div>
-      <div className="col">
+      <div className="col-md">
         <div className="mx-auto pt-3 pb-5 text-end d-flex justify-content-end pe-1">
           <form className="d-flex mx-2">
               <div className="input-group flex-nowrap mx-auto" style={{maxWidth:"250px"}}>
@@ -83,6 +83,8 @@ return (
                     <th scope="row">{++numUser}</th>
                     <td>{e.userName}</td>
                     <td>{e.email}</td>
+                    <td> <i className="bi bi-pencil-fill h5 text-white cursor" title="Modificar"></i></td>
+                    <td><i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)}></i></td>
                   </tr>
                 )
               })}

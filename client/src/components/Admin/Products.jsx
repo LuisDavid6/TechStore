@@ -5,6 +5,7 @@ import { filterByCategory, getCategories, getProducts } from "../../redux/action
 import { useState } from "react"
 import ProductCard from "./ProductCard"
 import AddCategory from "./AddCategory"
+import AddProduct from "./AddProduct"
 
 
 export default function Products(){
@@ -43,7 +44,7 @@ export default function Products(){
               {categories && categories.map(e =>{
                 return(
                   <>
-                    <input type="radio" className="btn-check" name="btnradio" id={e.name} autocomplete="off"/>
+                    <input type="radio" className="btn-check" name="btnradio" id={e.name} autoComplete="off"/>
                     <label className="btn btn-outline-secondary text-white rounded-2" for={e.name} onClick={()=>handleCategory(e.name)}>{e.name}</label>
                   </>
                 )
@@ -60,8 +61,24 @@ export default function Products(){
                       <i className="bi bi-search text-white"></i>
                     </button>
                 </div>
-            </form> 
-            <button className="btn btn-outline-secondary text-white py-2">Agregar Producto</button>
+            </form>
+            <button className="btn btn-outline-secondary text-white py-2" data-bs-toggle="modal" data-bs-target="#newProductModal">Agregar Producto</button>
+            <div className="modal fade" id="newProductModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div className="modal-dialog">
+                <div className="modal-content bg-global">
+                  <div className="modal-header text-white">
+                    <h5 className="modal-title" id="staticBackdropLabel">Nuevo Producto</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body">
+                    <AddProduct/>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="product-list-admin">
             <ProductCard filter={filterCategory}/>

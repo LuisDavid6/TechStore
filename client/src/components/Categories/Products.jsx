@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Products({ category }) {
+  
   const convertPrice = (price) => {
     const priceLong = "" + price;
     let punt = 0;

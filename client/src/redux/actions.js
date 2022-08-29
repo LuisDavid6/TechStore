@@ -3,7 +3,8 @@ import axios from "axios"
 import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
          GET_USERS, CREATE_USER, VERIFY_ROLE, GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY,
-         FILTER_BY_SUBCATEGORY} from "./actionTypes";
+         FILTER_BY_SUBCATEGORY,
+         CREATE_PRODUCT} from "./actionTypes";
 
 export function getProducts(){
   return async function(dispatch){
@@ -15,6 +16,19 @@ export function getProducts(){
       })
     }catch(e){
       throw Error
+    }
+  }
+}
+
+export function createProduct(product){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.post("/products", product)
+      return dispatch({
+        type: CREATE_PRODUCT
+      }) 
+    } catch(e){
+        throw Error
     }
   }
 }
@@ -187,7 +201,7 @@ export function verifyRole(){
         payload: data
       })
     } catch (e) {
-      throw Error
+      // throw Error
     }
   }
 }

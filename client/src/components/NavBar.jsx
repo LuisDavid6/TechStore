@@ -63,7 +63,7 @@ export default function NavBar() {
               >Categorias</a>
               <ul className="dropdown-menu bg-dark p-0 mx-auto" aria-labelledby="navbarDropdown" style={{maxWidth:"200px"}}>
                 <div className="list-group">
-                  {categories && categories.length>1 && categories.map(e=>{
+                  {categories && categories.map(e=>{
                     return (
                       <Link to={`/products/${e.name}`} className="text-decoration-none" key={e.id}> <li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={() => handleCategory(e.name)}>{e.name}</li></Link>
                       )

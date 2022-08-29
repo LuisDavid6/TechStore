@@ -52,6 +52,7 @@ export default function AddUser(){
           email: '',
           password: '',
           passwordConfirm: '',
+          role: "user"
         }}
 
         validate = {values=>{
@@ -109,12 +110,20 @@ export default function AddUser(){
             </div>
             <div className='form-floating my-3 w-75 mx-auto'>
               <Field type="password" name="passwordConfirm" className="form-control" id="confirmValue" placeholder="Confirma tu contraseña" style={{maxWidth:"360px"}}/>
-              <label for="confirmValue" className='text-secondary'>Confirma tu contraseña</label>
+              <label for="confirmValue" className='text-secondary'>Confirma la contraseña</label>
               <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='passwordConfirm' component="div"/>
             </div>
-            <div class="d-flex align-items-center">
+            <div className='my-3 w-75 mx-auto'>
+              <label htmlFor="role" className="text-white">Seleccione un rol:</label><br/>
+									<select id="role" className="form-select w-50 p-2" name='role' onChange={e=> values.role = e.target.value}>
+										<option value="user" className="outline-secondary">Usuario</option>
+										<option value="admin" className="outline-secondary">Admin</option>
+									</select> 
+            </div>
+            <div className="d-flex align-items-center">
               <button type="submit" className='btn btn-secondary my-3 p-2 mx-auto align-self-center w-50' style={{maxWidth:"230px"}}>Registrar</button>
             </div>
+            
           </Form>         
         )}
       </Formik>

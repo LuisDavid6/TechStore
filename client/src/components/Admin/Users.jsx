@@ -30,12 +30,12 @@ return (
     <div className="row mx-0">
       <div className="col-md-3 mt-2 py-4 text-white bg-global">
         <h6> Filtrar por tipo</h6>
-        <div class="btn-group-vertical pt-4" role="group" aria-label="Vertical radio toggle button group">
-          <input type="radio" className="btn-check" name="btnradio" id="all" autocomplete="off"/>
+        <div className="btn-group-vertical pt-4" role="group" aria-label="Vertical radio toggle button group">
+          <input type="radio" className="btn-check" name="btnradio" id="all" autoComplete="off"/>
           <label className="btn btn-outline-secondary text-white rounded-2" for="all" onClick={()=>handleCategory()}>Todos</label>
-          <input type="radio" className="btn-check" name="btnradio" id="user" autocomplete="off"/>
+          <input type="radio" className="btn-check" name="btnradio" id="user" autoComplete="off"/>
           <label className="btn btn-outline-secondary text-white rounded-2" for="user" onClick={()=>handleCategory()}>Usuarios</label>
-          <input type="radio" className="btn-check" name="btnradio" id="admin" autocomplete="off"/>
+          <input type="radio" className="btn-check" name="btnradio" id="admin" autoComplete="off"/>
           <label className="btn btn-outline-secondary text-white rounded-2" for="admin" onClick={()=>handleCategory()}>Administradores</label>
         </div>
       </div>
@@ -50,7 +50,7 @@ return (
               </div>
           </form> 
           <button className="btn btn-outline-secondary text-white py-2" data-bs-toggle="modal" data-bs-target="#registerModal">Agregar Usuario</button>
-          <div className="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">
               <div className="modal-content bg-global">
                 <div className="modal-header text-white">
@@ -79,7 +79,7 @@ return (
             <tbody>
               {users && users.map(e=>{
                 return(
-                  <tr className={ numUser%2!==0 ? "text-white" : "text-white table-active"}>
+                  <tr className={ numUser%2!==0 ? "text-white" : "text-white table-active"} key={e.id}>
                     <th scope="row">{++numUser}</th>
                     <td>{e.userName}</td>
                     <td>{e.email}</td>

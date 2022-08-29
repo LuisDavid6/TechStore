@@ -1,7 +1,8 @@
 import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL, GET_USERS, CREATE_USER,
          VERIFY_ROLE, GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY,
-         FILTER_BY_SUBCATEGORY} from "./actionTypes";
+         FILTER_BY_SUBCATEGORY,
+         CREATE_PRODUCT} from "./actionTypes";
 
 const initialState = {
     products: [],
@@ -10,9 +11,10 @@ const initialState = {
     refresh: false,
     productDetail:{},
     users: [],
+    // user: {},
     categorySelect: {},
     categoryProductsAdmin: [],
-    currentUser: "",
+    currentUser: {},
     role: "",
     cart: []
 }
@@ -25,6 +27,12 @@ export default function Reducer(state = initialState, action){
                 ...state,
                 products: action.payload,
                 productsFilter: action.payload
+            }
+
+        case CREATE_PRODUCT:
+            return{
+                ...state,
+                refresh: !state.refresh
             }
         
         case DELETE_PRODUCT:
@@ -69,7 +77,7 @@ export default function Reducer(state = initialState, action){
 
             return{
                 ...state,
-                productsFilter: filter
+                productsFilter: filter,
             }
 
         case FILTER_BY_PRICE:

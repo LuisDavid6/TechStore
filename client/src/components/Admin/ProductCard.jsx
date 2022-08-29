@@ -15,8 +15,8 @@ export default function ProductCard({filter}){
   return(
     <> 
       {list && list.map(e =>{
-        return(
-          <div className="card bg-global mb-2 w-100">
+        return( 
+          <div className="card bg-global mb-2 w-100" key={e.name}>
             <div className="card-body row">
               <div className="col-2 text-start">
                 <img src={e.image} width="100" height="100"></img>
@@ -30,7 +30,7 @@ export default function ProductCard({filter}){
               <div className="col-1 my-auto">
                 <i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)}></i>
               </div>
-              <div className="modal fade" id={"p"+e.id.slice(0,3)} tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div className="modal fade" id={"p"+e.id.slice(0,3)} tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                   <div className="modal-content bg-global">
                     <div className="modal-header">

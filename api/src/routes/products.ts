@@ -40,30 +40,37 @@ router.get("/details/:id", async (req,res) =>{
 })
 
 // localhost:3001/products/
-router.post("/:categoryId", async (req, res) =>{
+router.post("/", async (req, res) =>{
 
-    const {name,price,discount,type,stock,image} = req.body
-    const {categoryId} = req.params
+    const {name,price,discount,type,stock,image,category} = req.body
     const totalPrice = price-(price*(Number(discount)/100))
 
     try {
-        const newProduct = await prisma.product.create({
-            data: {
-                name,
-                price,
-                discount,
-                type,
-                stock,
-                image,
-                category:{
-                    connect: {id: categoryId}
-                },
-                totalPrice
+        const categ = await prisma.category.findFirst({
+            where:{
+                name: category
             }
-          })
-        res.json(newProduct)
-    } catch (error) {
-        res.json("ERROR")
+        })
+        
+        if(categ){
+            const newProduct = await prisma.product.create({
+                data: {
+                    name,
+                    price,
+                    discount,
+                    type,
+                    stock,
+                    image,
+                    category:{
+                        connect: {id: categ.id}
+                    },
+                    totalPrice
+                }
+            })
+            return res.json("product created")
+        }
+    } catch ({message}) {
+        res.json("Error")
     }
     
 

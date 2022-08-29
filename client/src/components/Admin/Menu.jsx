@@ -34,7 +34,7 @@ export default function Menu() {
 					<button className="navbar-toggler mx-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
 						<span className="navbar-toggler-icon"></span>
 					</button>
-					<div className="offcanvas offcanvas-end bg-global w-50" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+					<div className="offcanvas offcanvas-end bg-global w-50" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div className="offcanvas-header text-white">
 							<h5 className="offcanvas-title" id="offcanvasNavbarLabel">TechStore</h5>
 							<button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>

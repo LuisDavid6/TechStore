@@ -67,7 +67,7 @@ export default function AddCategory(){
 			<button className="btn btn-sm btn-outline-secondary text-white p-2 m-1" data-bs-toggle="modal" data-bs-target="#CategoryModal">Agregar Categoria</button>
 			<button className="btn btn-sm btn-outline-secondary text-white p-2 m-1" data-bs-toggle="modal" data-bs-target="#SubcategoryModal">Agregar Subcategoria</button>
 	
-			<div className="modal fade" id="CategoryModal" tabindex="-1" aria-labelledby="CategoryModalLabel" aria-hidden="true">
+			<div className="modal fade" id="CategoryModal" tabIndex="-1" aria-labelledby="CategoryModalLabel" aria-hidden="true">
   			<div className="modal-dialog modal-dialog-centered">
     			<div className="modal-content bg-global">
 							<form onSubmit={ e=> submitCategory(e)}>
@@ -88,7 +88,7 @@ export default function AddCategory(){
 				</div>
 			</div>
 
-			<div className="modal fade" id="SubcategoryModal" tabindex="-1" aria-labelledby="SubcategoryModalLabel" aria-hidden="true">
+			<div className="modal fade" id="SubcategoryModal" tabIndex="-1" aria-labelledby="SubcategoryModalLabel" aria-hidden="true">
   			<div className="modal-dialog modal-dialog-centered">
     			<div className="modal-content bg-global">
 						<form onSubmit={ e=> submitSubCategory(e)}>
@@ -104,7 +104,7 @@ export default function AddCategory(){
 										<option selected disabled>---------</option>
 										{categories && categories.map(e =>{
 											return(
-												<option value={e.id} className="outline-secondary">{e.name}</option>
+												<option value={e.id} className="outline-secondary" key={e.name}>{e.name}</option>
 											)
 										})}
 									</select>

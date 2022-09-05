@@ -1,8 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//production
 var idVJ = "64de5016-d95a-4a25-bc43-cbda90cd8dc3";
 var idPC = "31784bfe-9bb2-4f50-b321-b1f15cfb0258";
 var idCelu = "5575d2d9-d5ca-4f22-a4cc-71553b3fb905";
+//local
+// var idVJ = "a5eb44d8-ae20-44a5-b641-584d39c14e2a"
+// var idPC = "fd33d495-7359-4b9a-9238-c5be03f09783"
+// var idCelu = "d7dda341-efc8-4b01-be49-1fcef1c0d77c"
 const GtaV = {
     name: "Grand Theft Auto V",
     price: 99900,

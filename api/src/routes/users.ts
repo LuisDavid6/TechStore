@@ -13,9 +13,9 @@ router.get("/", async (req, res) =>{
         const users = await prisma.user.findMany({
             include:{
                 cart:{
-                    include:{
-                        products: true
-                    }
+                    // include:{
+                    //     products: true
+                    // }
                 }
             }
         })

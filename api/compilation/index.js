@@ -21,7 +21,6 @@ const client_1 = require("@prisma/client");
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
-const Data_1 = __importDefault(require("./Data"));
 const prisma = new client_1.PrismaClient();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
@@ -55,9 +54,9 @@ app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     //         }
     //     })
     // }    
-    yield prisma.product.createMany({
-        data: Data_1.default
-    });
+    // await prisma.product.createMany({
+    //     data: datas
+    // })
     console.log(`server running on port ${PORT}`);
 }));
 //# sourceMappingURL=index.js.map

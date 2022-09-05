@@ -50,29 +50,35 @@ router.get("/details/:id", (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 // localhost:3001/products/
-router.post("/:categoryId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, price, discount, type, stock, image } = req.body;
-    const { categoryId } = req.params;
+router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, price, discount, type, stock, image, category } = req.body;
     const totalPrice = price - (price * (Number(discount) / 100));
     try {
-        const newProduct = yield prisma.product.create({
-            data: {
-                name,
-                price,
-                discount,
-                type,
-                stock,
-                image,
-                category: {
-                    connect: { id: categoryId }
-                },
-                totalPrice
+        const categ = yield prisma.category.findFirst({
+            where: {
+                name: category
             }
         });
-        res.json(newProduct);
+        if (categ) {
+            const newProduct = yield prisma.product.create({
+                data: {
+                    name,
+                    price,
+                    discount,
+                    type,
+                    stock,
+                    image,
+                    category: {
+                        connect: { id: categ.id }
+                    },
+                    totalPrice
+                }
+            });
+            return res.json("product created");
+        }
     }
-    catch (error) {
-        res.json("ERROR");
+    catch ({ message }) {
+        res.json("Error");
     }
 }));
 // localhost:3001/products/update/

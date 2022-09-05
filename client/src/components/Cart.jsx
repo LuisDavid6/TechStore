@@ -1,15 +1,22 @@
 import s from "./Styles/Cart.module.css"
 import NavBar from "./NavBar"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { verifyRole } from "../redux/actions"
 
 export default function Cart(){
+	
+	const dispatch = useDispatch()
+	const currentUser = useSelector(state=> state.currentUser) 
 
-	const cart = useSelector(state=> state.cart) 
+	useEffect(()=>{
+		dispatch(verifyRole())
+	},[])
 
   return(
 		<div>
 			<NavBar/>
-			<div className={s.main}>
+			{/* <div className={s.main}>
 				{cart && cart.length > 0 ? cart.map(e =>{
 					return(
 						<div key={e.id} className={s.product}>
@@ -22,6 +29,17 @@ export default function Cart(){
 						</div>
 					)
 				}) : <h4 className="text-white">No hay productos</h4>}
+			</div> */}
+			<div>
+				{console.log(currentUser)}
+				{currentUser.cart && currentUser.cart.products.map(e=>{
+					return(
+						<div>
+							<h1>{e.name} {e.cant}</h1>
+						</div>
+					)	
+				})}
+				<h1>Total: {currentUser.cart && currentUser.cart.total}</h1>
 			</div>
 		</div>
   )

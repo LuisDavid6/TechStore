@@ -1,4 +1,4 @@
-import express from "express"
+import express, { json } from "express"
 import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
@@ -17,19 +17,58 @@ router.put("/addToCart/:userId", async (req, res) => {
             }
         })
 
-        const productList = []
-        productList.push(product)
-        
-        await prisma.cart.update({
+        const user = await prisma.user.findUnique({
             where:{
-                userId
+                id: userId
             },
-            data: {
-                // @ts-ignore
-                products: productList
+            include:{
+                cart: true
             }
-        }) 
+        })
 
+        //@ts-ignore
+        const productInCart = user.cart.products.find(e=> e.id === productId)
+
+        if(productInCart) {
+            // @ts-ignore
+            productInCart.cant = productInCart.cant +1
+            // @ts-ignore
+            const totalCart = user.cart.total + productInCart.totalPrice
+            JSON.stringify(product)
+            await prisma.cart.update({
+                where:{
+                    userId
+                },
+                data: {
+                    // @ts-ignore
+                    products: user.cart.products,
+                    total: totalCart
+                }
+            }) 
+
+        }else {
+            // @ts-ignore
+            product.cant = 1
+            // @ts-ignore
+            product.totalValue = product.totalPrice
+            // @ts-ignore
+            const totalCart = user.cart.total + product.totalPrice
+            JSON.stringify(product)
+
+            await prisma.cart.update({
+                where:{
+                    userId
+                },
+                data: {
+                    // @ts-ignore
+                    products: {
+                        // @ts-ignore
+                        push: product
+                    },
+                    total: totalCart     
+                }
+            }) 
+        }
         res.json("Product added to cart")
 
     }catch({message}) {

@@ -31,9 +31,7 @@ model Product {
   active      Boolean    @default(true)
   date        DateTime   @default(now()) @db.Timestamptz()
   categoryId  String     @db.Uuid
-  // cartId      String?    @db.Uuid
   category    Category   @relation(fields: [categoryId], references: [id])
-  carts        Cart[]   
   comments    Comment[]
 }
 
@@ -55,8 +53,10 @@ model Cart{
   id          String    @id @default(uuid()) @db.Uuid
   date        DateTime  @default(now()) @db.Timestamptz()
   userId      String    @db.Uuid @unique
+  productId   String?   @db.Uuid
   user        User      @relation(fields: [userId], references: [id])
-  products    Product[] 
+  products    Json[]
+  total       Int    @default(0) 
 }
 
 model Comment{

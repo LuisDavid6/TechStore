@@ -23,11 +23,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield prisma.user.findMany({
             include: {
-                cart: {
-                // include:{
-                //     products: true
-                // }
-                }
+                cart: true
             }
         });
         res.json(users);

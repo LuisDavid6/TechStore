@@ -13,6 +13,7 @@ export default function Cart(){
 	useEffect(()=>{
 		dispatch(verifyRole())
 	},[])
+	
 
   return(
 		<div>

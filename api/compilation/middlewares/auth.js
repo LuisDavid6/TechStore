@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.verifyToken = void 0;
 const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -36,5 +37,5 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         res.json("invalid token");
     }
 });
-exports.default = verifyToken;
+exports.verifyToken = verifyToken;
 //# sourceMappingURL=auth.js.map

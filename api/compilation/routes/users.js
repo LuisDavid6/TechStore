@@ -16,14 +16,15 @@ const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const auth_1 = __importDefault(require("../middlewares/auth"));
+const auth_1 = require("../middlewares/auth");
 const prisma = new client_1.PrismaClient();
 const router = (0, express_1.default)();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield prisma.user.findMany({
             include: {
-                cart: true
+                cart: true,
+                sales: true
             }
         });
         res.json(users);
@@ -60,6 +61,44 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     else
         res.json("error en los datos proporcionados");
 }));
+router.delete("/delete/:userId", [auth_1.verifyToken], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const { userId } = req.params;
+    try {
+        // @ts-ignore
+        const id = req.userId;
+        const user = yield prisma.user.findUnique({
+            where: {
+                id
+            }
+        });
+        if (user && user.role === "admin") {
+            const userDelete = yield prisma.user.findUnique({
+                where: {
+                    id: userId
+                },
+                include: {
+                    cart: true
+                }
+            });
+            yield prisma.cart.delete({
+                where: {
+                    id: (_a = userDelete === null || userDelete === void 0 ? void 0 : userDelete.cart) === null || _a === void 0 ? void 0 : _a.id
+                }
+            });
+            yield prisma.user.delete({
+                where: {
+                    id: userId
+                }
+            });
+            return res.json("User deleted");
+        }
+        res.status(401).json("Unauthorized");
+    }
+    catch ({ message }) {
+        res.json("Error");
+    }
+}));
 router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
@@ -88,7 +127,7 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.status(400).send('Error al iniciar sesión');
     }
 }));
-router.get("/verifyRole", [auth_1.default], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/verifyRole", [auth_1.verifyToken], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // @ts-ignore
         const id = req.userId;
@@ -102,7 +141,8 @@ router.get("/verifyRole", [auth_1.default], (req, res) => __awaiter(void 0, void
                 email: true,
                 role: true,
                 cart: true,
-                comments: true
+                comments: true,
+                sales: true
             }
         });
         res.json(user);

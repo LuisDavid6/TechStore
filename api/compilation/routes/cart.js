@@ -89,7 +89,7 @@ router.put("/addToCart/:userId", (req, res) => __awaiter(void 0, void 0, void 0,
         }
         res.json("Product added to cart");
     }
-    catch ({ e }) {
+    catch ({ error }) {
         res.json("ERROR");
     }
 }));
@@ -162,7 +162,7 @@ router.put("/removeToCart/:userId", (req, res) => __awaiter(void 0, void 0, void
         res.json("Product removed from cart");
     }
     catch ({ message }) {
-        res.json(message);
+        res.json("Error");
     }
 }));
 exports.default = router;

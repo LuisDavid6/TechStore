@@ -97,6 +97,7 @@ router.get("/verifyRole", [auth_1.default], (req, res) => __awaiter(void 0, void
                 id
             },
             select: {
+                id: true,
                 userName: true,
                 email: true,
                 role: true,

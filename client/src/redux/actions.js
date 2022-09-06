@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
+import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, REMOVE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
          GET_USERS, CREATE_USER, VERIFY_ROLE, GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY,
          FILTER_BY_SUBCATEGORY,
@@ -61,15 +61,31 @@ export function getProductDetail(id){
   }  
 }
 
-export function addToCart(product){
-  return{
-    type: ADD_TO_CART, payload: product
+export function addToCart(ids){
+  return async function(dispatch){
+    try{
+      const {userId, productId} = ids
+      const {data} = await axios.put(`/cart/addToCart/${userId}`, {productId})
+      return dispatch({
+        type: ADD_TO_CART
+      })
+    }catch(e){
+      // throw Error
+    }
   }
 }
 
-export function deleteFromCart(id){
-  return{
-    type: DELETE_FROM_CART, payload: id
+export function removeFromCart(ids){
+  return async function(dispatch){
+    try{
+      const {userId, productId} = ids
+      const {data} = await axios.put(`/cart/removeToCart/${userId}`, {productId})
+      return dispatch({
+        type: REMOVE_FROM_CART
+      })
+    }catch(e){
+      // throw Error
+    }
   }
 }
 

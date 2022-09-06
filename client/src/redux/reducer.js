@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, DELETE_FROM_CART, FILTER_BY_CATEGORY,
+import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, REMOVE_FROM_CART, FILTER_BY_CATEGORY,
          FILTER_BY_PRICE, GET_PRODUCT_DETAIL, GET_USERS, CREATE_USER,
          VERIFY_ROLE, GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY,
          FILTER_BY_SUBCATEGORY,
@@ -16,7 +16,6 @@ const initialState = {
     categoryProductsAdmin: [],
     currentUser: {},
     role: "",
-    cart: []
 }
 
 export default function Reducer(state = initialState, action){
@@ -45,13 +44,13 @@ export default function Reducer(state = initialState, action){
         case ADD_TO_CART:
             return{
                 ...state,
-                cart: [...state.cart, action.payload]
+                refresh: !state.refresh
             }
 
-        case DELETE_FROM_CART:
+        case REMOVE_FROM_CART:
             return{
                 ...state,
-                cart: state.cart.filter(e => e.id !== action.payload)
+                refresh: !state.refresh
             }
 
         case FILTER_BY_CATEGORY:

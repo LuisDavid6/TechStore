@@ -1,4 +1,4 @@
-import express, { json } from "express"
+import express from "express"
 import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
@@ -9,7 +9,6 @@ router.put("/addToCart/:userId", async (req, res) => {
 
     const {userId} = req.params
     const {productId} = req.body
-
     try {
         //se busca el producto a agregar
         const product = await prisma.product.findUnique({
@@ -84,8 +83,8 @@ router.put("/addToCart/:userId", async (req, res) => {
         }
         res.json("Product added to cart")
 
-    }catch({message}) {
-        res.json(message)
+    }catch({e}) {
+        res.json("ERROR")
     }
 })
 

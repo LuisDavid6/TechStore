@@ -105,6 +105,7 @@ router.get("/verifyRole", [verifyToken], async (req: Request, res:Response) =>{
                 id
             },
             select:{
+                id:true,
                 userName: true,
                 email: true,
                 role: true,

@@ -89,8 +89,8 @@ router.put("/addToCart/:userId", (req, res) => __awaiter(void 0, void 0, void 0,
         }
         res.json("Product added to cart");
     }
-    catch ({ message }) {
-        res.json(message);
+    catch ({ e }) {
+        res.json("ERROR");
     }
 }));
 router.put("/removeToCart/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

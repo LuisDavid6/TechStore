@@ -7,27 +7,29 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+export const convertPrice = (price) => {
+  const priceLong = "" + price;
+  let punt = 0;
+  let result = "";
+  for (let i = priceLong.length - 1; i >= 0; i--) {
+    result = priceLong[i] + result;
+    punt++;
+    if (punt === 3 && i !== 0) {
+      result = "." + result;
+      punt = 0;
+    }
+  }
+  return "$"+result;
+};
+
 export default function Products({ category }) {
   
-  const convertPrice = (price) => {
-    const priceLong = "" + price;
-    let punt = 0;
-    let result = "";
-    for (let i = priceLong.length - 1; i >= 0; i--) {
-      result = priceLong[i] + result;
-      punt++;
-      if (punt === 3 && i !== 0) {
-        result = "." + result;
-        punt = 0;
-      }
-    }
-    return result;
-  };
 
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.productsFilter);
   const categorySelect = useSelector(state => state.categorySelect)
+  const currentUser = useSelector(state => state.currentUser)
 
   const refresh = useSelector((state) => state.refresh);
 
@@ -70,7 +72,7 @@ export default function Products({ category }) {
                 </div>
                   <div className="card-body">
                     <p className="card-text h6 product-price text-decoration-line-through opacity-50 m-0">${convertPrice(e.price)}</p>
-                    <p className="card-text h5 product-price">${convertPrice(e.totalPrice)}</p>
+                    <p className="card-text h5 product-price">{convertPrice(e.totalPrice)}</p>
                   </div>
                 <div className="card-body px-0" >
                   <Link to={`/product/${e.id}`}>  
@@ -93,7 +95,7 @@ export default function Products({ category }) {
                     data-bs-placement="top"
                     title="Agregar al carrito"
                     onClick={() => {
-                      dispatch(addToCart(e));
+                      dispatch(addToCart({userId: currentUser.id, productId: e.id}));
                       notifyAddToCart();
                     }}
                   ></i>

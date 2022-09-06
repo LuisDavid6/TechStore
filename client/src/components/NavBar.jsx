@@ -6,10 +6,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function NavBar() {
-  const cont = useSelector((state) => state.cart);
   const categories = useSelector(state => state.categories)
   const role = useSelector(state => state.role)
+  const currentUser = useSelector(state => state.currentUser)
+  const refresh = useSelector(state => state.refresh)
   const dispatch = useDispatch();
+
+  const cantProductsCart = currentUser.cart && currentUser.cart.products.reduce((acum,e)=> acum+=e.cant,0)
 
   const [search, setSearch] = useState("")
 
@@ -25,7 +28,7 @@ export default function NavBar() {
   useEffect(()=>{
     dispatch(getCategories())
     dispatch(verifyRole())
-  },[])
+  },[refresh])
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top bg-global px-3 h5 m-0">
@@ -82,8 +85,8 @@ export default function NavBar() {
           </form> 
           <Link to="/shoppingCart">
             <i className="bi bi-cart-check h2 mb-0 mx-3 position-relative text-white" >
-              <span className={cont && cont.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
-                {cont && cont.length>0 && cont.length}
+              <span className={currentUser.cart && currentUser.cart.products.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
+                {currentUser.cart && currentUser.cart.products.length>0 && cantProductsCart}
 
               </span>
             </i>

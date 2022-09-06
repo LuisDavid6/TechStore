@@ -1,10 +1,12 @@
 import axios from "axios"
 
-import { GET_PRODUCTS, DELETE_PRODUCT, ADD_TO_CART, REMOVE_FROM_CART, FILTER_BY_CATEGORY,
-         FILTER_BY_PRICE, GET_PRODUCT_DETAIL,
-         GET_USERS, CREATE_USER, VERIFY_ROLE, GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY,
-         FILTER_BY_SUBCATEGORY,
-         CREATE_PRODUCT} from "./actionTypes";
+import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT,
+         GET_PRODUCT_DETAIL,
+         ADD_TO_CART, REMOVE_FROM_CART, 
+         FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
+         GET_USERS, CREATE_USER, DELETE_USER,
+         VERIFY_ROLE, 
+         GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY } from "./actionTypes";
 
 export function getProducts(){
   return async function(dispatch){
@@ -186,6 +188,23 @@ export function createUser(user){
   }
 }
 
+export function deleteUser(userId){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.delete(`/users/delete/${userId}`,{
+          headers : {
+            Authorization : `Bearer ${window.localStorage.getItem("token")}`
+          }
+      })
+      return dispatch({
+        type: DELETE_USER
+      }) 
+    } catch(e){
+        throw Error
+    }
+  }
+}
+
 export function login(user){
   return async function(dispatch){
     try {
@@ -216,6 +235,23 @@ export function verifyRole(){
         type: VERIFY_ROLE,
         payload: data
       })
+    } catch (e) {
+      // throw Error
+    }
+  }
+}
+
+export function payOut(user){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.get("/sales/payOut",{
+        headers : {
+          Authorization : `Bearer ${window.localStorage.getItem("token")}`
+        }
+      })
+
+      return data
+      
     } catch (e) {
       // throw Error
     }

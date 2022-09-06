@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getUsers } from "../../redux/actions"
+import { deleteUser, getUsers } from "../../redux/actions"
 import AddUser from "./AddUser"
 
 export default function Users(){
@@ -84,7 +84,24 @@ return (
                     <td>{e.userName}</td>
                     <td>{e.email}</td>
                     <td> <i className="bi bi-pencil-fill h5 text-white cursor" title="Modificar"></i></td>
-                    <td><i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)}></i></td>
+                    <td>
+                      <i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#u"+e.id.slice(0,3)}></i>
+                      
+                      <div className="modal fade" id={"u"+e.id.slice(0,3)} tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                          <div className="modal-content bg-global">
+                            <div className="modal-header">
+                              <h5 className="modal-title text-white" id="deleteModalLabel">¿Esta seguro de eliminar el usuario?</h5>
+                              <button type="button" className="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-footer">
+                              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=>dispatch(deleteUser(e.id))}>Confirmar</button>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                    </td>
                   </tr>
                 )
               })}
@@ -96,52 +113,3 @@ return (
   </div>
 )
 }
-
-
-
-//   return (
-//     <div className="">
-//       <div className="mx-auto pt-3 pb-5 text-end d-flex justify-content-end pe-1">
-//         <form className="d-flex mx-2">
-//           <div className="input-group flex-nowrap mx-auto" style={{maxWidth:"250px"}}>
-//             <input type="text" className="form-control" placeholder="Buscar..." aria-label="buscar" aria-describedby="addon-wrapping" onChange={e=> setSearch(e.target.value)}/>
-//             <button className="input-group-text btn-outline-light bg-dark" type="submit" id="addon-wrapping" onClick={handleSearch}>
-//               <i className="bi bi-search text-white"></i>
-//             </button>
-//           </div>
-//         </form> 
-//         <button className="btn btn-outline-secondary text-white py-2">Agregar Usuario</button>
-//       </div>
-//       <div className=" mx-5">
-//         <nav className="">
-//           <div className="nav nav-tabs border-1 border-dark ">
-//             <button className="nav-link active text-white btn-outline-secondary border-5 border-light" data-bs-toggle="tab">Usuarios</button>
-//             <button className="nav-link text-white btn-outline-secondary border-5 border-light" data-bs-toggle="tab" >Administradores</button>
-//           </div>
-//         </nav>
-//         <div className="pt-0">
-//           <table className="table table-dark table-hover">
-//             <thead>
-//               <tr className="text-white h5">
-//                 <th scope="col">#</th>
-//                 <th scope="col">Usuario</th>
-//                 <th scope="col">Email</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {users && users.map(e=>{
-//                 return(
-//                   <tr className={ numUser%2!==0 ? "text-white" : "text-white table-active"}>
-//                     <th scope="row">{++numUser}</th>
-//                     <td>{e.userName}</td>
-//                     <td>{e.email}</td>
-//                   </tr>
-//                 )
-//               })}
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }

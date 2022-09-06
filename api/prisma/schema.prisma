@@ -16,6 +16,7 @@ model User {
   active      Boolean   @default(true)
   date        DateTime  @default(now()) @db.Timestamptz()
   cart        Cart?   
+  sales        Sale[]
   comments    Comment[]  
 }
 
@@ -53,10 +54,17 @@ model Cart{
   id          String    @id @default(uuid()) @db.Uuid
   date        DateTime  @default(now()) @db.Timestamptz()
   userId      String    @db.Uuid @unique
-  productId   String?   @db.Uuid
-  user        User      @relation(fields: [userId], references: [id])
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   products    Json[]
-  total       Int    @default(0) 
+  total       Int       @default(0) 
+}
+
+model Sale{
+  id          String    @id @default(uuid()) @db.Uuid
+  date        DateTime  @default(now()) @db.Timestamptz()
+  userId      String    @db.Uuid
+  user        User      @relation(fields: [userId], references: [id])
+  cart        Json
 }
 
 model Comment{

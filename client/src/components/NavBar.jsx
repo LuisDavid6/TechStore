@@ -96,12 +96,14 @@ export default function NavBar() {
             <ul className="dropdown-menu dropdown-menu-end bg-dark p-0 mt-2" aria-labelledby="navbarDropdown">
               {role ==="admin" ?
                 <div className="list-group">
+
+                  <Link to="/profile" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li></Link>
                   <Link to="/admin" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Panel de Admin</li></Link>
                   <Link to="/" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={logout()}>Cerrar Sesión</li></Link>
                 </div>
               : role === "user" ?
                 <div className="list-group">
-                  <li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li>
+                  <Link to="/profile" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li></Link>
                   <Link to="/" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={logout()}>Cerrar Sesión</li></Link>
                 </div>
               : 

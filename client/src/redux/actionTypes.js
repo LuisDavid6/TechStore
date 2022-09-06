@@ -8,6 +8,7 @@ export const FILTER_BY_PRICE = "FILTER_BY_PRICE"
 
 export const GET_USERS = "GET_USERS"
 export const CREATE_USER = "CREATE_USER"
+export const DELETE_USER = "DELETE_USER"
 export const VERIFY_ROLE = "VERIFY_ROLE"
 
 export const GET_CATEGORIES = "GET_CATEGORIES"

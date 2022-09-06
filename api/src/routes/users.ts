@@ -2,7 +2,7 @@ import express, { Request, Response } from "express"
 import { PrismaClient } from '@prisma/client'
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import verifyToken from "../middlewares/auth"
+import {verifyToken} from "../middlewares/auth"
 
 const prisma = new PrismaClient()
 const router = express()
@@ -12,7 +12,8 @@ router.get("/", async (req, res) =>{
     try{
         const users = await prisma.user.findMany({
             include:{
-                cart: true
+                cart: true,
+                sales:true
             }
         })
         res.json(users)
@@ -56,6 +57,50 @@ router.post("/", async (req, res) =>{
         }
     }else res.json("error en los datos proporcionados")
 
+})
+
+router.delete("/delete/:userId", [verifyToken], async (req: Request, res:Response) =>{
+    
+    const {userId} = req.params
+    try{
+        // @ts-ignore
+        const id = req.userId
+
+        const user = await prisma.user.findUnique({
+            where:{
+                id
+            }
+        })
+
+        if(user && user.role === "admin"){
+
+            const userDelete = await prisma.user.findUnique({
+                where:{
+                    id: userId
+                },
+                include:{
+                    cart: true
+                }
+            })
+
+            await prisma.cart.delete({
+                where:{
+                    id: userDelete?.cart?.id
+                }
+            })
+
+            await prisma.user.delete({
+                where:{
+                    id: userId
+                }
+            })
+            return res.json("User deleted")
+        }
+        res.status(401).json("Unauthorized")
+
+    }catch({message}){
+        res.json("Error")
+    }
 })
 
 
@@ -110,7 +155,8 @@ router.get("/verifyRole", [verifyToken], async (req: Request, res:Response) =>{
                 email: true,
                 role: true,
                 cart: true,
-                comments: true
+                comments: true,
+                sales: true
             }
         })
 

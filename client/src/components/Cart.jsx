@@ -2,19 +2,58 @@ import s from "./Styles/Cart.module.css"
 import NavBar from "./NavBar"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { addToCart, removeFromCart, verifyRole } from "../redux/actions"
+import { useNavigate } from "react-router-dom"
+import { addToCart, payOut, removeFromCart, verifyRole } from "../redux/actions"
 import { convertPrice } from "./Categories/Products"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Cart(){
 	
 	const dispatch = useDispatch()
+	const history =  useNavigate()
 	const currentUser = useSelector(state=> state.currentUser) 
+
+	const handlePayOut = async() =>{
+		const pay = await dispatch(payOut(currentUser))
+		if(pay === "successful purchase") {
+			registerNotify()
+			setTimeout(() => {
+				history("/profile", { replace: true });
+			  }, 1000);
+		} else errorNotify()
+	}
+
+	const registerNotify = () =>{
+		toast.success('Compra Exitosa', {
+		  position: "top-center",
+		  autoClose: 3000,
+		  hideProgressBar: true,
+		  closeOnClick: true,
+		  pauseOnHover: true,
+		  draggable: true,
+		  progress: false,
+		  theme:"dark",
+		});
+	  } 
+	
+	  const errorNotify = () =>{
+		toast.error('Un error ha ocurrido', {
+		  position: "top-center",
+		  autoClose: 3000,
+		  hideProgressBar: true,
+		  closeOnClick: true,
+		  pauseOnHover: true,
+		  draggable: true,
+		  progress: false,
+		  theme:"dark",
+		});
+	  } 
 
 	useEffect(()=>{
 		dispatch(verifyRole())
 	},[])
 	
-
   return(
 		<div>
 			<NavBar/>
@@ -65,10 +104,11 @@ export default function Cart(){
 								</div>
 							)
 						})}
-						<h1 className="text-white">Total A Pagar: {currentUser.cart && convertPrice(currentUser.cart.total)}</h1>
+						<h3 className="text-white my-4">Total A Pagar: {currentUser.cart && convertPrice(currentUser.cart.total)}</h3>
+						<button type="button" class="btn btn-secondary btn-lg w-25 my-4" onClick={handlePayOut}>Realizar Pago</button>
 					</div>
 				: 
-					<h2>NO HAY PRODUCTOS</h2>}
+					<h2 className="text-white">NO HAY PRODUCTOS</h2>}
 		</div>
 	)
 }

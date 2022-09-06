@@ -12,6 +12,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Footer from './components/Footer';
 import Menu from './components/Admin/Menu';
+import Profile from './components/Profile';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route path='/register' element={<Register/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/admin' element={<Menu/>} />
+        <Route path='/profile' element={<Profile/>} />
       </Routes>
       {/* <Footer/> */}
     </div>

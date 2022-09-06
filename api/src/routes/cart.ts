@@ -83,7 +83,7 @@ router.put("/addToCart/:userId", async (req, res) => {
         }
         res.json("Product added to cart")
 
-    }catch({e}) {
+    }catch({error}) {
         res.json("ERROR")
     }
 })
@@ -167,7 +167,7 @@ router.put("/removeToCart/:userId", async (req, res) => {
         res.json("Product removed from cart")
 
     }catch({message}) {
-        res.json(message)
+        res.json("Error")
     }
 })
 

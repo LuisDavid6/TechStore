@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 const prisma = new PrismaClient()
 const router = express()
 
-const verifyToken = async (req:Request, res:Response, next:NextFunction) =>{
+export const verifyToken = async (req:Request, res:Response, next:NextFunction) =>{
 
     try {
         const authorization = req.get("authorization")
@@ -27,6 +27,3 @@ const verifyToken = async (req:Request, res:Response, next:NextFunction) =>{
     }
 
 }
-
-
-export default verifyToken

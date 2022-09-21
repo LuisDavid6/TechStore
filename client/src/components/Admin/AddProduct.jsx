@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createProduct, filterByCategory } from '../../redux/actions';
 
 export default function AddProduct(){
@@ -11,6 +11,7 @@ export default function AddProduct(){
   const refresh = useSelector(state=> state.refresh)
 	const categories = useSelector((state)=> state.categories)
 	const categorySelect = useSelector((state)=> state.categorySelect)
+  const [image, setImage] = useState('')
 
   const successNotify = () =>{
     toast.success('Producto agregado exitosamente', {
@@ -25,6 +26,26 @@ export default function AddProduct(){
     });
   }
 
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+
+    data.append('file', files[0]);
+    data.append('upload_preset', 'ophfn9bj');
+    // setLoading(true);
+    try {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dnc21abpp/image/upload", { method: "POST", body: data })
+      const file = await res.json();
+      setImage(file.secure_url);
+      
+    } catch (error) {
+      // console.log(error)
+    }
+  };
+  useEffect(()=>{
+    console.log("HE")
+  },[refresh])
+
   return(
     <div>
       <Formik 
@@ -33,10 +54,10 @@ export default function AddProduct(){
           price: "",
           discount: 0,
           stock: 0,
+          category: "",
           type: "",
           image: "",
           // description: "",
-          category: ""
         }}
 
         validate = {values=>{
@@ -60,7 +81,7 @@ export default function AddProduct(){
 
           } else if (values.stock.toString().length>1 && values.stock.toString()[0]==="0") errors.stock = "El valor debe ser mayor a 0"
           
-					if (!values.category) errors.categoryId = "Debes seleccionar categoria";
+					if (!values.category) errors.category = "Debes seleccionar categoria";
             
 					if (!values.type) errors.type = "Debes seleccionar subcategoria";
 
@@ -73,10 +94,11 @@ export default function AddProduct(){
           values.price = Number(values.price)
           values.discount = Number(values.discount)
           values.stock = Number(values.stock)
+          values.image = image
           dispatch(createProduct(values))
           resetForm()
-          successNotify()
-          
+          setImage("")
+          successNotify()          
         }}
       >
         {({values, errors}) => (
@@ -115,7 +137,7 @@ export default function AddProduct(){
                       return <option value={e.name} className="outline-secondary" key={e.name}>{e.name}</option>
                     })}
                   </select>
-                  <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='categoryId' component="div"/>
+                  <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='category' component="div"/>
               </div>
               <div className='form-floating mb-2 w-50 ms-1'>
                 <label htmlFor="type" className="text-secondary my-2">SubCategoria</label><br/>
@@ -127,17 +149,26 @@ export default function AddProduct(){
                   </select> 
                   <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='type' component="div"/>
               </div>
-            </div>
+              </div>
             {/* <div className='form-floating w-100 my-3 mx-auto'>
               <Field as="textarea" name="description"className="form-control" id="descriptionValue" placeholder="descripción" style={{minHeight:"120px"}}/>
               <label for="descriptionValue" className='text-secondary'>Descripción</label>
               <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='description' component="div"/>
 						</div> */}
-            <div className='form-floating w-100 my-4 mx-auto'>
-              <Field type="text" name="image"className="form-control" id="imageValue" placeholder="Link imagen"/>
-              <label for="imageValue" className='text-secondary'>Link imagen</label>
-              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='image' component="div"/>
-						</div>
+            <div>
+                <Field
+                  className="form-control form-control-sm"
+                  id="Poster"
+                  type="file"
+                  name="file"
+                  onChange={(e) => uploadImage(e)}
+                />
+                {!image && 
+                  <span className='text-danger fs-6 fst-italic text-wrap'>Selecciona imagen</span>
+                }
+                {/* {(values.Poster = image)} */}
+                    <div className="container-fix mx-auto my-3"><img src={image} className="" width="120px"/></div>
+            </div>
             <div className="d-flex align-items-center">
               <button type="submit" className='btn btn-secondary my-3 p-2 mx-auto align-self-center w-50' style={{maxWidth:"230px"}}>Guardar</button>
             </div>

@@ -241,10 +241,10 @@ export function verifyRole(){
   }
 }
 
-export function payOut(user){
+export function payOut(paymentId){
   return async function(dispatch){
     try {
-      const {data} = await axios.get("/sales/payOut",{
+      const {data} = await axios.post("/sales/payOut",{paymentId},{
         headers : {
           Authorization : `Bearer ${window.localStorage.getItem("token")}`
         }

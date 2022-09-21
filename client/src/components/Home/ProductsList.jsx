@@ -25,7 +25,7 @@ export default function(){
               {e.products && e.products.slice(0,4).map(p=>{
                 return(
                   <div className="col py-3" key={p.name}>
-                    <Link to={`/product/${p.id}`}><img src={p.image} alt={p.name} className=" img-fluid rounded-circle"/></Link> {/* style={{maxWidth:"250px", maxHeight:"240px"}} */}
+                    <Link to={`/product/${p.id}`}><img src={p.image} alt={p.name} className=" img-fluid rounded-2"/></Link> {/* style={{maxWidth:"250px", maxHeight:"240px"}} */}
                     
                     {/* <Link to={`/product/${p.id}`}><img src={p.image} alt={p.name} className="rounded-4" style={{maxWidth:"200px", height:"240px"}}/></Link> */}
                   </div>

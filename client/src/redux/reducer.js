@@ -84,13 +84,13 @@ export default function Reducer(state = initialState, action){
             let products = []
             if(action.payload === "asc") {
                 products = state.productsFilter.sort(function(a,b){
-                    if(a.price > b.price) return 1
+                    if(a.totalPrice > b.totalPrice) return 1
                     else return -1   
                 })}
                 
             else if(action.payload === "desc") {
                 products = state.productsFilter.sort(function(a,b){
-                    if(a.price < b.price) return 1
+                    if(a.totalPrice < b.totalPrice) return 1
                     else return -1   
             })}
             else products = state.productsFilter

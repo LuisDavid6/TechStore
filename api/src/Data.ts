@@ -141,7 +141,7 @@ const MotoG22 = {
 const SamsungA12 = {
     name: "Samsung Galaxy A12",
     price: 849900,
-    totalPrice: 896720,
+    totalPrice: 679920,
     discount: 20,
     type: "Samsung",
     stock: 8,

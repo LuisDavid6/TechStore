@@ -41,6 +41,10 @@
     cursor: pointer;
 }
 
+.container-fix{
+    width: fit-content;
+}
+
 @media (max-width: 680px) {
     .product-list{
             grid-template-columns: repeat(auto-fill , 200px);

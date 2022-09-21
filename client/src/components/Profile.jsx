@@ -24,9 +24,9 @@ export default function Profile(){
 			<div>
 				{currentUser.sales && currentUser.sales.map(e=>{
 					return(
-						<div class="card bg-secondary w-50 my-3 mx-auto">
-							<div class="card-body text-white">
-								<p class="card-text text-end">{e.date.slice(0,10)}</p>
+						<div className="card bg-global w-50 my-3 mx-auto">
+							<div className="card-body text-white">
+								<p className="card-text text-end">{e.date.slice(0,10)}</p>
 								<p>
 									{e.cart.products && e.cart.products.map(f=>{
 										return(
@@ -40,7 +40,7 @@ export default function Profile(){
 										)
 									})}
 								</p>
-								<p class="card-text text-start mt-5">Total Compra: {convertPrice(e.cart.total)}</p>
+								<p className="card-text text-start mt-5">Total Compra: {convertPrice(e.cart.total)}</p>
 
 							</div>
 						</div>

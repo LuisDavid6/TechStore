@@ -1,14 +1,20 @@
 import express, { Request, Response } from "express"
 import { PrismaClient } from '@prisma/client'
 import {verifyToken} from "../middlewares/auth"
+import Stripe from "stripe"
 
 const prisma = new PrismaClient()
 const router = express()
 
-router.get("/payOut", [verifyToken], async (req:Request, res: Response)=>{
+const {STRIPE_KEY} : any = process.env
 
+
+router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
+    
     // @ts-ignore
     const id = req.userId
+    const {paymentId} = req.body
+    const stripe = new Stripe(STRIPE_KEY,{apiVersion:"2022-08-01"})
 
     try {
         const user = await prisma.user.findUnique({
@@ -18,6 +24,18 @@ router.get("/payOut", [verifyToken], async (req:Request, res: Response)=>{
             include:{
                 cart: true
             }
+        })
+        
+        // @ts-ignore
+        const amount = Math.floor(user?.cart?.total /40)
+
+        const payment = await stripe.paymentIntents.create({
+            // @ts-ignore
+            amount,
+            currency: "USD",
+            payment_method: paymentId,
+            description: "Productos tecnologicos",
+            confirm: true
         })
         
         const sale = await prisma.sale.create({
@@ -35,13 +53,14 @@ router.get("/payOut", [verifyToken], async (req:Request, res: Response)=>{
                 id: user?.cart.id
             },
             data:{
-                products: []
+                products: [],
+                total: 0
             }
         })
 
-        res.json("successful purchase")
-    } catch (error) {
-        res.json("error")
+        res.json("successfull purchase")
+    } catch ({message}) {
+        res.json(message)
     }
 })
 

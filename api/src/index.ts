@@ -17,6 +17,7 @@ const app = express()
 const PORT = process.env.PORT || 3001;
 
 //middlewares
+app.use(express.urlencoded({extended:false})) //midleware que permite recibir datos de formularios externos y de stripe
 app.use(express.json())  //middleware que transforma la req.body a json
 app.use(cors({
     origin: '*',

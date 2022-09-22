@@ -43,7 +43,6 @@ router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
                 userId: user?.id,
                 // @ts-ignore
                 cart: user?.cart
-
             }
         })
 

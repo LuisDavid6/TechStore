@@ -174,16 +174,16 @@ export default function Cart(){
 
 						<div className="modal fade" id="exampleModalToggle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 							<div className="modal-dialog modal-dialog-centered">
-								<div className="modal-content">
+								<div className="modal-content bg-dark">
 									<div className="modal-header">
-										<h5 className="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+										<h5 className="modal-title text-white" id="exampleModalToggleLabel">Realizar Pago</h5>
 										<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div className="modal-body">
-										<div className="text-white bg-white p-4">
+										<div className="text-white p-4">
 											<form onSubmit={handleSubmit}>
 												<CardElement className="form-control" onChange={e=>verifyPayment()}/> {/*options={element} */}
-												<button className="btn btn-outline-success" type="submit"  data-bs-toggle={correctCard ? "modal":null} data-bs-target={correctCard ? "#staticBackdrop" :null}>Pagar</button>
+												<button className="btn btn-outline-success mt-3" type="submit"  data-bs-toggle={correctCard ? "modal":null} data-bs-target={correctCard ? "#staticBackdrop" :null}>Pagar</button>
 											</form>
 										</div>
 									</div>

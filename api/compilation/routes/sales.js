@@ -15,11 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const auth_1 = require("../middlewares/auth");
+const stripe_1 = __importDefault(require("stripe"));
 const prisma = new client_1.PrismaClient();
 const router = (0, express_1.default)();
-router.get("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const { STRIPE_KEY } = process.env;
+router.post("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     // @ts-ignore
     const id = req.userId;
+    const { paymentId } = req.body;
+    const stripe = new stripe_1.default(STRIPE_KEY, { apiVersion: "2022-08-01" });
     try {
         const user = yield prisma.user.findUnique({
             where: {
@@ -28,6 +33,16 @@ router.get("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, void
             include: {
                 cart: true
             }
+        });
+        // @ts-ignore
+        const amount = Math.floor(((_a = user === null || user === void 0 ? void 0 : user.cart) === null || _a === void 0 ? void 0 : _a.total) / 40);
+        const payment = yield stripe.paymentIntents.create({
+            // @ts-ignore
+            amount,
+            currency: "USD",
+            payment_method: paymentId,
+            description: "Productos tecnologicos",
+            confirm: true
         });
         const sale = yield prisma.sale.create({
             data: {
@@ -42,13 +57,14 @@ router.get("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, void
                 id: user === null || user === void 0 ? void 0 : user.cart.id
             },
             data: {
-                products: []
+                products: [],
+                total: 0
             }
         });
-        res.json("successful purchase");
+        res.json("successfull purchase");
     }
-    catch (error) {
-        res.json("error");
+    catch ({ message }) {
+        res.json(message);
     }
 }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

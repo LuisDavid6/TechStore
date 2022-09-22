@@ -26,6 +26,7 @@ const prisma = new client_1.PrismaClient();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
 //middlewares
+app.use(express_1.default.urlencoded({ extended: false })); //midleware que permite recibir datos de formularios externos y de stripe
 app.use(express_1.default.json()); //middleware que transforma la req.body a json
 app.use((0, cors_1.default)({
     origin: '*',

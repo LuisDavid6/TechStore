@@ -42,9 +42,9 @@ export default function AddProduct(){
       // console.log(error)
     }
   };
-  useEffect(()=>{
-    console.log("HE")
-  },[refresh])
+  // useEffect(()=>{
+  //   console.log("HE")
+  // },[refresh])
 
   return(
     <div>

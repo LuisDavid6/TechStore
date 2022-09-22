@@ -31,6 +31,18 @@
     flex-wrap: wrap;
 }
 
+.shopping-history{
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill , 200px); */
+    /* grid-template-columns: repeat(auto-fill , minmax(20rem, 1fr)); */
+    max-width: max-content;
+    height: auto;
+    gap: 20px;
+    justify-content: center;
+    margin: 2%;
+    flex-wrap: wrap;
+}
+
 .bg-global{
     /* background-color:rgb(48, 45, 45); */
     /* background-color: #343a40 */

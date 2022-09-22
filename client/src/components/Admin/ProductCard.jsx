@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteProduct } from "../../redux/actions"
+import ModifyProduct from "./ModifyProduct"
 
 export default function ProductCard({filter}){
   
@@ -25,7 +26,24 @@ export default function ProductCard({filter}){
                 <span className="text-white">{e.name}</span>
               </div>
               <div className="col-1 my-auto">
-                <i className="bi bi-pencil-fill h5 text-white cursor" title="Modificar"></i>
+                <i className="bi bi-pencil-fill h5 text-white cursor" title="Modificar" data-bs-toggle="modal" data-bs-target={"#m"+e.id.slice(0,3)}></i>
+                <div className="modal fade" id={"m"+e.id.slice(0,3)} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div className="modal-dialog">
+                  <div className="modal-content bg-global">
+                    <div className="modal-header text-white">
+                      <h5 className="modal-title" id="staticBackdropLabel">Modificar Producto</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <ModifyProduct data={e}/>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               </div>
               <div className="col-1 my-auto">
                 <i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)}></i>

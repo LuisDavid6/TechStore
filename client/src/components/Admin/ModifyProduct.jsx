@@ -28,6 +28,7 @@ export default function ModifyProduct({data}){
 
   return(
     <div>
+      {data &&
       <Formik 
         initialValues = {{
           name: data.name,
@@ -146,6 +147,7 @@ export default function ModifyProduct({data}){
           </Form>         
         )}
       </Formik>
+      }
     </div>
   )
 }

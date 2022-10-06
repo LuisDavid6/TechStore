@@ -38,7 +38,7 @@ export default function Products(){
           <div className="">
             <AddCategory/>
           </div>
-          <div className="pt-5 ">
+          <div className="pt-5">
             <h6> Filtrar por categoria</h6>
             <div className="btn-group-vertical pt-4" role="group" aria-label="Vertical radio toggle button group">
               {categories && categories.map(e =>{

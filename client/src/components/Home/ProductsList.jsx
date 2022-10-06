@@ -15,7 +15,7 @@ export default function(){
 
   return(
     <div className="mx-5 mb-4">
-      {categories && categories.slice(0,4).map(e =>{
+      {categories.length>0 ? categories.slice(0,4).map(e =>{
         return(
           <div className="card bg-global mx-5 mt-3 rounded-4" key={e.name}>
             <div className="card-header text-white">
@@ -35,7 +35,14 @@ export default function(){
             </div>
           </div>
         )
-      })}
+      })
+    :
+    <div class="text-center">
+    <div class="spinner-border text-primary mt-5" role="status" style={{width: "6rem", height: "6rem"}}>
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+    }
     </div>
   )
 }

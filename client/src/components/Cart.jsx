@@ -96,6 +96,7 @@ export default function Cart(){
 				} else{
 					setErrorPayment(true)
 					setLoading(false)
+					setLoad(0)
 					errorNotify()
 				} 
 			}
@@ -103,6 +104,7 @@ export default function Cart(){
 		}catch(e){
 			setErrorPayment(true)
 			setLoading(false)
+			setLoad(0)
 			errorNotify()
 		}
 	}
@@ -183,6 +185,7 @@ export default function Cart(){
 										<div className="text-white p-4">
 											<form onSubmit={handleSubmit}>
 												<CardElement className="form-control" onChange={e=>verifyPayment()}/> {/*options={element} */}
+												<h6 className="fst-italic fw-normal text-start my-0 ms-4 mt-1">4242 4242 4242 4242 ---- 02/24  ---- 123 ---- 12345</h6>
 												<button className="btn btn-outline-success mt-3" type="submit"  data-bs-toggle={correctCard ? "modal":null} data-bs-target={correctCard ? "#staticBackdrop" :null}>Pagar</button>
 											</form>
 										</div>
@@ -202,13 +205,13 @@ export default function Cart(){
 										</div>
 									: errorPayment ?
 										<div className="modal-body text-white h3">
-											<h2>Un error ha ocurrido con el pago</h2>
+											<h3>Ha ocurrido un error con el pago</h3>
 											<button className="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">Intentar nuevamente</button>
 										</div>
 									:
 										<div className="modal-body text-white h3">
-											<h1>Felicidades tu compra se ha completado con exito</h1>
-											<h2>Este es tu número de seguimiento</h2>
+											<h2>Felicidades tu compra se ha completado con exito</h2>
+											<h3>Este es tu número de seguimiento </h3>
 											<Link to="/home"><button className="btn btn-outline-info mt-3 me-3" data-bs-dismiss="modal" aria-label="Close">Volver a inicio</button></Link>
 											<Link to="/profile"><button className="btn btn-outline-info mt-3" data-bs-dismiss="modal" aria-label="Close">Ir a mis compras</button></Link>
 										</div>

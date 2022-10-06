@@ -5,13 +5,31 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
 import { createProduct, filterByCategory } from '../../redux/actions';
 
-export default function AddProduct(){
+const defaultState = {
+  name: "",
+  value:""
+}
 
+const Specs = ({onChange, onRemove, name, value})=>{
+  return(
+    <div className='d-flex flex-direction-col gap-2 my-2'>
+      <input className='form-control' type="text" placeholder='Nombre' value={name} onChange={ e => onChange("name",e.target.value)}></input>
+      <input className='form-control' type="text" placeholder='Valor' value={value} onChange={ e => onChange("value",e.target.value)}></input>
+      <button className='btn btn-danger rounded-circle ' onClick={onRemove}>X</button>
+    </div>
+  )
+}
+
+export default function AddProduct(){
+  
   const dispatch = useDispatch()
   const refresh = useSelector(state=> state.refresh)
 	const categories = useSelector((state)=> state.categories)
 	const categorySelect = useSelector((state)=> state.categorySelect)
   const [image, setImage] = useState('')
+
+  const [specs, setSpecs] = useState([defaultState]);
+
 
   const successNotify = () =>{
     toast.success('Producto agregado exitosamente', {
@@ -46,6 +64,27 @@ export default function AddProduct(){
   //   console.log("HE")
   // },[refresh])
 
+
+  const handleOnChange = (index, name, value) => {
+    const copySpecs= [...specs];
+    copySpecs[index] = {
+      ...copySpecs[index],
+      [name]: value
+    };
+    setSpecs(copySpecs);
+  }
+
+  const handleOnAdd = () => {
+    setSpecs(specs.concat(defaultState));
+  }
+
+  const handleOnRemove = index => {
+    const copySpecs = [...specs];
+    copySpecs.splice(index, 1);
+    setSpecs(copySpecs);
+  }
+
+
   return(
     <div>
       <Formik 
@@ -57,7 +96,7 @@ export default function AddProduct(){
           category: "",
           type: "",
           image: "",
-          // description: "",
+          description: "",
         }}
 
         validate = {values=>{
@@ -85,7 +124,7 @@ export default function AddProduct(){
             
 					if (!values.type) errors.type = "Debes seleccionar subcategoria";
 
-					// if (!values.description) errors.description = "Debes ingresar la descripción";
+					if (!values.description) errors.description = "Debes ingresar la descripción";
 
           return errors
         }}
@@ -95,6 +134,14 @@ export default function AddProduct(){
           values.discount = Number(values.discount)
           values.stock = Number(values.stock)
           values.image = image
+
+          let finallyspecs = {}
+          specs.forEach(e => {
+            finallyspecs[e.name]=e.value
+          });
+
+          values.specs = finallyspecs
+          console.log(values)
           dispatch(createProduct(values))
           resetForm()
           setImage("")
@@ -150,11 +197,23 @@ export default function AddProduct(){
                   <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='type' component="div"/>
               </div>
               </div>
-            {/* <div className='form-floating w-100 my-3 mx-auto'>
+            <div className='form-floating w-100 my-3 mx-auto'>
               <Field as="textarea" name="description"className="form-control" id="descriptionValue" placeholder="descripción" style={{minHeight:"120px"}}/>
               <label for="descriptionValue" className='text-secondary'>Descripción</label>
               <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='description' component="div"/>
-						</div> */}
+						</div>
+              <label className='mt-3 text-white h5'>Caracteristicas:</label>
+            <div className='mb-5 text-center'>
+              {specs.map((specs, index) => (
+                <Specs
+                  {...specs}
+                  onChange={(name, value) => handleOnChange(index, name, value)}
+                  onRemove={() => handleOnRemove(index)}
+                  key={index}
+                />
+              ))}
+              <button className='btn btn-secondary' type='button' onClick={handleOnAdd}>+</button>
+            </div>
             <div>
                 <Field
                   className="form-control form-control-sm"
@@ -169,7 +228,8 @@ export default function AddProduct(){
                 {/* {(values.Poster = image)} */}
                     <div className="container-fix mx-auto my-3"><img src={image} className="" width="120px"/></div>
             </div>
-            <div className="d-flex align-items-center">
+
+            <div className="d-flex a1lign-items-center">
               <button type="submit" className='btn btn-secondary my-3 p-2 mx-auto align-self-center w-50' style={{maxWidth:"230px"}}>Guardar</button>
             </div>
             

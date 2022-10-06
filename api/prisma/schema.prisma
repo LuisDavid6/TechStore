@@ -27,6 +27,8 @@ model Product {
   discount    Int?       @default(0)
   totalPrice  Int
   type        String
+  description String
+  specs       Json[]
   image       String
   stock       Int        @default(0)
   active      Boolean    @default(true)

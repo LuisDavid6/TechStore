@@ -42,7 +42,7 @@ router.get("/details/:id", async (req,res) =>{
 // localhost:3001/products/
 router.post("/", async (req, res) =>{
 
-    const {name,price,discount,type,stock,image,category} = req.body
+    const {name,price,discount,type,stock,image,category,description,specs} = req.body
     const totalPrice = price-(price*(Number(discount)/100))
 
     try {
@@ -59,6 +59,8 @@ router.post("/", async (req, res) =>{
                     price,
                     discount,
                     type,
+                    description,
+                    specs,
                     stock,
                     image,
                     category:{

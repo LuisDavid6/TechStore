@@ -135,12 +135,7 @@ export default function AddProduct(){
           values.stock = Number(values.stock)
           values.image = image
 
-          let finallyspecs = {}
-          specs.forEach(e => {
-            finallyspecs[e.name]=e.value
-          });
-
-          values.specs = finallyspecs
+          values.specs = specs
           console.log(values)
           dispatch(createProduct(values))
           resetForm()

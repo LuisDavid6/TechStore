@@ -16,7 +16,7 @@ model User {
   active      Boolean   @default(true)
   date        DateTime  @default(now()) @db.Timestamptz()
   cart        Cart?   
-  sales        Sale[]
+  sales       Sale[]
   comments    Comment[]  
 }
 

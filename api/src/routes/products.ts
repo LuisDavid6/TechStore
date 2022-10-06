@@ -72,6 +72,7 @@ router.post("/", async (req, res) =>{
             return res.json("product created")
         }
     } catch ({message}) {
+        console.log({message})
         res.json("Error")
     }
     

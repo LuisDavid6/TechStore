@@ -67,10 +67,10 @@ export default function Details(){
                     return(
                       <tr className="text-white text-start h6 ">
                         <td>
-                          <span className="">{Object.keys(e)}:</span>
+                          <span className="">{e.name}</span>
                         </td>
                         <td>
-                          <span className="">{Object.values(e)}</span>
+                          <span className="">{e.value}</span>
                         </td>
                       </tr>
                     )

@@ -81,9 +81,9 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log("ok");
     }
     catch ({ message }) {
-        console.log({ message });
-        // res.json("Error")
-        res.json(message);
+        // console.log({message})
+        res.json("Error");
+        // res.json(message)
     }
 }));
 // localhost:3001/products/update/

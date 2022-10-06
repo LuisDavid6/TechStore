@@ -2,17 +2,33 @@ import "./Styles/Styles.css"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getProductDetail } from "../redux/actions"
+import { addToCart, getProductDetail } from "../redux/actions"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import { convertPrice } from "./Categories/Products"
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Details(){
 
   const {id} = useParams()
   const dispatch = useDispatch()
   const product = useSelector(state => state.productDetail)
+  const currentUser = useSelector(state => state.currentUser)
+
+  const notifyAddToCart = () => {
+    toast.success("Articulo agregado al carrito", {
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: false,
+      theme: "dark",
+    });
+  };
 
   useEffect(()=>{
       dispatch(getProductDetail(id))
@@ -22,7 +38,7 @@ export default function Details(){
   return(
     <div >
       <NavBar/>
-      <div className="row mx-5 mt-2 gap-2">
+      <div className="row mx-0 mt-2 gap-2">
         <div className="col bg-global rounded-0 p-4">
               {product && <img src={product.image} className="img-fluid" style={{minWidth:"200px"}}></img>}
         </div>
@@ -50,18 +66,19 @@ export default function Details(){
                 <p className="text-white h3 fw-bold">{convertPrice(product.totalPrice)}</p>
              </div>
             }
-            <button className="btn btn-success mx-auto py-2 px-5">Agregar al carrito</button>
+            <button className="btn btn-success mx-auto py-2 px-5" onClick={() => {dispatch(addToCart({userId: currentUser.id, productId: product.id}));notifyAddToCart();}}>Agregar al carrito</button>
         </div>
       </div>
 
-      <div className="bg-global mt-1 mx-5 rounded-0 p-5 mb-2">
+      <div className="bg-global mt-1 mx-0 rounded-0 p-5 mb-2">
         <h3 className="dropdown-toggle mb-0 w-25 text-white text-start" data-bs-toggle="collapse" data-bs-target="#collapseEspec" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>
           Especificaciones
         </h3>
         <div className="collapse" id="collapseEspec">
           <div className="card card-body p-0 mt-3 mb-5 bg-global text-white border-0">
             <div className="pt-3 table-responsive">
-              <table className="table table-bordered" style={{maxWidth:"500px"}}>
+              <table className="table table-bordered"  style={{maxWidth:"500px"}}>
+                <thead style={{display:"none"}}></thead>
                 <tbody>
                   {product.specs && product.specs.length>0 && product.specs.map(e=>{
                     return(
@@ -86,7 +103,7 @@ export default function Details(){
         </h3>
         <div className="collapse" id="collapseDesc">
           <div className="card card-body bg-global text-white border-0 p-0">
-            <h4>{product.description}</h4>
+            <h6>{product.description}</h6>
           </div>
         </div>
         <h3 className="dropdown-toggle my-5 w-25 text-white text-start" data-bs-toggle="collapse" data-bs-target="#collapseCom" aria-expanded="false" aria-controls="collapseExample" style={{cursor:"pointer"}}>

@@ -58,7 +58,7 @@ app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     //     })
     // }    
     // await prisma.product.createMany({
-    //     data: datas
+    //     data: datas,
     // })
     console.log(`server running on port ${PORT}`);
 }));

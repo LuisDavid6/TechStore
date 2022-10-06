@@ -134,11 +134,10 @@ export default function AddProduct(){
           values.discount = Number(values.discount)
           values.stock = Number(values.stock)
           values.image = image
-
           values.specs = specs
-          console.log(values)
           dispatch(createProduct(values))
           resetForm()
+          setSpecs([defaultState])
           setImage("")
           successNotify()          
         }}

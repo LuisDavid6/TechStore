@@ -17,7 +17,7 @@ export default function(){
     <div className="mx-0 mb-4">
       {categories.length>0 ? categories.slice(0,4).map(e =>{
         return(
-          <div className="card bg-global mx- mt-3 rounded-4" key={e.name}>
+          <div className="card bg-global mt-3" key={e.name}>
             <div className="card-header text-white">
               <Link to={`/products/${e.name}`} className="text-decoration-none text-white"><h5>{e.name}</h5></Link>
             </div>
@@ -25,7 +25,7 @@ export default function(){
               {e.products && e.products.slice(0,4).map(p=>{
                 return(
                   <div className="col py-3" key={p.name}>
-                    <Link to={`/product/${p.id}`}><img src={p.image} alt={p.name} className=" img-fluid rounded-2" style={{MaxWidth:"100%",height:"auto"}}/></Link>
+                    <Link to={`/product/${p.id}`}><img src={p.image} alt={p.name} className=" img-fluid rounded-2"/></Link>
                   </div>
                 )
               })}

@@ -66,7 +66,7 @@ export default function Products({ category }) {
                     height="100%"
                   />
                 </div>
-                <div className="card-body ">
+                <div className="card-body">
                   <h6 className="card-title text-white text-wrap lh-base text-truncate" style={{ height: "50px" }}>{e.name}</h6>
                 </div>
                   <div className="card-body">
@@ -76,7 +76,7 @@ export default function Products({ category }) {
                     }
                     <p className="card-text h5 text-white product-price">{convertPrice(e.totalPrice)}</p>
                   </div>
-                <div className="card-body px-0" >
+                <div className="card-body px-0 down" >
                   <Link to={`/product/${e.id}`}>  
                     <a
                       href="#"

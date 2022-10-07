@@ -6,16 +6,14 @@
 }
 
 .product-price{
-    /* color: #0d6efd; */
     color: #6c757d;
-    /* color: rgb(24, 146, 13); */
     font-weight: bold;
 }
 
 .product-list{
     display: grid;
     /* grid-template-columns: repeat(auto-fill , 200px); */
-    grid-template-columns: repeat(auto-fill , minmax(11rem, 1fr));
+    grid-template-columns: repeat(auto-fill , minmax(12rem, 1fr));
     height: auto;
     gap: 20px;
     justify-content: center;
@@ -65,9 +63,26 @@
     display: flex;
 }
 
+
 @media (max-width: 680px) {
     .product-list{
             grid-template-columns: repeat(auto-fill , 200px);
+    }
+}
+
+@media (min-width: 375px) and  (max-width: 480px) {
+    .product-list{
+            grid-template-columns: repeat(auto-fill , 160px);
+            margin: 0;
+            gap: 2;
+    }
+
+    .down{
+        display: flex;
+        width: 160px;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
     }
 }
 

@@ -9,13 +9,13 @@ export default function HomeProducts(){
   const {category} = useParams()
 
   return(
-    <div className="position-relative mb-1">
+    <div className="position-relative">
       <NavBar/>
       <div className="row my-1 mx-0">
-        <div className="col-md-3 bg-global me-3 pb-5 pt-3">
+        <div className="col-md-3 bg-global me-0 pb-5 pt-3">
           <Filters/>
         </div>
-        <div className="col bg-black ms-3 rounded-5 py-3">
+        <div className="col bg-black rounded-5 py-3">
           <Products category={category}/>
         </div>
       </div>

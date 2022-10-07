@@ -1,18 +1,15 @@
-import s from "./Styles/Cart.module.css"
 import NavBar from "./NavBar"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { addToCart, payOut, removeFromCart, verifyRole } from "../redux/actions"
 import { convertPrice } from "./Categories/Products"
 import {CardElement, useStripe, useElements, Elements } from "@stripe/react-stripe-js"
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Cart(){
-	
 
 	const successNotify = () =>{
 		toast.success('Compra Exitosa', {
@@ -40,13 +37,11 @@ export default function Cart(){
 		});
 	}
 
-	const history =  useNavigate()
 	const stripe = useStripe()
 	const elements = useElements()
 	const dispatch = useDispatch()
 	const currentUser = useSelector(state=> state.currentUser) 
 	const [loading,setLoading] = useState(true)
-	const [load,setLoad] = useState(0)
 	const [correctCard, setCorrectCard] = useState(false)
 	const [payment, setPayment] = useState()
 	const [errorPayment, setErrorPayment] = useState(false)
@@ -69,10 +64,6 @@ export default function Cart(){
 		setLoading(true)
 		setErrorPayment(false)
 
-		setTimeout(()=>{
-			setLoad(load+20)
-		},800)
-
 		try{
 			const {error, paymentMethod} = await stripe.createPaymentMethod({
 				type:"card",
@@ -89,14 +80,9 @@ export default function Cart(){
 
 					successNotify()
 					setLoading(false)
-					setLoad(0)
-					// setTimeout(() => {
-					// 	history("/profile", { replace: true });
-					// }, 1000);
 				} else{
 					setErrorPayment(true)
 					setLoading(false)
-					setLoad(0)
 					errorNotify()
 				} 
 			}
@@ -104,7 +90,6 @@ export default function Cart(){
 		}catch(e){
 			setErrorPayment(true)
 			setLoading(false)
-			setLoad(0)
 			errorNotify()
 		}
 	}
@@ -112,15 +97,6 @@ export default function Cart(){
 	useEffect(()=>{
 		dispatch(verifyRole())
 	},[])
-
-	useEffect(()=>{
-
-		if(load>=20){
-			setTimeout(()=>{
-				if(load<=100)setLoad(load+20)
-			},800)
-		}
-	},[load])
 	
   return(
 		<div>
@@ -182,10 +158,18 @@ export default function Cart(){
 										<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div className="modal-body">
+										<div className="text-end text-white">
+											<i className="bi bi-info-circle-fill text-warning h3 me-4 cursor" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo"/>
+											<div className="collapse" id="collapseInfo">
+												<div className="card card-body bg-global border-0 h6 fst-italic fw-normal text-center">
+													Puedes usar la tarjeta de prueba: <br/><br/>
+													4242 4242 4242 4242 -- 02/24 -- 123 -- 12345
+												</div>
+											</div>
+										</div>
 										<div className="text-white p-4">
 											<form onSubmit={handleSubmit}>
 												<CardElement className="form-control" onChange={e=>verifyPayment()}/> {/*options={element} */}
-												<h6 className="fst-italic fw-normal text-start my-0 ms-4 mt-1">4242 4242 4242 4242 ---- 02/24  ---- 123 ---- 12345</h6>
 												<button className="btn btn-outline-success mt-3" type="submit"  data-bs-toggle={correctCard ? "modal":null} data-bs-target={correctCard ? "#staticBackdrop" :null}>Pagar</button>
 											</form>
 										</div>
@@ -200,7 +184,7 @@ export default function Cart(){
 										<div className="modal-body text-white h3">
 											Estamos procesando tu pago...
 											<div className="progress mt-3">
-											<div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: load+"%"}}></div>
+											<div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{width:"100%"}}></div>
 											</div>
 										</div>
 									: errorPayment ?
@@ -221,7 +205,11 @@ export default function Cart(){
 						</div>
 					</div>
 				: 
-					<h2 className="text-white">NO HAY PRODUCTOS</h2>}
+				<div className="my-auto align-items-center bg-warning" style={{height:"100%"}}>
+
+					<h2 className="text-white">Tu carrito esta vacio</h2>
+				</div>
+				}
 		</div>
 	)
 }

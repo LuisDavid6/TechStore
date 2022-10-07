@@ -205,10 +205,7 @@ export default function Cart(){
 						</div>
 					</div>
 				: 
-				<div className="my-auto align-items-center bg-warning" style={{height:"100%"}}>
-
-					<h2 className="text-white">Tu carrito esta vacio</h2>
-				</div>
+					<h2 className="text-white mt-5">Tu carrito esta vacío</h2>
 				}
 		</div>
 	)

@@ -21,6 +21,16 @@
     flex-wrap: wrap;
 }
 
+.product-list-offers{
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(15rem, 1fr));
+    height: auto;
+    gap: 20px;
+    justify-content: center;
+    margin: 2%;
+    flex-wrap: wrap;
+}
+
 .product-list-admin{
     display: grid;
     grid-template-columns: repeat(auto-fill , minmax(25rem, 1fr));

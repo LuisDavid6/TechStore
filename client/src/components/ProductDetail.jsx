@@ -40,7 +40,7 @@ export default function Details(){
       <NavBar/>
       <div className="row mx-0 mt-2 gap-2">
         <div className="col bg-global rounded-0 p-4">
-              {product && <img src={product.image} className="img-fluid" style={{minWidth:"200px"}}></img>}
+              {product && <img src={product.image} className="img-fluid" style={{minWidth:"200px", maxWidth:"300px"}}></img>}
         </div>
 
         <div className="col bg-global ms-0 rounded-0 d-flex flex-column justify-content-around">

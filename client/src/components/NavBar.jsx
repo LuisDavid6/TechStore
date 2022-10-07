@@ -49,7 +49,7 @@ export default function NavBar() {
         </Link>
         <div className="view">
           <Link to="/shoppingCart">
-            <i className="bi bi-cart-check h2 mb-0 mx-3 position-relative text-white" >
+            <i className="bi bi-cart-check h2 mb-0 me-2 position-relative text-white" >
               <span className={currentUser.cart && currentUser.cart.products.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
                 {currentUser.cart && currentUser.cart.products.length>0 && cantProductsCart}
 

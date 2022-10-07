@@ -57,8 +57,25 @@
     width: fit-content;
 }
 
+.view{
+    display: none;
+}
+
+.viewInv{
+    display: flex;
+}
+
 @media (max-width: 680px) {
     .product-list{
             grid-template-columns: repeat(auto-fill , 200px);
+    }
+}
+
+@media (max-width: 992px) {
+    .view{
+        display: flex;
+    }
+    .viewInv{
+        display: none;
     }
 }

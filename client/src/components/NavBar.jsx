@@ -33,9 +33,6 @@ export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top bg-global px-3 h5 m-0">
       <div className="container-fluid py-2">
-      <Link className="navbar-brand me-5" to="/">
-          TECHSTORE
-        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -47,8 +44,44 @@ export default function NavBar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <Link className="navbar-brand me-5" to="/">
+          TECHSTORE
+        </Link>
+        <div className="view">
+          <Link to="/shoppingCart">
+            <i className="bi bi-cart-check h2 mb-0 mx-3 position-relative text-white" >
+              <span className={currentUser.cart && currentUser.cart.products.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
+                {currentUser.cart && currentUser.cart.products.length>0 && cantProductsCart}
+
+              </span>
+            </i>
+          </Link>        
+          <div className="dropdown">
+            <i className="bi bi-person-circle h2 mb-0 mx-3 text-white" data-bs-toggle="dropdown" aria-expanded="false" style={{cursor:"pointer"}}></i>
+            <ul className="dropdown-menu dropdown-menu-end bg-dark p-0 mt-2" aria-labelledby="navbarDropdown">
+              {role ==="admin" ?
+                <div className="list-group">
+
+                  <Link to="/profile" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li></Link>
+                  <Link to="/admin" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Panel de Admin</li></Link>
+                  <Link to="/" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={logout()}>Cerrar Sesión</li></Link>
+                </div>
+              : role === "user" ?
+                <div className="list-group">
+                  <Link to="/profile" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Perfil</li></Link>
+                  <Link to="/" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={logout()}>Cerrar Sesión</li></Link>
+                </div>
+              : 
+              <div className="list-group">
+                  <Link to="/login" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Iniciar Sesión</li></Link>
+                  <Link to="/register" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Registrarme</li></Link>
+                </div>
+              }
+            </ul>
+          </div>
+        </div>
+        <div className="collapse navbar-collapse row mx-auto" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 col">
             <li className="nav-item">
               <Link to="/home" className="text-decoration-none"><a className="nav-link mx-3 active" aria-current="page" href="#">Inicio</a></Link>
             </li>
@@ -74,15 +107,16 @@ export default function NavBar() {
                 </div>
               </ul>
             </li>
-          </ul>          
-          <form className="d-flex mx-5">
-            <div className="input-group flex-nowrap mx-auto" style={{maxWidth:"250px"}}>
+          </ul>    
+          <form className="d-flex col">
+            <div className="input-group flex-nowrap mx-auto" style={{maxWidth:"350px"}}>
                 <input type="text" className="form-control" placeholder="Buscar..." aria-label="buscar" aria-describedby="addon-wrapping" onChange={e=> setSearch(e.target.value)}/>
                 <button className="input-group-text btn-outline-light bg-dark" type="submit" id="addon-wrapping" onClick={handleSearch}>
                   <i className="bi bi-search text-white"></i>
                 </button>
             </div>
-          </form> 
+          </form>     
+          <div className="viewInv col justify-content-end" style={{maxWidth:"200px"}}>
           <Link to="/shoppingCart">
             <i className="bi bi-cart-check h2 mb-0 mx-3 position-relative text-white" >
               <span className={currentUser.cart && currentUser.cart.products.length>0 ? "position-absolute top-0 p-2 start-100  translate-middle badge rounded-pill bg-danger" : ""} style={{fontSize:"12px"}}>
@@ -107,13 +141,14 @@ export default function NavBar() {
                   <Link to="/" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console" onClick={logout()}>Cerrar Sesión</li></Link>
                 </div>
               : 
-                <div className="list-group">
+              <div className="list-group">
                   <Link to="/login" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Iniciar Sesión</li></Link>
                   <Link to="/register" className="text-decoration-none"><li className="list-group-item list-group-item-action list-group-item-dark select-console">Registrarme</li></Link>
                 </div>
               }
             </ul>
-          </div>      
+          </div>
+        </div>
         </div>
       </div>
     </nav>

@@ -161,6 +161,40 @@ const MarioKart = {
     "category": "Videojuegos"
 }
 
+const Cyberpunk = {
+    "name": "Juego Cyberpunk 2077 Para Xbox One",
+    "price": 249900,
+    "discount": 10,
+    "type": "Xbox One",
+    "description":"Cyberpunk 2077 es una historia de acción y aventura en mundo abierto ambientada en Night City, una megalópolis obsesionada con el poder, el glamur y la modificación corporal. Tu personaje es V, un mercenario que persigue un implante único que permite alcanzar la inmortalidad. Podrás personalizar las mejoras cibernéticas, las habilidades y el estilo de juego del personaje para dar forma a un mundo y a una historia que depende de tus decisiones.",
+    "specs":[{"name":"Clasificación", "value":"ESRB: M (Mayores de 17 años)"},
+            {"name":"Tipo Consola", "value":"Xbox One"},
+            {"name":"Número de jugadores", "value":"1"},
+            {"name":"Género", "value":"Acción / Disparos"},
+            {"name":"Tipo", "value":"Videojuegos"}],
+    "stock": 7,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665067090/TechStore/m9acwtoszhmlhcnlwhnm.png",
+    "category": "Videojuegos"
+}
 
-const Games = [MotoG22, MotoG31, MotoG60, SamsungS21, MarioParty, LuigiMansion, Crash, MarioKart, ]
+const CODV = {
+    "name": "Juego Call of Duty: Vanguard Para Xbox One",
+    "price": 317900,
+    "discount": 30,
+    "type": "Xbox One",
+    "description":"Rebélate en cada frente: combate sobre el Pacífico, defiende Stalingrado con la precisión de un francotirador, lánzate desde el aire en Francia o atraviesa fuerzas en el norte de África. La franquicia de Call of Duty regresa con Call of Duty: Vanguard, desarrollado por Sledgehammer Games. Los jugadores se sumergirán en el combate visceral de escala global de la Segunda Guerra Mundial. A través de una fascinante campaña, un grupo selecto de soldados de diferentes países se rebelará contra la amenaza más grande del mundo. Los jugadores también dejarán su huella en el Multijugador característico de Call of Duty, y en la nueva y emocionante experiencia Zombis de Treyarch.",
+    "specs":[{"name":"Clasificación", "value":"ESRB: M (Mayores de 17 años)"},
+            {"name":"Tipo Consola", "value":"Xbox One, Xbox Series X"},
+            {"name":"Número de jugadores", "value":"1 a 2"},
+            {"name":"Multijugador en línea", "value":"Sí"},
+            {"name":"Género", "value":"Acción / Disparos"},
+            {"name":"Tipo", "value":"Videojuegos"}],
+    "stock": 7,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665088026/TechStore/aq0ps6ybj6zzfcs8prjx.png",
+    "category": "Videojuegos"
+}
+
+
+
+const Games = [MotoG22, MotoG31, MotoG60, SamsungS21, MarioParty, LuigiMansion, Crash, MarioKart, Cyberpunk, ]
 export default Games

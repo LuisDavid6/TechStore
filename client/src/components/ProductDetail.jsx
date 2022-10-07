@@ -84,10 +84,10 @@ export default function Details(){
                     return(
                       <tr className="text-white text-start h6 ">
                         <td>
-                          <span className="">{e.name}</span>
+                          <span>{e.name}</span>
                         </td>
                         <td>
-                          <span className="">{e.value}</span>
+                          <span>{e.value}</span>
                         </td>
                       </tr>
                     )
@@ -111,7 +111,7 @@ export default function Details(){
         </h3>
         <div className="collapse" id="collapseCom">
           <div className="card card-body bg-global text-white text-start border-0 p-0">
-            <h6 className="px-5">@Vane - muy buen producto</h6>
+            <h6 className="px-3">@Vane - muy buen producto</h6>
           </div>
         </div>
 

@@ -88,6 +88,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 // localhost:3001/products/update/
 router.put("/update/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
     const { id } = req.params;
     try {
         yield prisma.product.update({
@@ -99,6 +100,7 @@ router.put("/update/:id", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.json("Update success");
     }
     catch (error) {
+        console.log(error.message);
         res.json("ERROR");
     }
 }));

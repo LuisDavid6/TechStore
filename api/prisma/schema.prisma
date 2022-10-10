@@ -30,6 +30,7 @@ model Product {
   description String
   specs       Json[]
   image       String
+  imageOffer  String?
   stock       Int        @default(0)
   active      Boolean    @default(true)
   date        DateTime   @default(now()) @db.Timestamptz()

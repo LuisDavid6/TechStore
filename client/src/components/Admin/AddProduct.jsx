@@ -59,7 +59,7 @@ export default function AddProduct(){
     } catch (error) {
       // console.log(error)
     }
-  };
+  }
   // useEffect(()=>{
   //   console.log("HE")
   // },[refresh])

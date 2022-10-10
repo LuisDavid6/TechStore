@@ -7,7 +7,7 @@ const MotoG22 = {
     "discount": 20,
     "type": "Motorola",
     "description": "Fotografía profesional en tu bolsillo Descubre infinitas posibilidades para tus fotos con las 4 cámaras principales de tu equipo. Pon a prueba tu creatividad y juega con la iluminación, diferentes planos y efectos para obtener grandes resultados. Mayor rendimiento Su memoria RAM de 4 GB permite que tu smartphone funcione de manera fluida y sin demoras al realizar distintas tareas, jugar o navegar. Desbloqueo facial y dactilar Máxima seguridad para que solo tú puedas acceder al equipo. Podrás elegir entre el sensor de huella dactilar para habilitar el teléfono en un toque, o el reconocimiento facial que permite un desbloqueo hasta un 30% más rápido. Batería de duración superior ¡Desenchúfate! Con la súper batería de 5000 mAh tendrás energía por mucho más tiempo para jugar, ver series o trabajar sin necesidad de realizar recargas.",
-    "specs": [{ "Almacenamiento": "128 GB" },
+    "specs": [{ "name": "Almacenamiento", "value": "128 GB" },
         { "name": "Memoria", "value": "4 GB" },
         { "name": "Sistema Operativo", "value": "Android 12" },
         { "name": "Procesador", "value": "Helio G37" },
@@ -29,7 +29,7 @@ const MotoG31 = {
     "discount": 40,
     "type": "Motorola",
     "description": "Mira tu mundo en todo su esplendor en el MOTO G31. Haz que tus películas, videos y juegos favoritos cobren vida en una pantalla OLED Full HD + de 6.4' . Capture fotos impresionantes con cualquier luz y desde cualquier ángulo con un sistema de triple cámara de 50 MPX. Y durante 36 horas con una sola carga con un Batería de 5000 mAh. El MOTO G31 es brillante en todos los sentidos.",
-    "specs": [{ "Almacenamiento": "128 GB" },
+    "specs": [{ "name": "Almacenamiento", "value": "128 GB" },
         { "name": "Memoria", "value": "4 GB" },
         { "name": "Sistema Operativo", "value": "Android 11" },
         { "name": "Procesador", "value": "Helio G85" },
@@ -51,7 +51,7 @@ const MotoG60 = {
     "discount": 51,
     "type": "Motorola",
     "description": "Buscas detalles increíbles. Los tienes. El moto g60 incluye un sistema de cámaras de ultra alta resolución con sensor de 108 MP¹ de lo mejor de su clase. Quieres usar el teléfono por más tiempo. Listo. El moto g60 viene con batería de 6000 mAh.",
-    "specs": [{ "Almacenamiento": "128 GB" },
+    "specs": [{ "name": "Almacenamiento", "value": "128 GB" },
         { "name": "Memoria", "value": "4 GB" },
         { "name": "Sistema Operativo", "value": "Android 11" },
         { "name": "Procesador", "value": "Snapdragon 732G" },
@@ -73,7 +73,7 @@ const SamsungS21 = {
     "discount": 10,
     "type": "Samsung",
     "description": "Fotografía profesional en tu bolsillo Descubre infinitas posibilidades para tus fotos con las 3 cámaras principales de tu equipo. Pon a prueba tu creatividad y juega con la iluminación, diferentes planos y efectos para obtener grandes resultados. Su zoom híbrido es perfecto para los amantes del plano detalle, ya que integra lo mejor del zoom óptico y digital para que consigas acercamientos sin pérdida de calidad. Experiencia visual increíble Mira tus series y películas favoritas con la mejor definición a través de su pantalla Dynamic AMOLED 2X de 6.2'. Disfruta de colores brillantes y detalles precisos en todos tus contenidos. Capacidad y eficiencia Con su potente procesador y memoria RAM de 8 GB tu equipo alcanzará un alto rendimiento con gran velocidad de transmisión de contenidos y ejecutará múltiples aplicaciones a la vez sin demoras. Desbloqueo veloz con tu huella digital Con el sensor de huella digital, el acceso es seguro y podrás desbloquearlo automáticamente con un toque. Batería de duración superior ¡Desenchúfate! Con la súper batería de 4000 mAh tendrás energía por mucho más tiempo para jugar, ver series o trabajar sin necesidad de realizar recargas.Buscas detalles increíbles. Los tienes. El moto g60 incluye un sistema de cámaras de ultra alta resolución con sensor de 108 MP¹ de lo mejor de su clase. Quieres usar el teléfono por más tiempo. Listo. El moto g60 viene con batería de 6000 mAh.",
-    "specs": [{ "Almacenamiento": "256 GB" },
+    "specs": [{ "name": "Almacenamiento", "value": "256 GB" },
         { "name": "Memoria", "value": "8 GB" },
         { "name": "Sistema Operativo", "value": "Android 11" },
         { "name": "Tamaño de Pantalla", "value": "6.2'" },
@@ -151,6 +151,37 @@ const MarioKart = {
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665071195/TechStore/jfjnfk7a5mgrm4fh4mwx.png",
     "category": "Videojuegos"
 };
-const Games = [MotoG22, MotoG31, MotoG60, SamsungS21, MarioParty, LuigiMansion, Crash, MarioKart,];
+const Cyberpunk = {
+    "name": "Juego Cyberpunk 2077 Para Xbox One",
+    "price": 249900,
+    "discount": 10,
+    "type": "Xbox One",
+    "description": "Cyberpunk 2077 es una historia de acción y aventura en mundo abierto ambientada en Night City, una megalópolis obsesionada con el poder, el glamur y la modificación corporal. Tu personaje es V, un mercenario que persigue un implante único que permite alcanzar la inmortalidad. Podrás personalizar las mejoras cibernéticas, las habilidades y el estilo de juego del personaje para dar forma a un mundo y a una historia que depende de tus decisiones.",
+    "specs": [{ "name": "Clasificación", "value": "ESRB: M (Mayores de 17 años)" },
+        { "name": "Tipo Consola", "value": "Xbox One" },
+        { "name": "Número de jugadores", "value": "1" },
+        { "name": "Género", "value": "Acción / Disparos" },
+        { "name": "Tipo", "value": "Videojuegos" }],
+    "stock": 7,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665067090/TechStore/m9acwtoszhmlhcnlwhnm.png",
+    "category": "Videojuegos"
+};
+const CODV = {
+    "name": "Juego Call of Duty: Vanguard Para Xbox One",
+    "price": 317900,
+    "discount": 30,
+    "type": "Xbox One",
+    "description": "Rebélate en cada frente: combate sobre el Pacífico, defiende Stalingrado con la precisión de un francotirador, lánzate desde el aire en Francia o atraviesa fuerzas en el norte de África. La franquicia de Call of Duty regresa con Call of Duty: Vanguard, desarrollado por Sledgehammer Games. Los jugadores se sumergirán en el combate visceral de escala global de la Segunda Guerra Mundial. A través de una fascinante campaña, un grupo selecto de soldados de diferentes países se rebelará contra la amenaza más grande del mundo. Los jugadores también dejarán su huella en el Multijugador característico de Call of Duty, y en la nueva y emocionante experiencia Zombis de Treyarch.",
+    "specs": [{ "name": "Clasificación", "value": "ESRB: M (Mayores de 17 años)" },
+        { "name": "Tipo Consola", "value": "Xbox One, Xbox Series X" },
+        { "name": "Número de jugadores", "value": "1 a 2" },
+        { "name": "Multijugador en línea", "value": "Sí" },
+        { "name": "Género", "value": "Acción / Disparos" },
+        { "name": "Tipo", "value": "Videojuegos" }],
+    "stock": 7,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665088026/TechStore/aq0ps6ybj6zzfcs8prjx.png",
+    "category": "Videojuegos"
+};
+const Games = [MotoG22, MotoG31, MotoG60, SamsungS21, MarioParty, LuigiMansion, Crash, MarioKart, Cyberpunk, CODV,];
 exports.default = Games;
 //# sourceMappingURL=Data.js.map

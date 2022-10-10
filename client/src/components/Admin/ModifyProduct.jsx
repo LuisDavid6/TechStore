@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
-import { createProduct, filterByCategory } from '../../redux/actions';
+import { createProduct, filterByCategory, updateProduct } from '../../redux/actions';
 
 export default function ModifyProduct({data}){
 
@@ -12,6 +12,7 @@ export default function ModifyProduct({data}){
 	const categories = useSelector((state)=> state.categories)
 	const categorySelect = useSelector((state)=> state.categorySelect)
 	// const product = useSelector(state => state.product)
+  // dispatch(filterByCategory(data.category.name))
 
   const successNotify = () =>{
     toast.success('Producto agregado exitosamente', {
@@ -37,8 +38,8 @@ export default function ModifyProduct({data}){
           stock: data.stock,
           type: data.type,
           image: data.image,
-          // description: "",
-          category: ""
+          description: data.description,
+          // category: ""
         }}
 
         validate = {values=>{
@@ -62,11 +63,11 @@ export default function ModifyProduct({data}){
 
           } else if (values.stock.toString().length>1 && values.stock.toString()[0]==="0") errors.stock = "El valor debe ser mayor a 0"
           
-					if (!values.category) errors.categoryId = "Debes seleccionar categoria";
+					// if (!values.category) errors.categoryId = "Debes seleccionar categoria";
             
-					if (!values.type) errors.type = "Debes seleccionar subcategoria";
+					// if (!values.type) errors.type = "Debes seleccionar subcategoria";
 
-					// if (!values.description) errors.description = "Debes ingresar la descripción";
+					if (!values.description) errors.description = "Debes ingresar la descripción";
 
           return errors
         }}
@@ -75,7 +76,7 @@ export default function ModifyProduct({data}){
           values.price = Number(values.price)
           values.discount = Number(values.discount)
           values.stock = Number(values.stock)
-          dispatch(createProduct(values))
+          dispatch(updateProduct(values,data.id))
           resetForm()
           successNotify()
           
@@ -108,7 +109,7 @@ export default function ModifyProduct({data}){
 								<ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='discount' component="div"/>
 							</div>
 						</div>
-            <div className="w-100 d-flex mx-auto">
+            {/* <div className="w-100 d-flex mx-auto">
               <div className='form-floating mb-2 w-50 me-1'>
                 <label htmlFor="category" className="text-secondary my-2">Categoria</label><br/>
                   <select id="category" className="form-select pb-2" name='category' onChange={e=> {values.category = e.target.value; dispatch(filterByCategory(e.target.value))}}>
@@ -129,12 +130,12 @@ export default function ModifyProduct({data}){
                   </select> 
                   <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='type' component="div"/>
               </div>
-            </div>
-            {/* <div className='form-floating w-100 my-3 mx-auto'>
+            </div> */}
+            <div className='form-floating w-100 my-3 mx-auto'>
               <Field as="textarea" name="description"className="form-control" id="descriptionValue" placeholder="descripción" style={{minHeight:"120px"}}/>
               <label for="descriptionValue" className='text-secondary'>Descripción</label>
               <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='description' component="div"/>
-						</div> */}
+						</div>
             <div className='form-floating w-100 my-4 mx-auto'>
               <Field type="text" name="image"className="form-control" id="imageValue" placeholder="Link imagen"/>
               <label for="imageValue" className='text-secondary'>Link imagen</label>

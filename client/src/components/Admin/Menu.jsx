@@ -8,6 +8,7 @@ import Login from "../Login"
 import Register from "../Register"
 import Products from './Products'
 import Users from './Users'
+import Offers from './Offers'
 export default function Menu() {
 
 	const [component, setComponent] = useState("Products")
@@ -16,7 +17,7 @@ export default function Menu() {
 
 	const handleComponent = () =>{
 		if(component === "Login") return <Login/>
-		if(component === "Register") return <Register/>
+		if(component === "Offers") return <Offers/>
 		if(component === "Products") return <Products/>
 		if(component === "Users") return <Users/>
 	}
@@ -42,7 +43,7 @@ export default function Menu() {
 						<div className="nav nav-tabs border-0 bg-global navbar-collapse d-flex flex-column align-items-start">
 							<div className="offcanvas-body">
 								<button className="nav-link active rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Products")}>Productos</button>
-								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Register")}>Ofertas</button>
+								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Offers")}>Ofertas</button>
 								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Login")}>Balance De Ventas</button>
 								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Users")}>Usuarios</button>
 							</div>

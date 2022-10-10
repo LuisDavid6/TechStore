@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT,
+import { GET_PRODUCTS, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT,
          GET_PRODUCT_DETAIL,
          ADD_TO_CART, REMOVE_FROM_CART, 
          FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
@@ -28,6 +28,19 @@ export function createProduct(product){
       const {data} = await axios.post("/products", product)
       return dispatch({
         type: CREATE_PRODUCT
+      }) 
+    } catch(e){
+        throw Error
+    }
+  }
+}
+
+export function updateProduct(product,id){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.put(`/products/update/${id}`, product)
+      return dispatch({
+        type: UPDATE_PRODUCT
       }) 
     } catch(e){
         throw Error

@@ -84,7 +84,8 @@ router.post("/", async (req, res) =>{
 
 // localhost:3001/products/update/
 router.put("/update/:id", async (req, res) =>{
-
+    console.log(req.body)
+    
     const {id} = req.params
     try {
         await prisma.product.update({
@@ -94,7 +95,8 @@ router.put("/update/:id", async (req, res) =>{
             data: req.body
         })
         res.json("Update success")
-    } catch (error) {
+    } catch (error:any) {
+        console.log(error.message)
         res.json("ERROR")
     }
 })

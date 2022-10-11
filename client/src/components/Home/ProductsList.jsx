@@ -29,7 +29,7 @@ export default function(){
             <div className="card-body mx-0 d-flex" style={{overflowX:"auto"}}>
               {e.products && e.products.map(p=>{
                 return(
-                    p.imageOffer && cont<4 &&
+                    p.imageOffer && cont<3 &&
                     <div className="px-2" key={p.name}>
                       <Link to={`/product/${p.id}`}><img src={p.imageOffer} alt={p.name} className={images ? "rounded-2" : "img-fluid rounded-2"} style={images ? {width:"320px", height:"auto"}:null}/></Link> 
                       {cont++}

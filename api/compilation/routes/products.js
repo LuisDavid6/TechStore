@@ -78,7 +78,6 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
             return res.json("product created");
         }
-        console.log("ok");
     }
     catch ({ message }) {
         // console.log({message})
@@ -88,7 +87,6 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 // localhost:3001/products/update/
 router.put("/update/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
     const { id } = req.params;
     try {
         yield prisma.product.update({
@@ -100,7 +98,7 @@ router.put("/update/:id", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.json("Update success");
     }
     catch (error) {
-        console.log(error.message);
+        // console.log(error.message)
         res.json("ERROR");
     }
 }));
@@ -117,6 +115,35 @@ router.delete("/delete/:id", (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
     catch (error) {
         res.json("ERROR");
+    }
+}));
+router.get("/search/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { query } = req.query;
+    try {
+        const products = yield prisma.product.findMany({
+            where: {
+                OR: [
+                    {
+                        name: {
+                            contains: `${query}`,
+                            mode: "insensitive"
+                        }
+                    },
+                    {
+                        category: {
+                            name: {
+                                contains: `${query}`,
+                                mode: "insensitive"
+                            }
+                        }
+                    }
+                ]
+            },
+        });
+        res.json(products);
+    }
+    catch (error) {
+        res.json("Error");
     }
 }));
 exports.default = router;

@@ -1,5 +1,5 @@
 import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT,
-         GET_PRODUCT_DETAIL,
+         SEARCH_PRODUCTS, GET_PRODUCT_DETAIL,
          ADD_TO_CART, REMOVE_FROM_CART, 
          FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
          GET_USERS, CREATE_USER, DELETE_USER,
@@ -41,6 +41,17 @@ export default function Reducer(state = initialState, action){
                 categoryProductsAdmin: state.categoryProductsAdmin.filter(e=> e.id !== action.payload.id),
                 refresh: !state.refresh
             }
+
+        case SEARCH_PRODUCTS:{
+            console.log("e")
+            let products = action.payload
+            if(products.length===0) products = ["notFound"]
+            return{
+                ...state,
+                productsFilter: products,
+                refresh: !state.refresh
+            }
+        }
 
         case ADD_TO_CART:
             return{

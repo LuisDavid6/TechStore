@@ -15,6 +15,7 @@ import Login from './components/Login';
 import Footer from './components/Footer';
 import Menu from './components/Admin/Menu';
 import Profile from './components/Profile';
+import Search from './components/Search';
 
 const stripePromise = loadStripe("pk_test_51LfFezGdVap7KN5XWRFm01jJvbHJ7qlI6OiXYsKXPN8LI4Y8p3UcPCFIIjaiQMDAu7EPQD4P3cLOBj1epwJzGkvf00WRO5HhUS")
 
@@ -44,6 +45,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/admin' element={<Menu/>} />
           <Route path='/profile' element={<Profile/>} />
+          <Route path='/search/:query' element={<Search/>} />
         </Routes>
         {/* <Footer/> */}
       </Elements>

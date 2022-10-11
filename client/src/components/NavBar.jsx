@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, getCategories, logout, verifyRole } from "../redux/actions";
 import "./Styles/Styles.css"
@@ -6,11 +6,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function NavBar() {
+
   const categories = useSelector(state => state.categories)
   const role = useSelector(state => state.role)
   const currentUser = useSelector(state => state.currentUser)
   const refresh = useSelector(state => state.refresh)
   const dispatch = useDispatch();
+  const history = useNavigate()
 
   const cantProductsCart = currentUser.cart && currentUser.cart.products.reduce((acum,e)=> acum+=e.cant,0)
 
@@ -22,7 +24,7 @@ export default function NavBar() {
 
   const handleSearch = (e) =>{
     e.preventDefault()
-    alert(search)
+    history(`/search/${search}`, { replace: true });
   }
 
   useEffect(()=>{

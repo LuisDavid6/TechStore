@@ -71,7 +71,6 @@ router.post("/", async (req, res) =>{
             })
             return res.json("product created")
         }
-        console.log("ok")
     } catch ({message}) {
         // console.log({message})
         res.json("Error")
@@ -84,7 +83,6 @@ router.post("/", async (req, res) =>{
 
 // localhost:3001/products/update/
 router.put("/update/:id", async (req, res) =>{
-    console.log(req.body)
     
     const {id} = req.params
     try {
@@ -96,7 +94,7 @@ router.put("/update/:id", async (req, res) =>{
         })
         res.json("Update success")
     } catch (error:any) {
-        console.log(error.message)
+        // console.log(error.message)
         res.json("ERROR")
     }
 })
@@ -113,6 +111,37 @@ router.delete("/delete/:id", async (req, res) =>{
         res.json(product)
     } catch (error) {
         res.json("ERROR")
+    }
+})
+
+router.get("/search/",async (req, res) => {
+    const {query} = req.query
+    try {
+        const products = await prisma.product.findMany({
+            where:{
+                OR:[
+                    {
+                        name:{
+                           contains: `${query}`,
+                           mode: "insensitive"
+                        }
+                    },
+                    {
+                        category:{
+                            name:{
+                                contains: `${query}`,
+                                mode: "insensitive"
+                            }
+                        }
+                    }
+                ]
+            },
+        })
+
+        res.json(products)
+
+    } catch (error) {
+        res.json("Error")
     }
 })
 

@@ -48,13 +48,13 @@ export default function Products({ category }) {
 
   useEffect(() => {
     dispatch(filterByCategory(category))
-  }, []);
+  }, []); 
 
   return (
     <div>
-      <div className="product-list">
-        {products &&
-          products.map((e) => {
+      {products.length>0 ?
+        <div className="product-list">
+          {products.map((e) => {
             return (
               <div key={e.id} className="card rounded bg-global">
                 <div className="card-body p-0 h-100">
@@ -105,7 +105,14 @@ export default function Products({ category }) {
               </div>
             );
           })}
-      </div>
+        </div>
+      :
+        <div className="text-center">
+          <div className="spinner-border text-primary mt-5" role="status" style={{width: "6rem", height: "6rem"}}>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      }
     </div>
   );
 }

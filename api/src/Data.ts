@@ -769,5 +769,5 @@ const Horizon = {
 
 
 
-const Games = [MotoG22, MotoG31, MotoG60, SamsungS21, Xiaomi11L, XiaomiMi8L, XiaomiRN10P, XiaomiPocoF3, XiaomiRN11, Xiaomi12, XiaomiRN9T, MarioParty, LuigiMansion, Crash, MarioKart, Pokemon, CaptainTsubasa, Zelda, MarioOdyssey, Kirby, Cyberpunk, CODV, MortalKombat, Ark, GTAV, ResidentVilage, CODCW, FarCryPrimal, TheDivision, RainbowSix, WatchDogs, GodOfWar, Horizon ]
+const Games = [HpPavilion, HpPavilion2, Hp15, AsusTuf, AsusRogZ, MotoG22, MotoG31, MotoG60, SamsungS21, Xiaomi11L, XiaomiMi8L, XiaomiRN10P, XiaomiPocoF3, XiaomiRN11, Xiaomi12, XiaomiRN9T, MarioParty, LuigiMansion, Crash, MarioKart, Pokemon, CaptainTsubasa, Zelda, MarioOdyssey, Kirby, Cyberpunk, CODV, MortalKombat, Ark, GTAV, ResidentVilage, CODCW, FarCryPrimal, TheDivision, RainbowSix, WatchDogs, GodOfWar, Horizon ]
 export default Games

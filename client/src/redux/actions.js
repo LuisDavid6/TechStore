@@ -1,7 +1,7 @@
 import axios from "axios"
 
 import { GET_PRODUCTS, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT,
-         GET_PRODUCT_DETAIL,
+         SEARCH_PRODUCTS, GET_PRODUCT_DETAIL,
          ADD_TO_CART, REMOVE_FROM_CART, 
          FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
          GET_USERS, CREATE_USER, DELETE_USER,
@@ -60,6 +60,20 @@ export function deleteProduct(id){
       throw Error
     }
   }  
+}
+
+export function searchProducts(text){
+  return async function(dispatch){
+    try{
+      const {data} = await axios.get(`/products/search?query=${text}`)
+      return dispatch({
+        type: SEARCH_PRODUCTS,
+        payload: data
+      })
+    }catch(e){
+      throw Error
+    }
+  }
 }
 
 export function getProductDetail(id){

@@ -145,7 +145,7 @@ export default function Cart(){
 								</div>
 							)
 						})}
-						<div className="container bg-global container-fix rounded-3 p-3 mt-5">
+						<div className="container bg-global container-fix rounded-3 p-3 my-5">
 							<h3 className="text-white my-4">Total A Pagar: {currentUser.cart && convertPrice(currentUser.cart.total)}</h3>
 							<button type="button" className="btn btn-secondary btn-lg px-5 my-4" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">Ir a pagar</button>
 						</div>						

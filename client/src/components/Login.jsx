@@ -2,9 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { login, verifyRole } from '../redux/actions';
 
 export default function Login() {
@@ -24,7 +22,6 @@ export default function Login() {
       theme:"dark",
     });
   } 
-
 
   return (
     <div>
@@ -111,7 +108,12 @@ export default function Login() {
                 component="div"
               />
 
-            <a className=" nav-link mt-2 mb-3 text-light" href='/register'>¿Aún no tienes una cuenta? <span className="text-warning"> Registrate</span></a>
+            <div className='mt-4'>
+              <span className='text-light'>¿Aún no tienes una cuenta? </span>
+              <Link to="/register" className="text-decoration-none">
+                <span className="text-warning">Registrate</span> 
+              </Link>
+            </div>
           </Form>
         )}
       </Formik>

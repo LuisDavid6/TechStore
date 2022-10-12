@@ -43,7 +43,6 @@ export default function Reducer(state = initialState, action){
             }
 
         case SEARCH_PRODUCTS:{
-            console.log("e")
             let products = action.payload
             if(products.length===0) products = ["notFound"]
             return{

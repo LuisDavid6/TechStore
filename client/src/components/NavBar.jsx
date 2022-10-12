@@ -24,7 +24,7 @@ export default function NavBar() {
 
   const handleSearch = (e) =>{
     e.preventDefault()
-    history(`/search/${search}`, { replace: true });
+    if(search) history(`/search/${search}`, { replace: true });
   }
 
   useEffect(()=>{

@@ -16,6 +16,15 @@ export default function Details(){
   const dispatch = useDispatch()
   const product = useSelector(state => state.productDetail)
   const currentUser = useSelector(state => state.currentUser)
+  const role = useSelector(state => state.role)
+
+  const add = (data) =>{
+    if(role === "user" || role === "admin"){
+      dispatch(addToCart(data))
+      notifyAddToCart();
+    }
+    else errorNotify()
+  }
 
   const notifyAddToCart = () => {
     toast.success("Articulo agregado al carrito", {
@@ -27,8 +36,21 @@ export default function Details(){
       draggable: true,
       progress: false,
       theme: "dark",
+    })
+  }
+
+  const errorNotify = () =>{
+    toast.error('Dedes iniciar sesión primero', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: false,
+      theme:"dark",
     });
-  };
+  }
 
   useEffect(()=>{
       dispatch(getProductDetail(id))
@@ -49,9 +71,9 @@ export default function Details(){
                 <span className="text-white h2 fw-bold bg-warning p-3 py-2">-{product.discount}%</span>
              </div>
             }
-            <h2 className="text-white mt-0">{product.name}</h2>
+            <h2 className="text-white my-4">{product.name}</h2>
             {product.discount>1 ?
-             <div>
+             <div className="my-4">
                 <p className="m-0">
                     <span className="text-white h5 text-decoration-line-through opacity-75">{convertPrice(product.price)}</span>
                     <span className="text-warning h6 text-decoration-line-through ms-1">Antes</span>
@@ -59,14 +81,14 @@ export default function Details(){
                 <p className="text-white h3 fw-bold">{convertPrice(product.totalPrice)} <span className="text-warning h5">Hoy</span></p>
              </div>
              :
-             <div>
+             <div className="my-4">
                 <p className="m-0">
                     <span className="text-white h5 text-decoration-line-through opacity-0">{convertPrice(product.price)}</span>
                 </p>
                 <p className="text-white h3 fw-bold">{convertPrice(product.totalPrice)}</p>
              </div>
             }
-            <button className="btn btn-success mx-auto py-2 px-5" onClick={() => {dispatch(addToCart({userId: currentUser.id, productId: product.id}));notifyAddToCart();}}>Agregar al carrito</button>
+            <button className="btn btn-success mx-auto py-2 px-5 my-3" onClick={() => add({userId: currentUser.id, productId: product.id})}>Agregar al carrito</button>
         </div>
       </div>
 

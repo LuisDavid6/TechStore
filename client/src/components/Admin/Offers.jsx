@@ -1,87 +1,61 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProduct } from "../../redux/actions";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {  getProducts, updateProduct } from "../../redux/actions";
+import { useEffect } from "react";
+import AddOffer from "./AddOffer";
 
 const Offers = () =>{
 
 	const dispatch = useDispatch()
-  const [image, setImage] = useState('')
-  const [idProduct, setIdProduct] = useState('')
-	const products = useSelector(state => state.products)
+  const products = useSelector((state)=> state.products)
+  const refresh = useSelector((state)=> state.refresh)
 
-	const save = () =>{
-
-		if(image && idProduct){
-			dispatch(updateProduct({imageOffer:image},idProduct))
-			setImage("")
-			setIdProduct("")
-			successNotify()
-		}
-	}
-
-	const uploadImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-
-    data.append('file', files[0]);
-    data.append('upload_preset', 'ophfn9bj');
-    try {
-      const res = await fetch("https://api.cloudinary.com/v1_1/dnc21abpp/image/upload", { method: "POST", body: data })
-      const file = await res.json();
-      setImage(file.secure_url);
-      
-    } catch (error) {
-      // console.log(error)
-    }
+  const deleteOffer = (id) =>{
+    dispatch(updateProduct({imageOffer:null},id))
   }
 
-	const successNotify = () =>{
-    toast.success('Agregado exitosamente', {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: false,
-      theme:"dark",
-    });
-  }
+  useEffect(()=>{
+    dispatch(getProducts())
+  },[refresh])
 
 	return(
-			<div className="mt-5 d-flex flex-column gap-4 align-items-center">
-				<div className="d-flex mx-auto">
-					<div className='form-floating mb-2 w-50 mx-auto'>
-						<label htmlFor="category" className="text-secondary my-2">Producto</label><br/>
-							<select id="category" className="form-select pb-2" name='category' onChange={e => setIdProduct(e.target.value)}>
-								<option value="" className="outline-secondary">--------</option>
-								{products && products.map(e=>{
-									return <option value={e.id} className="outline-secondary" key={e.id}>{e.name}</option>
-								})}
-							</select>
-					</div>
-				</div>
-
-				<div>
-          <h6 className='text-white fs-6 mb-3 fst-italic text-wrap'>Selecciona imagen</h6>
-					<input className="form-control" type="file" onChange={(e) => uploadImage(e)}></input>
-				</div>
-
-				<div className=" w-25">
-				<h6 className='text-white fs-6 mb-3 fst-italic text-wrap'>Ingresa link de la imagen</h6>
-					<input className="form-control" value={image} type="text" onChange={e=>setImage(e.target.value)}></input>
-				</div>
-
-				<div className="container-fix mx-auto my-3">
-					<img src={image} className="" width="120px"/>
-				</div>
-
-				<button type="submit" className='btn btn-secondary p-2 mx-auto align-self-center w-50' style={{maxWidth:"130px"}} onClick={save}>Guardar</button>
-
-          
-			</div>
+    <div className="text-center">
+		  <div className="row mx-0">
+        <div className="col-md-4 mt-1 py-2 text-white bg-global">
+          <AddOffer/>
+        </div>
+        <div className="col">
+          <div className=" product-list-offers-admin">
+            {products && products.map(e=>{
+              return(
+                e.imageOffer &&
+                <div className="d-flex flex-column bg-global rounded-3 mt-3">
+                  <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)}>Eliminar</button>
+                  {/* <i className="bi bi-x-circle-fill h1 position-absolute top-0 end-0" style={{color:"red"}}></i> */}
+                  <img src={e.imageOffer} className="rounded" alt={e.name} width="100%" height="100%"/>
+                  <h6 className="text-wrap text-white text-truncate mt-2 px-2" style={{height:"55px"}}>{e.name}</h6>
+                  
+                  <div className="modal fade" id={"p"+e.id.slice(0,3)} tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                      <div className="modal-content bg-global">
+                        <div className="modal-header">
+                          <h5 className="modal-title text-white" id="deleteModalLabel">¿Esta seguro de eliminar la oferta?</h5>
+                          <button type="button" className="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> deleteOffer(e.id)}>Confirmar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                )
+              })}
+          </div> 
+        </div>
+      </div>
+		</div>
+      
 	)
 }
 

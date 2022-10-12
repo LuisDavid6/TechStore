@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT,
+import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT,
          SEARCH_PRODUCTS, GET_PRODUCT_DETAIL,
          ADD_TO_CART, REMOVE_FROM_CART, 
          FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
@@ -41,6 +41,13 @@ export default function Reducer(state = initialState, action){
                 categoryProductsAdmin: state.categoryProductsAdmin.filter(e=> e.id !== action.payload.id),
                 refresh: !state.refresh
             }
+
+        case UPDATE_PRODUCT:{
+            return{
+                ...state,
+                refresh: !state.refresh
+            }
+        }
 
         case SEARCH_PRODUCTS:{
             let products = action.payload

@@ -31,6 +31,16 @@
     flex-wrap: wrap;
 }
 
+.product-list-offers-admin{
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(12rem, 1fr));
+    height: auto;
+    gap: 20px;
+    justify-content: center;
+    margin: 2%;
+    flex-wrap: wrap;
+}
+
 .product-list-admin{
     display: grid;
     grid-template-columns: repeat(auto-fill , minmax(25rem, 1fr));
@@ -82,9 +92,14 @@
 
 @media (min-width: 375px) and  (max-width: 480px) {
     .product-list{
-            grid-template-columns: repeat(auto-fill , 160px);
+            grid-template-columns: repeat(auto-fill , 165px);
             margin: 0;
             gap: 2;
+    }
+    .product-list-offers-admin{
+        grid-template-columns: repeat(auto-fill , 165px);
+        margin: 0;
+        gap: 2;
     }
 
     .down{

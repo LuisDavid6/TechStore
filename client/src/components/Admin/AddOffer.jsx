@@ -7,20 +7,20 @@ import { useEffect } from "react";
 
 const AddOffer = () =>{
 
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const [image, setImage] = useState('')
   const [idProduct, setIdProduct] = useState('')
   const [products, setProducts] = useState([])
-	const categories = useSelector(state => state.categories)
+  const categories = useSelector(state => state.categories)
 
-	const save = () =>{ 
-		if(image && idProduct){
-			dispatch(updateProduct({imageOffer:image},idProduct))
-			setImage("")
-			setIdProduct("")
-			successNotify()
-		}
+  const save = () =>{ 
+	if(image && idProduct){
+		dispatch(updateProduct({imageOffer:image},idProduct))
+		setImage("")
+		setIdProduct("")
+		successNotify()
 	}
+}
 
   const handleCategory = (id) =>{
     const category = categories.find(e=> e.id === id)
@@ -88,10 +88,10 @@ const AddOffer = () =>{
 			</div>
 			<div>
 				<h6 className='text-white fs-6 mb-3 fst-italic text-wrap'>Selecciona imagen</h6>
-				<input className="form-control " type="file" onChange={(e) => uploadImage(e)}></input>
+				<input className="form-control form-control-sm " type="file" onChange={(e) => uploadImage(e)}></input>
 			</div>
 			<div>
-			<h6 className='text-white fs-6 mb-3 fst-italic text-wrap'>Ingresa link de la imagen</h6>
+				<h6 className='text-white fs-6 mb-3 fst-italic text-wrap'>Ingresa link de la imagen</h6>
 				<input className="form-control" value={image} type="text" onChange={e=>setImage(e.target.value)}></input>
 			</div>
 			<div className="container-fix mx-auto my-3">

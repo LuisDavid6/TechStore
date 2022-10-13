@@ -1,7 +1,7 @@
 import axios from "axios"
 
 import { GET_PRODUCTS, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT,
-         SEARCH_PRODUCTS, GET_PRODUCT_DETAIL,
+         SEARCH_PRODUCTS, GET_PRODUCT_DETAIL, GET_PRODUCTS_BY_PAGE,
          ADD_TO_CART, REMOVE_FROM_CART, 
          FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
          GET_USERS, CREATE_USER, DELETE_USER,
@@ -14,6 +14,28 @@ export function getProducts(){
       const {data} = await axios.get("/products")
       return dispatch({
         type: GET_PRODUCTS,
+        payload: data
+      })
+    }catch(e){
+      throw Error
+    }
+  }
+}
+
+export function getProductsByPage(page, offer){
+  return async function(dispatch){
+    try{
+      if(offer) {
+        const {data} = await axios.get(`/products/pages/${page}?offer=true`)
+        return dispatch({
+          type: GET_PRODUCTS_BY_PAGE,
+          payload: data
+        })
+      }
+      
+      const {data} = await axios.get("/products/pages/"+page)
+      return dispatch({
+        type: GET_PRODUCTS_BY_PAGE,
         payload: data
       })
     }catch(e){

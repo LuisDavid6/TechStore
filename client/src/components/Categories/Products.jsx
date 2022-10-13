@@ -1,7 +1,7 @@
 import "../Styles/Styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getProducts, addToCart, filterByCategory } from "../../redux/actions";
+import { addToCart, filterByCategory } from "../../redux/actions";
 import { Link } from "react-router-dom";
 
 import { toast } from "react-toastify";

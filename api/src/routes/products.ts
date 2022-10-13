@@ -85,6 +85,11 @@ router.post("/", async (req, res) =>{
 router.put("/update/:id", async (req, res) =>{
     
     const {id} = req.params
+    if(req.body.price || req.body.discount){
+        const totalPrice = req.body.price-(req.body.price*(Number(req.body.discount)/100))
+        req.body.totalPrice = totalPrice
+    }
+    
     try {
         await prisma.product.update({
             where:{
@@ -142,6 +147,62 @@ router.get("/search/",async (req, res) => {
 
     } catch (error) {
         res.json("Error")
+    }
+})
+
+router.get("/pages/:page", async (req, res) =>{
+
+    const {page} = req.params
+    const {offer} = req.query
+
+    try{
+        
+        if(offer){
+
+            const cant = await prisma.product.count({
+                where:{
+                    imageOffer:{
+                        contains:"http"
+                    }
+                }
+            })
+
+            const allProducts = await prisma.product.findMany({
+                include: {
+                    category:true   
+                },
+                where:{
+                    imageOffer: {
+                        contains: "http"
+                    }
+                },
+                orderBy:{
+                    name:"asc"
+                }
+            })
+            //@ts-ignore
+            const products = allProducts.slice((page*8)-8,page*8)
+            
+            return res.json({cant, products})
+        }
+        
+        const cant = await prisma.product.count({})
+
+        const allProducts = await prisma.product.findMany({
+            include: {
+                category:true   
+            },
+            orderBy:{
+                name: "asc"
+            }
+        })
+        //@ts-ignore
+        const products = allProducts.slice((page*8)-8,page*8)
+
+        res.json({cant, products})
+
+    }catch(e:any){
+        res.json(e.message)
     }
 })
 

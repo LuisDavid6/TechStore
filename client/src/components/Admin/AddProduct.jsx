@@ -209,6 +209,7 @@ export default function AddProduct(){
               <button className='btn btn-secondary' type='button' onClick={handleOnAdd}>+</button>
             </div>
             <div>
+                <h6 className='text-white fs-6 mb-3 fst-italic text-wrap'>Selecciona imagen ó</h6>
                 <Field
                   className="form-control form-control-sm"
                   id="Poster"
@@ -216,9 +217,13 @@ export default function AddProduct(){
                   name="file"
                   onChange={(e) => uploadImage(e)}
                 />
-                {!image && 
+                {/* {!image && 
                   <span className='text-danger fs-6 fst-italic text-wrap'>Selecciona imagen</span>
-                }
+                } */}
+                <div>
+                  <h6 className='text-white fs-6 mt-4 mb-3 fst-italic text-wrap'>Ingresa link de la imagen</h6>
+                  <input className="form-control" value={image} type="text" onChange={e=>setImage(e.target.value)}></input>
+                </div>
                 {/* {(values.Poster = image)} */}
                     <div className="container-fix mx-auto my-3"><img src={image} className="" width="120px"/></div>
             </div>

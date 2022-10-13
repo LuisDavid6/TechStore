@@ -88,6 +88,10 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 // localhost:3001/products/update/
 router.put("/update/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
+    if (req.body.price || req.body.discount) {
+        const totalPrice = req.body.price - (req.body.price * (Number(req.body.discount) / 100));
+        req.body.totalPrice = totalPrice;
+    }
     try {
         yield prisma.product.update({
             where: {
@@ -144,6 +148,52 @@ router.get("/search/", (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
     catch (error) {
         res.json("Error");
+    }
+}));
+router.get("/pages/:page", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page } = req.params;
+    const { offer } = req.query;
+    try {
+        if (offer) {
+            const cant = yield prisma.product.count({
+                where: {
+                    imageOffer: {
+                        contains: "http"
+                    }
+                }
+            });
+            const allProducts = yield prisma.product.findMany({
+                include: {
+                    category: true
+                },
+                where: {
+                    imageOffer: {
+                        contains: "http"
+                    }
+                },
+                orderBy: {
+                    name: "asc"
+                }
+            });
+            //@ts-ignore
+            const products = allProducts.slice((page * 8) - 8, page * 8);
+            return res.json({ cant, products });
+        }
+        const cant = yield prisma.product.count({});
+        const allProducts = yield prisma.product.findMany({
+            include: {
+                category: true
+            },
+            orderBy: {
+                name: "asc"
+            }
+        });
+        //@ts-ignore
+        const products = allProducts.slice((page * 8) - 8, page * 8);
+        res.json({ cant, products });
+    }
+    catch (e) {
+        res.json(e.message);
     }
 }));
 exports.default = router;

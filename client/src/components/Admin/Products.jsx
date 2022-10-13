@@ -1,7 +1,7 @@
 import "../Styles/Styles.css"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filterByCategory, getCategories, getProducts } from "../../redux/actions"
+import { filterByCategory, getCategories, getProducts, getProductsByPage } from "../../redux/actions"
 import { useState } from "react"
 import ProductCard from "./ProductCard"
 import AddCategory from "./AddCategory"
@@ -28,6 +28,7 @@ export default function Products(){
   
   useEffect(()=>{
     dispatch(getProducts())
+    dispatch(getProductsByPage("1"))
     dispatch(getCategories())
   },[refresh])
 
@@ -80,7 +81,7 @@ export default function Products(){
               </div>
             </div>
           </div>
-          <div className="product-list-admin">
+          <div className="">
             <ProductCard filter={filterCategory}/>
           </div>
         </div>

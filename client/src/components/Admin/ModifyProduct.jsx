@@ -2,20 +2,37 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createProduct, filterByCategory, updateProduct } from '../../redux/actions';
 
 export default function ModifyProduct({data}){
 
   const dispatch = useDispatch()
+  const [image, setImage] = useState(data.image)
   const refresh = useSelector(state=> state.refresh)
 	const categories = useSelector((state)=> state.categories)
 	const categorySelect = useSelector((state)=> state.categorySelect)
 	// const product = useSelector(state => state.product)
   // dispatch(filterByCategory(data.category.name))
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+
+    data.append('file', files[0]);
+    data.append('upload_preset', 'ophfn9bj');
+    // setLoading(true);
+    try {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dnc21abpp/image/upload", { method: "POST", body: data })
+      const file = await res.json();
+      setImage(file.secure_url);
+      
+    } catch (error) {
+      // console.log(error)
+    }
+  }
 
   const successNotify = () =>{
-    toast.success('Producto agregado exitosamente', {
+    toast.success('Producto actualizado exitosamente', {
       position: "top-center",
       autoClose: 1000,
       hideProgressBar: true,
@@ -137,10 +154,22 @@ export default function ModifyProduct({data}){
               <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='description' component="div"/>
 						</div>
             <div className='form-floating w-100 my-4 mx-auto'>
-              <Field type="text" name="image"className="form-control" id="imageValue" placeholder="Link imagen"/>
-              <label for="imageValue" className='text-secondary'>Link imagen</label>
-              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='image' component="div"/>
-						</div>
+						<div>
+                <h6 className='text-white fs-6 mb-3 fst-italic text-wrap'>Selecciona imagen ó</h6>
+                <Field
+                  className="form-control form-control-sm"
+                  id="Poster"
+                  type="file"
+                  name="file"
+                  onChange={(e) => uploadImage(e)}
+                />
+                <div>
+                  <h6 className='text-white fs-6 mt-4 mb-3 fst-italic text-wrap'>Ingresa link de la imagen</h6>
+                  <input className="form-control" value={image} type="text" onChange={e=>setImage(e.target.value)}></input>
+                </div>
+                    <div className="container-fix mx-auto my-3"><img src={image} className="" width="120px"/></div>
+            </div>
+            </div>
             <div className="d-flex align-items-center">
               <button type="submit" className='btn btn-secondary my-3 p-2 mx-auto align-self-center w-50' style={{maxWidth:"230px"}}>Guardar</button>
             </div>

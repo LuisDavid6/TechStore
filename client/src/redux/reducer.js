@@ -1,5 +1,5 @@
 import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT,
-         SEARCH_PRODUCTS, GET_PRODUCT_DETAIL,
+         SEARCH_PRODUCTS, GET_PRODUCT_DETAIL, GET_PRODUCTS_BY_PAGE,
          ADD_TO_CART, REMOVE_FROM_CART, 
          FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
          GET_USERS, CREATE_USER, DELETE_USER,
@@ -8,6 +8,7 @@ import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT,
 
 const initialState = {
     products: [],
+    productsByPage: {},
     categories: [],
     productsFilter:[],
     refresh: false,
@@ -27,6 +28,12 @@ export default function Reducer(state = initialState, action){
                 ...state,
                 products: action.payload,
                 productsFilter: action.payload
+            }
+        
+        case GET_PRODUCTS_BY_PAGE:
+            return{
+                ...state,
+                productsByPage: action.payload,
             }
 
         case CREATE_PRODUCT:

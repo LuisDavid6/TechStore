@@ -102,6 +102,7 @@ export default function Reducer(state = initialState, action){
             return{
                 ...state,
                 productsFilter: filter,
+                refresh: !state.refresh
             }
 
         case FILTER_BY_PRICE:

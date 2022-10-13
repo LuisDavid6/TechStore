@@ -22,7 +22,7 @@ export default function Container(){
 	}
 
 	useEffect(()=>{
-		dispatch(getProductsByPage("1"))
+		dispatch(getProductsByPage("1",true))
 	},[])
 
 	return(

@@ -27,7 +27,7 @@ export default function Products(){
   }
   
   useEffect(()=>{
-    dispatch(getProducts())
+    // dispatch(getProducts())
     dispatch(getProductsByPage("1"))
     dispatch(getCategories())
   },[refresh])

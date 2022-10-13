@@ -1,6 +1,6 @@
 import "../Styles/Styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addToCart, filterByCategory } from "../../redux/actions";
 import { Link } from "react-router-dom";
 
@@ -32,6 +32,16 @@ export default function Products({ category }) {
   const currentUser = useSelector(state => state.currentUser)
   const role = useSelector(state => state.role)
   const refresh = useSelector((state) => state.refresh);
+
+  const [page,setPage] = useState(1)
+	let pages = []
+  
+	if(products){
+	  let cant = Math.ceil((products.length-1)/8)
+	  for(let i=1; i<=cant;i++){
+		pages.push(i+"")
+	  }
+	}
 
   const add = (data) =>{
     if(role === "user" || role === "admin"){
@@ -75,7 +85,7 @@ export default function Products({ category }) {
     <div>
       {products.length>0 ?
         <div className="product-list">
-          {products.map((e) => {
+          {products.slice((page*8)-8,page*8).map((e) => {
             return (
               <div key={e.id} className="card rounded bg-global">
                 <div className="card-body p-0 h-100">
@@ -144,6 +154,14 @@ export default function Products({ category }) {
           </div>
         </div>
       }
+
+      <div className="d-flex justify-content-center gap-3 mt-3 mb-4">
+        {pages.length>1 && pages.map(e=>{
+          return(
+            <button className={page===e ? "btn btn-secondary" : "btn btn-dark"} onClick={()=>setPage(e)}>{e}</button>
+          )
+        })}
+      </div>
     </div>
   );
 }

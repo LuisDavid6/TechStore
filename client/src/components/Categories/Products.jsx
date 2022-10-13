@@ -37,7 +37,7 @@ export default function Products({ category }) {
 	let pages = []
   
 	if(products){
-	  let cant = Math.ceil((products.length)/2)
+	  let cant = Math.ceil((products.length)/8)
 	  for(let i=1; i<=cant;i++){
 		pages.push(i)
 	  }
@@ -89,7 +89,7 @@ export default function Products({ category }) {
     <div>
       {products.length>0 ?
         <div className="product-list">
-          {products.slice((page*2)-2,page*2).map((e) => {
+          {products.slice((page*8)-8,page*8).map((e) => {
             return (
               <div key={e.id} className="card rounded bg-global">
                 <div className="card-body p-0 h-100">

@@ -201,8 +201,8 @@ router.get("/pages/:page", async (req, res) =>{
 
         res.json({cant, products})
 
-    }catch(e:any){
-        res.json(e.message)
+    }catch({message}){
+        res.json("Error")
     }
 })
 

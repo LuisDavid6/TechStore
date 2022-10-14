@@ -1,7 +1,7 @@
 import "../Styles/Styles.css"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filterByCategory, getCategories, getProducts, getProductsByPage } from "../../redux/actions"
+import { filterByCategory, filterCategoryByPage, getCategories, getProductsByPage } from "../../redux/actions"
 import { useState } from "react"
 import ProductCard from "./ProductCard"
 import AddCategory from "./AddCategory"
@@ -15,7 +15,7 @@ export default function Products(){
   const refresh = useSelector(state => state.refresh)
 
   const [search, setSearch] = useState()
-  const [filterCategory, setFilterCategory] = useState(false)
+  const [filterCategory, setFilterCategory] = useState()
 
   const handleSearch = (e)=>{
     e.preventDefault()
@@ -23,11 +23,11 @@ export default function Products(){
 
   const handleCategory = (name)=>{
     dispatch(filterByCategory(name))
-    setFilterCategory(true)
+    dispatch(filterCategoryByPage("1",name))
+    setFilterCategory(name)
   }
   
   useEffect(()=>{
-    // dispatch(getProducts())
     dispatch(getProductsByPage("1"))
     dispatch(getCategories())
   },[refresh])

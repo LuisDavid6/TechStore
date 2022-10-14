@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { deleteProduct, getProductsByPage } from "../../redux/actions"
+import { deleteProduct, filterCategoryByPage, getProductsByPage } from "../../redux/actions"
 import ModifyProduct from "./ModifyProduct"
 
 export default function ProductCard({filter}){
@@ -8,7 +8,7 @@ export default function ProductCard({filter}){
   const dispatch = useDispatch()
   const [page,setPage] = useState("1")
   const products = useSelector((state)=> state.productsByPage)
-  const categoryProductsAdmin = useSelector((state)=> state.categoryProductsAdmin)
+  const categoryProductsByPage = useSelector((state)=> state.categoryProductsByPage)
   let list = []
   let pages = []
 
@@ -19,7 +19,15 @@ export default function ProductCard({filter}){
     }
   }
 
-  filter ? list = categoryProductsAdmin : list = products.products
+  if(filter && categoryProductsByPage.cant){
+    pages=[]
+    let cant = Math.ceil(categoryProductsByPage.cant/8)
+    for(let i=1; i<=cant;i++){
+      pages.push(i+"")
+    }
+  }
+
+  filter ? list = categoryProductsByPage.products : list = products.products
 
   return(
     <> 
@@ -80,9 +88,12 @@ export default function ProductCard({filter}){
           })}      
         </div>
         <div className="d-flex justify-content-center gap-3 mt-3 mb-4">
-        {!filter && pages.length>1 && pages.map(e=>{
+        {pages.length>1 && pages.map(e=>{
           return(
-            <button className={page===e ? "btn btn-secondary" : "btn btn-dark"} onClick={()=>{dispatch(getProductsByPage(e)) ;setPage(e)}}>{e}</button>
+            <button className={page===e ? "btn btn-secondary" : "btn btn-dark"} 
+              onClick={()=>{ filter ? dispatch(filterCategoryByPage(e,filter)) : dispatch(getProductsByPage(e)) ;setPage(e)}}>
+              {e}
+            </button>
             )
           })}
         </div>

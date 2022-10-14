@@ -107,5 +107,38 @@ router.delete("/subcategory/delete/:id", (req, res) => __awaiter(void 0, void 0,
         res.json(error.message);
     }
 }));
+router.get("/pages/:page", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { category } = req.query;
+    const { page } = req.params;
+    if (category) {
+        try {
+            const filterCategory = yield prisma.category.findFirst({
+                where: {
+                    // @ts-ignore
+                    name: category
+                },
+                include: {
+                    subCategories: true,
+                    products: true
+                },
+                orderBy: {
+                    name: "asc"
+                },
+            });
+            const cant = yield prisma.product.count({
+                where: {
+                    categoryId: filterCategory === null || filterCategory === void 0 ? void 0 : filterCategory.id
+                }
+            });
+            //@ts-ignore
+            const products = filterCategory.products.slice((page * 8) - 8, page * 8);
+            return res.json({ cant, products });
+        }
+        catch ({ message }) {
+            return res.json("Error");
+        }
+    }
+    res.json("No category provided");
+}));
 exports.default = router;
 //# sourceMappingURL=categories.js.map

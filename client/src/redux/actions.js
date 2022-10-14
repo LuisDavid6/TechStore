@@ -3,7 +3,8 @@ import axios from "axios"
 import { GET_PRODUCTS, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT,
          SEARCH_PRODUCTS, GET_PRODUCT_DETAIL, GET_PRODUCTS_BY_PAGE,
          ADD_TO_CART, REMOVE_FROM_CART, 
-         FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, FILTER_BY_PRICE, 
+         FILTER_CATEGORY_BY_PAGE, FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY,
+         FILTER_BY_PRICE, 
          GET_USERS, CREATE_USER, DELETE_USER,
          VERIFY_ROLE, 
          GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY } from "./actionTypes";
@@ -181,6 +182,20 @@ export function addSubCategory(subcategory){
       throw Error
     }
   }
+}
+
+export function filterCategoryByPage(page, category){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.get(`/categories/pages/${page}?category=${category}`)
+      return dispatch({
+        type: FILTER_CATEGORY_BY_PAGE,
+        payload: data
+      })
+    }catch (error) {
+      throw Error
+    }
+  }  
 }
 
 export function filterByCategory(category){

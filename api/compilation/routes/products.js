@@ -192,8 +192,8 @@ router.get("/pages/:page", (req, res) => __awaiter(void 0, void 0, void 0, funct
         const products = allProducts.slice((page * 8) - 8, page * 8);
         res.json({ cant, products });
     }
-    catch (e) {
-        res.json(e.message);
+    catch ({ message }) {
+        res.json("Error");
     }
 }));
 exports.default = router;

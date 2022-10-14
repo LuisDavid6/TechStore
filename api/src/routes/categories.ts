@@ -112,4 +112,44 @@ router.delete("/subcategory/delete/:id", async (req, res) =>{
 
 })
 
+router.get("/pages/:page", async (req, res) =>{
+
+    const {category} = req.query
+    const {page} = req.params
+    if(category){
+        try {
+            const filterCategory = await prisma.category.findFirst({
+                where:{
+                    // @ts-ignore
+                    name: category
+                },
+                include:{
+                    subCategories:true,
+                    products: true
+                },
+                orderBy:{
+                    name:"asc"
+                },
+            }) 
+
+            const cant = await prisma.product.count({
+                where:{
+                    categoryId : filterCategory?.id
+                }
+            })
+
+            //@ts-ignore
+            const products = filterCategory.products.slice((page*8)-8,page*8)
+
+            return res.json({cant, products})
+
+        } catch ({message}) {
+            return res.json("Error")
+        }
+    }
+
+    res.json("No category provided")
+
+})
+
 export default router

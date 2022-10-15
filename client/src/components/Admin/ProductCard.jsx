@@ -8,6 +8,7 @@ export default function ProductCard({filter}){
   const dispatch = useDispatch()
   const [page,setPage] = useState("1")
   const products = useSelector((state)=> state.productsByPage)
+  const refresh = useSelector((state)=> state.refresh)
   const categoryProductsByPage = useSelector((state)=> state.categoryProductsByPage)
   let list = []
   let pages = []

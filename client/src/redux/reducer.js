@@ -3,7 +3,7 @@ import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT,
          ADD_TO_CART, REMOVE_FROM_CART, 
          FILTER_CATEGORY_BY_PAGE, FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, 
          FILTER_BY_PRICE, 
-         GET_USERS, CREATE_USER, DELETE_USER,
+         GET_USERS, CREATE_USER, UPDATE_USER, DELETE_USER,
          VERIFY_ROLE, 
          GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY } from "./actionTypes";
 
@@ -148,6 +148,12 @@ export default function Reducer(state = initialState, action){
             }
 
         case CREATE_USER:
+            return{
+                ...state,
+                refresh: !state.refresh
+            }
+
+        case UPDATE_USER:
             return{
                 ...state,
                 refresh: !state.refresh

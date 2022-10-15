@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteUser, getUsers } from "../../redux/actions"
 import AddUser from "./AddUser"
+import UpdateUser from "./UpdateUser"
 
 export default function Users(){
 
@@ -83,7 +84,26 @@ return (
                     <th scope="row">{++numUser}</th>
                     <td>{e.userName}</td>
                     <td>{e.email}</td>
-                    <td> <i className="bi bi-pencil-fill h5 text-white cursor" title="Modificar"></i></td>
+                    <td> 
+                        <i className="bi bi-pencil-fill h5 text-white cursor" title="Modificar" data-bs-toggle="modal" data-bs-target={"#e"+e.id.slice(0,3)}></i>
+                        
+                        <div className="modal fade" id={"e"+e.id.slice(0,3)} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                          <div className="modal-dialog">
+                            <div className="modal-content bg-global">
+                              <div className="modal-header text-white">
+                                <h5 className="modal-title" id="staticBackdropLabel">Actualizar Usuario</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div className="modal-body">
+                                <UpdateUser data={e}/>
+                              </div>
+                              <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>  
+                    </td>
                     <td>
                       <i className="bi bi-trash3-fill h5 text-white cursor" title="Eliminar" data-bs-toggle="modal" data-bs-target={"#u"+e.id.slice(0,3)}></i>
                       

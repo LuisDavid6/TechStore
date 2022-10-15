@@ -59,6 +59,29 @@ router.post("/", async (req, res) =>{
 
 })
 
+router.put("/update/:userId", async(req, res) =>{
+    const {userId} = req.params
+
+    try{
+
+        if(req.body.password){
+            const hashedPassword = await bcrypt.hash(req.body.password, Number(process.env.SALT_ROUNDS))
+            req.body.password = hashedPassword
+        }
+
+        await prisma.user.update({
+            where:{
+                id: userId
+            },
+            data: req.body
+        })
+
+        res.json("Update success")
+    }catch({message}){
+        res.json("Error")
+    }
+})
+
 router.delete("/delete/:userId", [verifyToken], async (req: Request, res:Response) =>{
     
     const {userId} = req.params

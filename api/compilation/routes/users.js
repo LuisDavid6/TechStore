@@ -61,6 +61,25 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     else
         res.json("error en los datos proporcionados");
 }));
+router.put("/update/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    try {
+        if (req.body.password) {
+            const hashedPassword = yield bcrypt_1.default.hash(req.body.password, Number(process.env.SALT_ROUNDS));
+            req.body.password = hashedPassword;
+        }
+        yield prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: req.body
+        });
+        res.json("Update success");
+    }
+    catch ({ message }) {
+        res.json("Error");
+    }
+}));
 router.delete("/delete/:userId", [auth_1.verifyToken], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const { userId } = req.params;

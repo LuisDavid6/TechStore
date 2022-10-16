@@ -16,7 +16,7 @@ model User {
   active      Boolean   @default(true)
   date        DateTime  @default(now()) @db.Timestamptz()
   cart        Cart?   
-  sales       Sale[]
+  sales       Json[]
   comments    Comment[]  
 }
 
@@ -64,9 +64,10 @@ model Cart{
 
 model Sale{
   id          String    @id @default(uuid()) @db.Uuid
+  orderNum    String
+  status      String    @default("Pendiente")
   date        DateTime  @default(now()) @db.Timestamptz()
-  userId      String    @db.Uuid
-  user        User      @relation(fields: [userId], references: [id])
+  user        Json
   cart        Json
 }
 

@@ -1,4 +1,4 @@
-import express,{Request,Response} from "express"
+import express from "express"
 import products from "./routes/products"
 import users from "./routes/users"
 import categories from "./routes/categories"
@@ -8,7 +8,6 @@ import { PrismaClient } from '@prisma/client'
 import cors from "cors"
 import cookieParser from 'cookie-parser';
 import morgan from "morgan"
-import datas from "./Data"
 
 
 const prisma = new PrismaClient()
@@ -39,26 +38,5 @@ app.use("/sales", sales)
 
 
 app.listen(PORT, async()=>{
-
-    // const user = await prisma.user.findUnique({
-    //     where:{
-    //         email : "juan@gmail.com"
-    //     }
-    // })
-    
-    // if(!user){
-    //     await prisma.user.create({
-    //         data:{
-    //             userName:"juan",
-    //             email:"juan@gmail.com",
-    //             password:"123"
-    //         }
-    //     })
-    // }    
-
-    // await prisma.product.createMany({
-    //     data: datas,
-    // })
-        
     console.log(`server running on port ${PORT}`)
 })

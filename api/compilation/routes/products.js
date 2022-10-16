@@ -117,8 +117,8 @@ router.delete("/delete/:id", (req, res) => __awaiter(void 0, void 0, void 0, fun
         });
         res.json(product);
     }
-    catch (error) {
-        res.json("ERROR");
+    catch ({ message }) {
+        res.json("Error");
     }
 }));
 router.get("/search/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

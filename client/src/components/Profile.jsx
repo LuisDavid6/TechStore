@@ -34,6 +34,7 @@ export default function Profile(){
 								<div className="card bg-global my-3">
 									<div className="card-body text-white">
 										<p className="card-text text-end">{e.date.slice(0,10)}</p>
+										<p className="card-text text-start">{e.orderNum}</p>
 										<p>
 											{e.cart.products && e.cart.products.map(f=>{
 												return(

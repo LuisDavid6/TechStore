@@ -114,8 +114,8 @@ router.delete("/delete/:id", async (req, res) =>{
             }
         })
         res.json(product)
-    } catch (error) {
-        res.json("ERROR")
+    } catch ({message}) {
+        res.json("Error")
     }
 })
 

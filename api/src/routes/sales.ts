@@ -2,6 +2,7 @@ import express, { Request, Response } from "express"
 import { PrismaClient } from '@prisma/client'
 import {verifyToken} from "../middlewares/auth"
 import Stripe from "stripe"
+import {customAlphabet} from "nanoid"
 
 const prisma = new PrismaClient()
 const router = express()
@@ -37,12 +38,17 @@ router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
             description: "Productos tecnologicos",
             confirm: true
         })
+
+        const nanoid = customAlphabet("0123456789",10)
+        const orderNum = nanoid()
         
         const sale = await prisma.sale.create({
             data:{
-                userId: user?.id,
                 // @ts-ignore
-                cart: user?.cart
+                user: {id:user.id, username:user.userName},
+                orderNum,
+                // @ts-ignore
+                cart: user?.cart 
             }
         })
 
@@ -57,18 +63,49 @@ router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
             }
         })
 
+        await prisma.user.update({
+            where:{
+                id: user?.id,
+            },
+            data:{
+                // @ts-ignore
+                sales: {
+                    // @ts-ignore
+                    push: sale,
+                },  
+            }
+        })
+
         res.json("successfull purchase")
     } catch ({message}) {
-        res.json(message)
+        res.json("Error")
     }
 })
 
 router.get("/", async (req, res) =>{
+
     try {
-        const sales = await prisma.sale.findMany()
+        const sales = await prisma.sale.findMany({})
         res.json(sales)
     } catch (error) {
         res.json("error")
+    }
+})
+
+router.delete("/delete/:id", async(req, res)=>{
+    const {id} = req.params
+
+    try {
+        await prisma.sale.delete({
+            where:{
+                id
+            }
+        })
+        res.json("OK")
+
+
+    } catch (error) {
+        res.json("ERROR")
     }
 })
 

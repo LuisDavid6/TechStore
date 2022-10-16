@@ -43,23 +43,6 @@ app.use("/categories", categories_1.default);
 app.use("/cart", cart_1.default);
 app.use("/sales", sales_1.default);
 app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
-    // const user = await prisma.user.findUnique({
-    //     where:{
-    //         email : "juan@gmail.com"
-    //     }
-    // })
-    // if(!user){
-    //     await prisma.user.create({
-    //         data:{
-    //             userName:"juan",
-    //             email:"juan@gmail.com",
-    //             password:"123"
-    //         }
-    //     })
-    // }    
-    // await prisma.product.createMany({
-    //     data: datas,
-    // })
     console.log(`server running on port ${PORT}`);
 }));
 //# sourceMappingURL=index.js.map

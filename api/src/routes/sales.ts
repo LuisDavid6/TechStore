@@ -76,7 +76,7 @@ router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
             }
         })
 
-        res.json("successfull purchase")
+        res.json({orderNum: sale.orderNum})
     } catch ({message}) {
         res.json("Error")
     }

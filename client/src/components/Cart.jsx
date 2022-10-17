@@ -45,6 +45,7 @@ export default function Cart(){
 	const [correctCard, setCorrectCard] = useState(false)
 	const [payment, setPayment] = useState()
 	const [errorPayment, setErrorPayment] = useState(false)
+	const [orderNum, setOrderNum] = useState("")
 
 	const verifyPayment = async() =>{
 		const {error, paymentMethod} = await stripe.createPaymentMethod({
@@ -71,14 +72,12 @@ export default function Cart(){
 			})
 			
 			// if(!error){
-				if(payment){
-
-				
+			if(payment){
 				// const pay = await dispatch(payOut(paymentMethod.id))
 				const pay = await dispatch(payOut(payment.id))
-				if(pay === "successfull purchase") {
-
+				if(pay.orderNum) {
 					successNotify()
+					setOrderNum(pay.orderNum)
 					setLoading(false)
 				} else{
 					setErrorPayment(true)
@@ -127,20 +126,6 @@ export default function Cart(){
 											<p className="text-white">SubTotal</p>
 											<span className="text-white h5">{convertPrice(e.totalValue)}</span>
 										</div>
-										<div className="modal fade" id={"p"+e.id.slice(0,3)} tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-											<div className="modal-dialog">
-												<div className="modal-content bg-global">
-													<div className="modal-header">
-														<h5 className="modal-title text-white" id="deleteModalLabel">¿Esta seguro de eliminar el producto?</h5>
-														<button type="button" className="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-													</div>
-													<div className="modal-footer">
-														<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-														<button type="button" className="btn btn-primary" data-bs-dismiss="modal" >Confirmar</button>
-													</div>
-												</div>
-											</div>
-										</div>    
 									</div>
 								</div>
 							)
@@ -194,8 +179,9 @@ export default function Cart(){
 										</div>
 									:
 										<div className="modal-body text-white h3">
-											<h2>Felicidades tu compra se ha completado con exito</h2>
-											<h3>Este es tu número de seguimiento </h3>
+											<h2 className="mb-5">Felicidades tu compra se ha completado con exito!!</h2>
+											<h4 className="fw-light mb-3">Este es tu número de seguimiento:</h4>
+											<h4 className="fw-light mb-4 text-warning">{orderNum}</h4>
 											<Link to="/home"><button className="btn btn-outline-info mt-3 me-3" data-bs-dismiss="modal" aria-label="Close">Volver a inicio</button></Link>
 											<Link to="/profile"><button className="btn btn-outline-info mt-3" data-bs-dismiss="modal" aria-label="Close">Ir a mis compras</button></Link>
 										</div>

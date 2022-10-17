@@ -78,7 +78,7 @@ router.post("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, voi
                 },
             }
         });
-        res.json("successfull purchase");
+        res.json({ orderNum: sale.orderNum });
     }
     catch ({ message }) {
         res.json("Error");

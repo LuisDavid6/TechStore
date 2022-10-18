@@ -4,7 +4,7 @@ import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT,
          FILTER_CATEGORY_BY_PAGE, FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY, 
          FILTER_BY_PRICE, 
          GET_USERS, CREATE_USER, UPDATE_USER, DELETE_USER,
-         VERIFY_ROLE, 
+         VERIFY_ROLE, GET_SALES_ADMIN,
          GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY } from "./actionTypes";
 
 const initialState = {
@@ -19,6 +19,7 @@ const initialState = {
     categoryProductsByPage: {},
     currentUser: {},
     role: "",
+    salesAdmin: []
 }
 
 export default function Reducer(state = initialState, action){
@@ -189,6 +190,12 @@ export default function Reducer(state = initialState, action){
             return{
                 ...state,
                 refresh: !state.refresh
+            }
+        
+        case GET_SALES_ADMIN:
+            return{
+                ...state,
+                salesAdmin: action.payload
             }
 
         default:

@@ -168,9 +168,8 @@ router.get("/verifyRole", [verifyToken], async (req: Request, res:Response) =>{
         const id = req.userId
 
         const user = await prisma.user.findUnique({
-            where:{
-                id
-            },
+            where:{id},
+
             select:{
                 id:true,
                 userName: true,
@@ -178,7 +177,7 @@ router.get("/verifyRole", [verifyToken], async (req: Request, res:Response) =>{
                 role: true,
                 cart: true,
                 comments: true,
-                sales: true
+                sales: true,
             }
         })
 

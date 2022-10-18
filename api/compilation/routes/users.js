@@ -150,9 +150,7 @@ router.get("/verifyRole", [auth_1.verifyToken], (req, res) => __awaiter(void 0, 
         // @ts-ignore
         const id = req.userId;
         const user = yield prisma.user.findUnique({
-            where: {
-                id
-            },
+            where: { id },
             select: {
                 id: true,
                 userName: true,
@@ -160,7 +158,7 @@ router.get("/verifyRole", [auth_1.verifyToken], (req, res) => __awaiter(void 0, 
                 role: true,
                 cart: true,
                 comments: true,
-                sales: true
+                sales: true,
             }
         });
         res.json(user);

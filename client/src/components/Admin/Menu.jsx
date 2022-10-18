@@ -4,11 +4,12 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { verifyRole } from '../../redux/actions'
-import Login from "../Login"
-import Register from "../Register"
 import Products from './Products'
 import Users from './Users'
 import Offers from './Offers'
+import Shipment from './Shipment'
+import SalesManagement from './SalesManagement'
+
 export default function Menu() {
 
 	const [component, setComponent] = useState("Products")
@@ -16,9 +17,10 @@ export default function Menu() {
 	const dispatch = useDispatch()
 
 	const handleComponent = () =>{
-		if(component === "Login") return <Login/>
-		if(component === "Offers") return <Offers/>
 		if(component === "Products") return <Products/>
+		if(component === "Offers") return <Offers/>
+		if(component === "SalesManagement") return <SalesManagement/>
+		if(component === "Shipment") return <Shipment/>
 		if(component === "Users") return <Users/>
 	}
 
@@ -35,7 +37,7 @@ export default function Menu() {
 					<button className="navbar-toggler mx-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
 						<span className="navbar-toggler-icon"></span>
 					</button>
-					<div className="offcanvas offcanvas-end bg-global w-50" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+					<div className="offcanvas offcanvas-end bg-global w-50" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style={{minWidth:"200px"}}>
 						<div className="offcanvas-header text-white">
 							<h5 className="offcanvas-title" id="offcanvasNavbarLabel">TechStore</h5>
 							<button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -44,7 +46,8 @@ export default function Menu() {
 							<div className="offcanvas-body">
 								<button className="nav-link active rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Products")}>Productos</button>
 								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Offers")}>Ofertas</button>
-								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Login")}>Balance De Ventas</button>
+								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("SalesManagement")}>Balance De Ventas</button>
+								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Shipment")}>Envios</button>
 								<button className="nav-link rounded-0 text-white btn-outline-secondary" data-bs-toggle="tab" onClick={() => setComponent("Users")}>Usuarios</button>
 							</div>
 						</div>

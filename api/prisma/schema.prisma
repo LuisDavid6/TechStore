@@ -67,6 +67,7 @@ model Sale{
   orderNum    String
   status      String    @default("Pendiente")
   date        DateTime  @default(now()) @db.Timestamptz()
+  dateFormat  String?
   user        Json
   cart        Json
 }

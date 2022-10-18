@@ -47,11 +47,13 @@ router.post("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, voi
         });
         const nanoid = (0, nanoid_1.customAlphabet)("0123456789", 10);
         const orderNum = nanoid();
+        const currentDate = new Date().toString().substring(0, 25);
         const sale = yield prisma.sale.create({
             data: {
                 // @ts-ignore
                 user: { id: user.id, username: user.userName },
                 orderNum,
+                dateFormat: currentDate,
                 // @ts-ignore
                 cart: user === null || user === void 0 ? void 0 : user.cart
             }
@@ -86,7 +88,11 @@ router.post("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, voi
 }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const sales = yield prisma.sale.findMany({});
+        const sales = yield prisma.sale.findMany({
+            orderBy: {
+                date: "desc"
+            }
+        });
         res.json(sales);
     }
     catch (error) {
@@ -96,16 +102,64 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 router.delete("/delete/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        yield prisma.sale.delete({
-            where: {
-                id
-            }
+        yield prisma.sale.deleteMany({
+        // where:{
+        //     id
+        // }
         });
         res.json("OK");
     }
-    catch (error) {
-        res.json("ERROR");
+    catch ({ message }) {
+        res.json(message);
     }
+}));
+router.get("/salesManagement", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { date } = req.query;
+    if (date) {
+        try {
+            const sales = yield prisma.sale.findMany({
+                where: {
+                    dateFormat: {
+                        contains: `${date}`,
+                        mode: "insensitive"
+                    },
+                },
+            });
+            const categories = yield prisma.category.findMany({
+                select: {
+                    id: true,
+                    name: true
+                }
+            });
+            const list = [];
+            sales.map((e) => {
+                e.cart.products.map((f) => {
+                    const catFound = categories.find(c => c.id === f.categoryId);
+                    const foundList = list.find((l) => l.name === (catFound === null || catFound === void 0 ? void 0 : catFound.name));
+                    if (foundList) {
+                        list.map((r) => {
+                            if (r.name === foundList.name)
+                                r.cant = r.cant + f.cant;
+                        });
+                    }
+                    else {
+                        list.push({ name: catFound === null || catFound === void 0 ? void 0 : catFound.name, cant: f.cant });
+                    }
+                });
+            });
+            const listCategories = [];
+            const listCantVentas = [];
+            list.map((e) => {
+                listCategories.push(e.name);
+                listCantVentas.push(e.cant);
+            });
+            return res.json([listCategories, listCantVentas]);
+        }
+        catch ({ message }) {
+            return res.json(message);
+        }
+    }
+    res.json("No date provided");
 }));
 exports.default = router;
 //# sourceMappingURL=sales.js.map

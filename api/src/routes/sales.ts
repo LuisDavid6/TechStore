@@ -41,12 +41,14 @@ router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
 
         const nanoid = customAlphabet("0123456789",10)
         const orderNum = nanoid()
-        
+        const currentDate = new Date().toString().substring(0,25)
+
         const sale = await prisma.sale.create({
             data:{
                 // @ts-ignore
                 user: {id:user.id, username:user.userName},
                 orderNum,
+                dateFormat: currentDate,                
                 // @ts-ignore
                 cart: user?.cart 
             }
@@ -85,7 +87,11 @@ router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
 router.get("/", async (req, res) =>{
 
     try {
-        const sales = await prisma.sale.findMany({})
+        const sales = await prisma.sale.findMany({
+            orderBy:{
+                date: "desc"
+            }
+        })
         res.json(sales)
     } catch (error) {
         res.json("error")
@@ -96,17 +102,75 @@ router.delete("/delete/:id", async(req, res)=>{
     const {id} = req.params
 
     try {
-        await prisma.sale.delete({
-            where:{
-                id
-            }
+        await prisma.sale.deleteMany({
+            // where:{
+            //     id
+            // }
         })
         res.json("OK")
 
 
-    } catch (error) {
-        res.json("ERROR")
+    } catch ({message}) {
+        res.json(message)
     }
+})
+
+router.get("/salesManagement", async(req, res) =>{
+    const {date} = req.query
+
+    if(date){
+
+        try {
+            
+            const sales = await prisma.sale.findMany({
+                where:{
+                    dateFormat:{
+                        contains: `${date}`,
+                        mode: "insensitive"
+                    },
+                },
+            })
+
+            const categories = await prisma.category.findMany({
+                select:{
+                    id: true,
+                    name: true
+                }
+            })
+
+            const list:any = []
+
+            sales.map((e:any) =>{
+                e.cart.products.map((f:any)=>{
+                    const catFound = categories.find(c =>c.id === f.categoryId)
+                    const foundList = list.find((l:any) =>l.name === catFound?.name)
+                    if(foundList){
+                        list.map((r:any)=>{
+                            if(r.name === foundList.name) r.cant= r.cant+f.cant
+                        })
+                    }else{
+                        list.push({name:catFound?.name, cant: f.cant})
+                    }
+                })
+            })
+
+            const listCategories:any = []
+            const listCantVentas:any = []
+
+            list.map((e:any)=>{
+                listCategories.push(e.name)
+                listCantVentas.push(e.cant)
+            
+            })
+
+            return res.json([listCategories, listCantVentas])
+
+        } catch ({message}) {
+            return res.json(message)
+        }
+    }
+
+    res.json("No date provided")
 })
 
 

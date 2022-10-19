@@ -41,14 +41,18 @@ router.post("/payOut", [verifyToken], async (req:Request, res: Response)=>{
 
         const nanoid = customAlphabet("0123456789",10)
         const orderNum = nanoid()
-        const currentDate = new Date().toString().substring(0,25)
 
+        const currentDate = new Date().toString().substring(0,25)
+        const month = currentDate.slice(4,7)
+        const day = currentDate.slice(8,10)
+        const newDate = currentDate.replace(month+" "+day, day+" "+month)
+        
         const sale = await prisma.sale.create({
             data:{
                 // @ts-ignore
                 user: {id:user.id, username:user.userName},
                 orderNum,
-                dateFormat: currentDate,                
+                dateFormat: newDate,                
                 // @ts-ignore
                 cart: user?.cart 
             }
@@ -102,10 +106,10 @@ router.delete("/delete/:id", async(req, res)=>{
     const {id} = req.params
 
     try {
-        await prisma.sale.deleteMany({
-            // where:{
-            //     id
-            // }
+        await prisma.sale.delete({
+            where:{
+                id
+            }
         })
         res.json("OK")
 
@@ -116,12 +120,12 @@ router.delete("/delete/:id", async(req, res)=>{
 })
 
 router.get("/salesManagement", async(req, res) =>{
-    const {date} = req.query
 
+    const {date} = req.query
+    
     if(date){
 
         try {
-            
             const sales = await prisma.sale.findMany({
                 where:{
                     dateFormat:{

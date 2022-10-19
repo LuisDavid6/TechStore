@@ -47,9 +47,7 @@ const SalesBar = () =>{
   };
       
   return(
-    // <div  style={{maxWidth:"900px", MaxHeight:"auto", backgroundColor:"red"}}>
-      <Bar data={data} options={options}/>
-    // </div>
+    <Bar data={data} options={options}/>
   )
 }
 

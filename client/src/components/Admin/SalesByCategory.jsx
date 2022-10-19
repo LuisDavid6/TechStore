@@ -18,12 +18,6 @@ const SalesByCategory = ({sales}) =>{
           'blue',
           'orange',
         ],
-        // backgroundColor: [
-        //   '#9D1515',
-        //   '#457D22',
-        //   '#141672',
-        //   '#7D4E07',
-        // ],
         hoverOffset: 4
       }],
     }
@@ -50,9 +44,7 @@ const SalesByCategory = ({sales}) =>{
     }
 
     return(
-        // <div style={{maxWidth:"500px", maxHeight:"auto",backgroundColor:"blue"}}>
-            <Doughnut data={data} options={options}/>
-        // </div>
+      <Doughnut data={data} options={options}/>
     )
 }
 

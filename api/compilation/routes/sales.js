@@ -48,12 +48,15 @@ router.post("/payOut", [auth_1.verifyToken], (req, res) => __awaiter(void 0, voi
         const nanoid = (0, nanoid_1.customAlphabet)("0123456789", 10);
         const orderNum = nanoid();
         const currentDate = new Date().toString().substring(0, 25);
+        const month = currentDate.slice(4, 7);
+        const day = currentDate.slice(8, 10);
+        const newDate = currentDate.replace(month + " " + day, day + " " + month);
         const sale = yield prisma.sale.create({
             data: {
                 // @ts-ignore
                 user: { id: user.id, username: user.userName },
                 orderNum,
-                dateFormat: currentDate,
+                dateFormat: newDate,
                 // @ts-ignore
                 cart: user === null || user === void 0 ? void 0 : user.cart
             }
@@ -102,10 +105,10 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 router.delete("/delete/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        yield prisma.sale.deleteMany({
-        // where:{
-        //     id
-        // }
+        yield prisma.sale.delete({
+            where: {
+                id
+            }
         });
         res.json("OK");
     }

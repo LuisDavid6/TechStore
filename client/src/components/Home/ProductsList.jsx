@@ -41,11 +41,11 @@ export default function(){
         )
       })
     :
-    <div className="text-center">
-    <div className="spinner-border text-primary mt-5" role="status" style={{width: "6rem", height: "6rem"}}>
-      <span className="visually-hidden">Loading...</span>
-    </div>
-  </div>
+      <div className="text-center">
+        <div className="spinner-border text-primary mt-5" role="status" style={{width: "6rem", height: "6rem"}}>
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
     }
     </div>
   )

@@ -177,5 +177,92 @@ router.get("/salesManagement", async(req, res) =>{
     res.json("No date provided")
 })
 
+router.get("/shipment", async(req, res) =>{
+    const {status} = req.query
+
+    if(status){
+        try {
+            const sales = await prisma.sale.findMany({
+                where:{
+                    //@ts-ignore
+                    status:status
+                },
+                select:{
+                    id:true,
+                    orderNum:true,
+                    date:true,
+                    user: true,
+                    status:true,
+                    cart:true
+                }
+            })
+
+            return res.json(sales)
+
+        } catch (error) {
+            return res.json("Error")
+        }
+    }
+
+    try {
+        const sales = await prisma.sale.findMany({
+            select:{
+                id:true,
+                orderNum:true,
+                date:true,
+                user: true,
+                status:true,
+                cart:true
+            }
+        })
+
+        res.json(sales)
+
+    } catch (error) {
+        res.json("Error")
+    }
+})
+
+router.put("/shipment/changeStatus", async(req, res) =>{
+    const {id, status, userId} = req.body
+
+    try {
+        await prisma.sale.update({
+            where:{
+                id
+            },
+            data:{
+                status
+            }
+        })
+
+        const user = await prisma.user.findUnique({
+            where:{
+                id: userId
+            }
+        })
+
+        const sale = user?.sales.find((e:any)=> e.id === id)
+        //@ts-ignore
+        if(sale) sale.status = status
+
+        const userSales = user?.sales.filter((e:any) => e.id !== id)
+        //@ts-ignore
+        userSales?.push(sale)
+
+        await prisma.user.update({
+            where:{
+                id: userId
+            },
+            data:{
+                sales: userSales
+            }
+        })
+        
+        res.json("success")
+    } catch ({message}) {
+        res.json("Error")
+    }
+})
 
 export default router

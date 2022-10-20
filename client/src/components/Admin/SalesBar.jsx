@@ -38,7 +38,7 @@ const SalesBar = () =>{
     datasets: [{
       label: 'Ventas',
       data: scores,
-      backgroundColor: '#0D47A1',
+      backgroundColor: '#05388F',
       datalabels:{
         display:true,
         color:"red"

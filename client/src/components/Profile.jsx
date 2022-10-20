@@ -42,7 +42,7 @@ export default function Profile(){
                         <p className="card-text text-start">Fecha: {e.date.slice(0,10)}</p>
                         <p className="card-text text-start">Número de orden: {e.orderNum}</p>
                         <p className="card-text text-start">Total Compra: {convertPrice(e.cart.total)}</p>
-                        <p className="card-text text-start">Estado: <span className="text-warning">{e.status}</span></p>
+                        <p className="card-text text-start">Estado: <span className={e.status==="Pendiente" ? "text-warning" : e.status==="Enviado" ? "text-info" : "text-success"}>{e.status}</span></p>
 
                         <button className="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target={"#d"+e.id.slice(0,3)}>Detalles</button>
 

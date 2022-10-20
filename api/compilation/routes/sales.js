@@ -164,5 +164,83 @@ router.get("/salesManagement", (req, res) => __awaiter(void 0, void 0, void 0, f
     }
     res.json("No date provided");
 }));
+router.get("/shipment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { status } = req.query;
+    if (status) {
+        try {
+            const sales = yield prisma.sale.findMany({
+                where: {
+                    //@ts-ignore
+                    status: status
+                },
+                select: {
+                    id: true,
+                    orderNum: true,
+                    date: true,
+                    user: true,
+                    status: true,
+                    cart: true
+                }
+            });
+            return res.json(sales);
+        }
+        catch (error) {
+            return res.json("Error");
+        }
+    }
+    try {
+        const sales = yield prisma.sale.findMany({
+            select: {
+                id: true,
+                orderNum: true,
+                date: true,
+                user: true,
+                status: true,
+                cart: true
+            }
+        });
+        res.json(sales);
+    }
+    catch (error) {
+        res.json("Error");
+    }
+}));
+router.put("/shipment/changeStatus", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, status, userId } = req.body;
+    try {
+        yield prisma.sale.update({
+            where: {
+                id
+            },
+            data: {
+                status
+            }
+        });
+        const user = yield prisma.user.findUnique({
+            where: {
+                id: userId
+            }
+        });
+        const sale = user === null || user === void 0 ? void 0 : user.sales.find((e) => e.id === id);
+        //@ts-ignore
+        if (sale)
+            sale.status = status;
+        const userSales = user === null || user === void 0 ? void 0 : user.sales.filter((e) => e.id !== id);
+        //@ts-ignore
+        userSales === null || userSales === void 0 ? void 0 : userSales.push(sale);
+        yield prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                sales: userSales
+            }
+        });
+        res.json("success");
+    }
+    catch ({ message }) {
+        res.json("Error");
+    }
+}));
 exports.default = router;
 //# sourceMappingURL=sales.js.map

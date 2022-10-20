@@ -40,7 +40,7 @@ export default function Details(){
   }
 
   const errorNotify = () =>{
-    toast.error('Dedes iniciar sesión primero', {
+    toast.error('Debes iniciar sesión primero', {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: true,

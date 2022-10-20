@@ -17,6 +17,8 @@ const SalesByCategory = ({sales}) =>{
           'green',
           'blue',
           'orange',
+          'yellow',
+          'grey'                            
         ],
         hoverOffset: 4
       }],

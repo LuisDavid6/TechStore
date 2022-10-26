@@ -164,6 +164,43 @@ router.get("/salesManagement", (req, res) => __awaiter(void 0, void 0, void 0, f
     }
     res.json("No date provided");
 }));
+router.get("/salesByWeek", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const currentDate = new Date().toString().substring(0, 25);
+    const month = currentDate.slice(4, 7);
+    const day = currentDate.slice(8, 10);
+    try {
+        const sales = yield prisma.sale.findMany({
+            where: {
+                dateFormat: {
+                    contains: month
+                }
+            }
+        });
+        const list = [];
+        sales.map((e) => {
+            const obj = { day: Number(e.dateFormat.slice(4, 6)), cant: 0 };
+            e.cart.products.forEach((p) => {
+                obj.cant = obj.cant + p.cant;
+            });
+            list.push(obj);
+        });
+        const days = [];
+        const cants = [];
+        for (let i = Number(day); i >= Number(day) - 6 && i > 0; i--) {
+            let cant = 0;
+            list.forEach((e) => {
+                if (e.day === i)
+                    cant = cant + e.cant;
+            });
+            days.push(i);
+            cants.push(cant);
+        }
+        res.json([days.reverse(), cants.reverse()]);
+    }
+    catch ({ message }) {
+        res.json(message);
+    }
+}));
 router.get("/shipment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { status } = req.query;
     if (status) {

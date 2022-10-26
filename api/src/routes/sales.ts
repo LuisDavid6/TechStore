@@ -177,6 +177,53 @@ router.get("/salesManagement", async(req, res) =>{
     res.json("No date provided")
 })
 
+router.get("/salesByWeek", async(req, res) =>{
+
+    const currentDate = new Date().toString().substring(0,25)
+    const month = currentDate.slice(4,7)
+    const day = currentDate.slice(8,10)
+
+    try {
+        const sales = await prisma.sale.findMany({
+            where:{
+                dateFormat:{
+                    contains: month
+                }
+            }
+        })
+
+        const list:any = []
+
+        sales.map((e:any) =>{
+
+            const obj = {day: Number(e.dateFormat.slice(4,6)), cant:0}
+
+            e.cart.products.forEach((p:any) => {
+                obj.cant = obj.cant + p.cant
+            });
+            
+            list.push(obj)
+        })
+
+        const days=[]
+        const cants=[]
+
+        for (let i = Number(day); i >= Number(day)-6 && i>0; i--) {
+            let cant=0
+            list.forEach((e:any) => {
+                if(e.day === i) cant = cant + e.cant
+            })
+            days.push(i)
+            cants.push(cant)
+        }
+        
+        res.json([days.reverse(), cants.reverse()])
+    } catch ({message}) {
+        res.json(message)
+    }
+
+})
+
 router.get("/shipment", async(req, res) =>{
     const {status} = req.query
 

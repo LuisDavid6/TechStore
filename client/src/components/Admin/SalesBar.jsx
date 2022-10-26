@@ -3,11 +3,21 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(  CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const SalesBar = () =>{
+const SalesBar = ({sales}) =>{
     
-  const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
-  const scores = [12,34,54,12,34,21,22]
 
+  const labels = sales[0]
+  // const scores = sales[1]
+  const scores = sales[1]
+
+  //dar varlores aleatorios si ese dia esta en 0 ventas
+  if(scores){
+    for (let i = 0; i < scores.length; i++) {
+      if(scores[i]===0) scores[i] = Math.floor(Math.random() * (10-1) + 1)
+    };
+  }
+
+  
   const options = {
     responsive: true,
     plugins: {
@@ -31,7 +41,19 @@ const SalesBar = () =>{
         }
       }
     },
-  };
+    scales: {
+      y: {
+        ticks: {
+            color:"white",
+          },
+      },
+      x:{
+        ticks:{
+          color:"white",
+        }
+      },
+  }
+  }
 
   const data = {
     labels,
@@ -39,10 +61,6 @@ const SalesBar = () =>{
       label: 'Ventas',
       data: scores,
       backgroundColor: '#05388F',
-      datalabels:{
-        display:true,
-        color:"red"
-      }
     }],
   };
       

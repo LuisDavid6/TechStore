@@ -6,7 +6,8 @@ import { GET_PRODUCTS, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT,
          FILTER_CATEGORY_BY_PAGE, FILTER_BY_CATEGORY, FILTER_BY_SUBCATEGORY,
          FILTER_BY_PRICE, 
          GET_USERS, CREATE_USER, UPDATE_USER, DELETE_USER,
-         VERIFY_ROLE, GET_SALES_ADMIN, GET_SALES_SHIPMENT, SET_SHIPMENT_STATUS,
+         VERIFY_ROLE, GET_SALES_ADMIN, GET_SALES_BY_WEEK, 
+         GET_SALES_SHIPMENT, SET_SHIPMENT_STATUS,
          GET_CATEGORIES, ADD_CATEGORY, ADD_SUBCATEGORY } from "./actionTypes";
 
 export function getProducts(){
@@ -341,6 +342,20 @@ export function getSalesAdmin(date){
       const {data} = await axios.get(`/sales/salesManagement?date=${date}`)
       return dispatch({
         type: GET_SALES_ADMIN,
+        payload: data
+      }) 
+    } catch(e){
+        throw Error
+    }
+  }
+}
+
+export function getSalesByWeek(){
+  return async function(dispatch){
+    try {
+      const {data} = await axios.get("/sales/salesByWeek")
+      return dispatch({
+        type: GET_SALES_BY_WEEK,
         payload: data
       }) 
     } catch(e){

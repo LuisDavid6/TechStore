@@ -6,11 +6,9 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const SalesByCategory = ({sales}) =>{
 
     const data = {
-      // labels:["videojuegos", "celulares", "monitores", "computadores"],
       labels: sales[0],
       datasets: [{
         label: 'cantidad de ventas',
-        // data: [12, 0, 3, 5],
         data: sales[1],
         backgroundColor: [
           'red',

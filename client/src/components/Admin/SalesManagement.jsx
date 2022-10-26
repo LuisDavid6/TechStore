@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {getSalesAdmin} from "../../redux/actions"
+import {getSalesAdmin, getSalesByWeek} from "../../redux/actions"
 import SalesBar from "./SalesBar"
 import SalesByCategory from "./SalesByCategory"
 
@@ -9,6 +9,7 @@ const SalesManagement = () =>{
 
   const dispatch = useDispatch()
   const sales = useSelector(state => state.salesAdmin)
+  const salesByWeek = useSelector(state => state.salesByWeek)
   const [date, setDate] = useState("")
   const [month, setMonth] = useState("")
   const [search, setSearch] = useState("")
@@ -50,7 +51,8 @@ const SalesManagement = () =>{
   }
 
   useEffect(()=>{
-    dispatch(getSalesAdmin(search || "19"))
+    dispatch(getSalesAdmin(search || "20 Oct"))
+    dispatch(getSalesByWeek())
   },[search])
 
   return(
@@ -78,12 +80,12 @@ const SalesManagement = () =>{
 
       <div className='col card text-center bg-global mx-auto my-2'>
         <div className='card-header text-white'>
-          <h4>Ventas mensuales</h4>
+          <h4>Ventas de la Semana</h4>
         </div>
         <div className='card-body'>
-          <SalesBar sales={sales}/>
+          <SalesBar sales={salesByWeek}/>
         </div>
-        <div className='card-footer text-muted'>Total de ventas de los ultimos meses</div>
+        <div className='card-footer text-muted'>Total de ventas de los ultimos dias</div>
       </div>
     </div>
   )

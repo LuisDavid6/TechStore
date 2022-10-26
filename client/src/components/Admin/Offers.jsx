@@ -55,7 +55,7 @@ const Offers = () =>{
                 {products.products.map(e=>{
                   return(
                     e.imageOffer &&
-                    <div className="d-flex flex-column bg-global rounded-3 mt-3">
+                    <div className="d-flex flex-column bg-global rounded-3 mt-3" key={e.id}>
                       <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target={"#p"+e.id.slice(0,3)}>Eliminar</button>
                       {/* <i className="bi bi-x-circle-fill h1 position-absolute top-0 end-0" style={{color:"red"}}></i> */}
                       <img src={e.imageOffer} className="rounded" alt={e.name} width="100%" height="100%"/>

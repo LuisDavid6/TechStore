@@ -15,8 +15,11 @@ export default function Carousel() {
           <div className="carousel-item" >
             <img src="https://www.elpais.com.co/files/article_main/uploads/2021/10/07/615f6a4a6b182.jpeg" className="img-fluid mx-auto d-block w-100" alt="..." style={{maxHeight:"400px"}}/>
           </div>
-          <div className="carousel-item" >
+          {/* <div className="carousel-item" >
             <img src="https://pbs.twimg.com/media/C56xfZhWcAANTlo.jpg" className="img-fluid mx-auto d-block w-100" alt="..." style={{maxHeight:"400px"}}/>
+          </div> */}
+          <div className="carousel-item" >
+            <img src="/diseño6.png" className="img-fluid mx-auto d-block w-100" alt="..." style={{maxHeight:"400px"}}/>
           </div>
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

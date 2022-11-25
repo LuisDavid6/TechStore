@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { getCategories } from "../../redux/actions"
 import "../Styles/Styles.css"
 
-export default function(){
+export default function ProductsList(){
 
   const categories = useSelector(state => state.categories)
   const dispatch = useDispatch()

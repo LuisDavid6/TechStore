@@ -51,7 +51,7 @@ const SalesManagement = () =>{
   }
 
   useEffect(()=>{
-    dispatch(getSalesAdmin(search || "20 Oct"))
+    dispatch(getSalesAdmin(search || "21 Nov"))
     dispatch(getSalesByWeek())
   },[search])
 

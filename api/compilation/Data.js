@@ -54,6 +54,7 @@ const HpPavilion2 = {
         { "name": "Bluetooth", "value": "Bluetooth® 5" }],
     "stock": 12,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665033541/TechStore/hw9qdb8ucdgodc8be7ir.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665505482/TechStore/ituxwkpsjpz8gbrri3xo.png",
     "category": "Computadores"
 };
 const Hp15 = {
@@ -99,6 +100,7 @@ const AsusTuf = {
         { "name": "Fuente de Alimentación", "value": "Input: 100-240V AC, 50/60Hz universal" }],
     "stock": 15,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665032095/TechStore/dxt3vxex0uktluitmzug.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665504777/TechStore/gzdwook0k4popiwxeflv.png",
     "category": "Computadores"
 };
 const AsusRogZ = {
@@ -122,6 +124,7 @@ const AsusRogZ = {
         { "name": "Duración de la Batería", "value": "8 Horas Aproximadas" }],
     "stock": 12,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665031583/TechStore/yidfcsamedplsisuj7if.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665504364/TechStore/s5zp2l0bhrhx3lwmingp.png",
     "category": "Computadores"
 };
 //CELULARES
@@ -145,6 +148,7 @@ const MotoG22 = {
         { "name": "Servicios de localización", "value": "GPS, AGPS, GLONASS" }],
     "stock": 10,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1664977468/TechStore/a83raisx62ld6fexdo9m.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665427645/TechStore/wtzcynua9tiz7yraw0us.png",
     "category": "Celulares"
 };
 const MotoG31 = {
@@ -167,6 +171,7 @@ const MotoG31 = {
         { "name": "NFC", "value": "No" }],
     "stock": 15,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1664974932/TechStore/sbjkaekxo2czxqnmwsob.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665426973/TechStore/kx2xixicseiogcxs3mfx.png",
     "category": "Celulares"
 };
 const MotoG60 = {
@@ -189,6 +194,7 @@ const MotoG60 = {
         { "name": "NFC", "value": "Si" }],
     "stock": 9,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1664977456/TechStore/e8ayslbsqhjrvlh51kqr.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665419364/TechStore/y3cz6me08ze7ilvp9tmd.png",
     "category": "Celulares"
 };
 const SamsungS21 = {
@@ -212,6 +218,7 @@ const SamsungS21 = {
         { "name": "NFC", "value": "Si" }],
     "stock": 6,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665073808/TechStore/yitrtqhgntx7vogisoes.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665436006/TechStore/gadbxidoaswmns6imlqx.png",
     "category": "Celulares"
 };
 const Xiaomi11L = {
@@ -393,6 +400,7 @@ const MarioParty = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 5,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665068245/TechStore/yhlfshez46pfurkkefc5.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665425592/TechStore/aom0kx9yrciayl2y1ste.png",
     "category": "Videojuegos"
 };
 const LuigiMansion = {
@@ -409,6 +417,7 @@ const LuigiMansion = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 5,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665067220/TechStore/xqtv32wg4m4ie0hqz8cm.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665425633/TechStore/i2nan7lsncnbbw9cmror.png",
     "category": "Videojuegos"
 };
 const Crash = {
@@ -529,6 +538,7 @@ const Cyberpunk = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 7,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665067090/TechStore/m9acwtoszhmlhcnlwhnm.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665277127/TechStore/ku8f64bhgyldjz2mn3lu.png",
     "category": "Videojuegos"
 };
 const CODV = {
@@ -545,6 +555,7 @@ const CODV = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 7,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665088026/TechStore/aq0ps6ybj6zzfcs8prjx.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665426836/TechStore/x9jg8zm266uzjbzqsv9w.png",
     "category": "Videojuegos"
 };
 const MortalKombat = {
@@ -561,6 +572,7 @@ const MortalKombat = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 7,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665463401/TechStore/wzwjbvcus0b7wvwydoqy.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665504355/TechStore/fdulqfhh6bp5snxcfgyl.png",
     "category": "Videojuegos"
 };
 const Ark = {
@@ -578,6 +590,7 @@ const Ark = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 12,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665257207/TechStore/xluearl6uvc3tnvla2k7.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665506364/TechStore/bflpgswdllralj8kwdkm.png",
     "category": "Videojuegos"
 };
 const GTAV = {
@@ -626,6 +639,7 @@ const CODCW = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 15,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665464383/TechStore/vtcv0ppm6zehxme8mvdz.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665506381/TechStore/a3vpyftxmjjsi4zewivt.png",
     "category": "Videojuegos"
 };
 const FarCryPrimal = {

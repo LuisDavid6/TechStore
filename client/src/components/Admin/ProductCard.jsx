@@ -40,7 +40,7 @@ export default function ProductCard({filter}){
               <div className="card bg-global mb-2 w-100" key={e.name}>
                 <div className="card-body row">
                   <div className="col-2 text-start">
-                    <img src={e.image} width="100" height="100"></img>
+                    <img src={e.image} width="100" height="100" alt={e.name}></img>
                   </div>
                   <div className="col my-auto ps-5">
                     <span className="text-white">{e.name}</span>

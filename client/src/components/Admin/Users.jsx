@@ -42,14 +42,14 @@ return (
       </div>
       <div className="col-md">
         <div className="mx-auto pt-3 pb-5 text-end d-flex justify-content-end pe-1">
-          <form className="d-flex mx-2">
+          {/* <form className="d-flex mx-2">
               <div className="input-group flex-nowrap mx-auto" style={{maxWidth:"250px"}}>
                 <input type="text" className="form-control" placeholder="Buscar..." aria-label="buscar" aria-describedby="addon-wrapping" onChange={e=> setSearch(e.target.value)}/>
                 <button className="input-group-text btn-outline-light bg-dark" type="submit" id="addon-wrapping" onClick={handleSearch}>
                   <i className="bi bi-search text-white"></i>
                 </button>
               </div>
-          </form> 
+          </form>  */}
           <button className="btn btn-outline-secondary text-white py-2" data-bs-toggle="modal" data-bs-target="#registerModal">Agregar Usuario</button>
           <div className="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">

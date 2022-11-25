@@ -162,7 +162,7 @@ export default function Products({ category }) {
       <div className="d-flex justify-content-center gap-3 mt-3 mb-4">
         {pages.length>1 && pages.map(e=>{
           return(
-            <button className={page===e ? "btn btn-secondary" : "btn btn-dark"} onClick={()=>setPage(e)}>{e}</button>
+            <button className={page===e ? "btn btn-secondary" : "btn btn-dark"} onClick={()=>{setPage(e); window.scrollTo({ top: 0, behavior: 'smooth' })}}>{e}</button>
           )
         })}
       </div>

@@ -18,7 +18,7 @@ export default function Profile(){
 	return(
 		<div>
 			<NavBar/>
-			<div className="bg-global mx-0 my-2 p-4 pt-5 rounded-0 text-start">
+			<div className="bg-global mx-0 my-2 p-4 pt-5 rounded-0 text-start" style={{minHeight:"69vh"}}>
         <i className="bi bi-person-circle text-white h1 me-3" style={{fontSize:"64px"}}></i>
 				<span className="mb-0 w-25 text-secondary h1">
         {currentUser.userName}

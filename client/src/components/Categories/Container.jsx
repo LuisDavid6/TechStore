@@ -11,7 +11,7 @@ export default function HomeProducts(){
   return(
     <div className="position-relative">
       <NavBar/>
-      <div className="row my-1 mx-0">
+      <div className="row my-1 mx-0" style={{minHeight:"70vh"}}>
         <div className="col-md-3 bg-global me-0 pb-5 pt-3">
           <Filters/>
         </div>

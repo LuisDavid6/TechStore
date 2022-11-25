@@ -140,6 +140,12 @@ router.get("/search/", (req, res) => __awaiter(void 0, void 0, void 0, function*
                                 mode: "insensitive"
                             }
                         }
+                    },
+                    {
+                        type: {
+                            contains: `${query}`,
+                            mode: "insensitive"
+                        }
                     }
                 ]
             },

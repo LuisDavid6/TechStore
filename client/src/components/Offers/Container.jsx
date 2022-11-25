@@ -28,7 +28,7 @@ export default function Container(){
 	return(
 		<div>
 			<NavBar/>
-			<div>
+			<div style={{minHeight:"56vh"}}>
 				{products.products && products.products.length>0 ?
 					<div className="product-list-offers">
 						{products.products.map(e =>{
@@ -52,7 +52,7 @@ export default function Container(){
 						})}
 					</div>
 				:
-					<div className="text-center">
+					<div className="text-center" style={{minHeight:"65vh"}}>
 						<div className="spinner-border text-primary mt-5" role="status" style={{width: "6rem", height: "6rem"}}>
 							<span className="visually-hidden">Loading...</span>
 						</div>
@@ -62,7 +62,7 @@ export default function Container(){
 			<div className="d-flex justify-content-center gap-3 mt-3 mb-4">
           	{pages.length>1 && pages.map(e=>{
             return(
-              <button className={page===e ? "btn btn-secondary" : "btn btn-dark"} onClick={()=>{dispatch(getProductsByPage(e,true)) ;setPage(e)}}>{e}</button>
+              <button className={page===e ? "btn btn-secondary" : "btn btn-dark"} onClick={()=>{dispatch(getProductsByPage(e,true)) ;setPage(e); window.scrollTo({ top: 0, behavior: 'smooth' })}}>{e}</button>
               )
             })}
           </div>

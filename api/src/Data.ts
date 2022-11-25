@@ -245,7 +245,7 @@ const Aorus = {
     "name": "Monitor Gamer Gigabyte Aorus FI27Q-P LCD 27″ 100V/240V",
     "price": 3200000,
     "discount": 20,
-    "type": "Gigabyte",
+    "type": "Aorus",
     "description":"Disfruta de todas las cualidades que el monitor Gigabyte FI27Q-P tiene para ofrecerte. Percibe las imágenes de una manera completamente diferente y complementa cualquier espacio ya sea en tu hogar u oficina. Un monitor a la medida gracias a su pantalla LCD obtendrás gráficas con gran nitidez, colores vivos y atractivos. Una experiencia visual de calidad. Este monitor de 27″ te proporcionará comodidad para estudiar, trabajar o ver una película en tus tiempos de ocio. Asimismo, su resolución de 2560 x 1440 te permitirá disfrutar de momentos únicos gracias a una imagen de alta fidelidad. Una de sus virtudes es que posee pantalla antirreflejo, de esta manera no verás reflejado lo que está detrás de ti y evitarás forzar tu vista para enfocar el contenido. Su tiempo de respuesta de un milisegundo lo hace ideal para gamers y cinéfilos porque es capaz de mostrar imágenes en movimiento sin halos o bordes borrosos.",
     "specs":[{"name":"Marca","value":"Gigabyte"},
         {"name":"Familia","value":"Aorus"},

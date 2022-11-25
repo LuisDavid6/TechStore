@@ -127,6 +127,128 @@ const AsusRogZ = {
     "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665504364/TechStore/s5zp2l0bhrhx3lwmingp.png",
     "category": "Computadores"
 };
+//MONITORES
+const LG = {
+    "name": "Monitor Gamer LG 27″ Ultra Gear FHD IPS 27GL650F-B",
+    "price": 1350000,
+    "discount": 10,
+    "type": "LG",
+    "description": "UltraGear™ de LG es un potente dispositivo de visualización de juegos integrado con funciones de alto rendimiento capaces de responder a los mejores juegos. UltraGear es un monitor compatible con G-SYNC®, probado y oficialmente validado por NVIDIA, que minimiza el desgarro y el tartamudeo de la pantalla, para una experiencia de juego con movimientos más fluidoz y rápidos. Gracias a la tecnología AMD RADEON FreeSync™, los gamers podrán disfrutar de juegos veloces y de movimientos fluidos e impecables en alta resolución. Elimina casi por completo el tearing y la interrupción de pantalla. Este monitor es compatible con HDR10, al reproducir detalles de partes luminosas y oscuras en contenidos de alto rango dinámico. Los gamers disfrutarán de un brillo y un contraste más intensos, con sombras y siluetas más profundas. La pantalla IPS con 99% de sRGB posee una precisión extraordinaria. Proporciona un ángulo de visión más amplio y reproduce escenas aún más vívidas del campo de batalla, tales como las llamas causadas por el contraste entre explosiones.",
+    "specs": [{ "name": "Tamaño de pantalla", "value": "27'" },
+        { "name": "Relación de aspecto", "value": "16:09" },
+        { "name": "Tipo de panel", "value": "IPS" },
+        { "name": "Resolución", "value": "1920 x 1080" },
+        { "name": "Marca", "value": "LG" },
+        { "name": "Brillo", "value": "400 Nits" },
+        { "name": "Ángulo de visión", "value": "178/178(CR≥10)" },
+        { "name": "Modo de imagen", "value": "Custom, Reader, Photo, Cinema, Color Weakness, FPS Game 1, FPS Game 2, RTS Game, Custom (Game)" },
+        { "name": "HDR", "value": "HDR10" }],
+    "stock": 5,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665812741/TechStore/lv5w1c9hwdxs5uogy3fs.png",
+    "category": "Monitores"
+};
+const LG2 = {
+    "name": "Monitor LG 27″ Full HD IPS FreeSync 27MP60G-B 1ms 75Hz",
+    "price": 1400000,
+    "discount": 30,
+    "type": "LG",
+    "description": "LG busca entender a los usuarios para ofrecerles óptimas soluciones y nuevas experiencias a través de la evolución tecnológica. Disfruta de la perfecta combinación de diseño, calidad y rendimiento que la empresa te ofrece en este monitor. Un monitor a la medida gracias a su pantalla LCD obtendrás gráficas con gran nitidez, colores vivos y atractivos. Una experiencia visual de calidad. Este monitor de 27' te proporcionará comodidad para estudiar, trabajar o ver una película en tus tiempos de ocio. Asimismo, su resolución de 1920 x 1080 te permitirá disfrutar de momentos únicos gracias a una imagen de alta fidelidad. Una de sus virtudes es que posee pantalla antirreflejo, de esta manera no verás reflejado lo que está detrás de ti y evitarás forzar tu vista para enfocar el contenido. Su tiempo de respuesta de 5 ms lo hace ideal para gamers y cinéfilos porque es capaz de mostrar imágenes en movimiento sin halos o bordes borrosos.",
+    "specs": [{ "name": "Tamaño de pantalla", "value": "27'" },
+        { "name": "Relación de aspecto", "value": "16:09" },
+        { "name": "Tipo de panel", "value": "IPS" },
+        { "name": "Resolución", "value": "1920 x 1080" },
+        { "name": "Marca", "value": "LG" },
+        { "name": "Brillo", "value": "250cd/m²" },
+        { "name": "Ángulo de visión", "value": "178(I/D), 178(Arr./Ab.)" },
+        { "name": "Frecuencia de actualización", "value": "75 Hz" },
+        { "name": "Tipos de conexión", "value": "DisplayPort 1.4, VGA/D-Sub, Jack 3.5 mm, HDMI" }],
+    "stock": 5,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665812815/TechStore/myphwmwz0oeizan1inmi.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669388438/TechStore/w7q9dryxlgnugskdmzoo.png",
+    "category": "Monitores"
+};
+const LG3 = {
+    "name": "Monitor LG Gaming UltraGear de 24″ 144Hz 1ms 24GL600F-B",
+    "price": 950000,
+    "discount": 0,
+    "type": "LG",
+    "description": "LG UltraGear ™ es el potente equipo de visualización de juegos con características de alto rendimiento para llevar sus juegos al siguiente nivel. Con una pantalla de 23.6 pulgadas y un tiempo de respuesta de 1 ms, el 24GL600F es el UltraGear optimizado para juegos que requieren decisiones instantáneas, como RTS y FPS. Con una frecuencia de actualización de 144Hz, el 24GL600F le permite capturar incluso los movimientos más pequeños al tiempo que proporciona un movimiento más suave. Con el 24GL600F, que admite el tiempo de respuesta más rápido, puedes observar rápidamente el campo de batalla e inmediatamente responder al enemigo.",
+    "specs": [{ "name": "Tamaño de pantalla", "value": "24″" },
+        { "name": "Tipo de pantalla", "value": "Plana" },
+        { "name": "Relación de aspecto", "value": "16:09" },
+        { "name": "Tipo de panel", "value": "TN" },
+        { "name": "Marca", "value": "LG" },
+        { "name": "Resolución", "value": "1920 x 1080" },
+        { "name": "Tiempo de respuesta", "value": "WW: 1ms (GtG at Faster) KR: 2m (GtG at Faster)" },
+        { "name": "Angulo de visión", "value": "(CR≥10) : 170º(R/L), 160º(U/D)" },
+        { "name": "Frecuencia de actualización", "value": "144 Hz" }],
+    "stock": 6,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669308249/TechStore/hosv0345gr2442izvtd5.png",
+    "category": "Monitores"
+};
+const Samsung = {
+    "name": "Monitor Gaming Odyssey G3 24″ FHD 144hz",
+    "price": 1300000,
+    "discount": 0,
+    "type": "Samsung",
+    "description": "Frecuencia de actualización de 144 Hz: Conquista a todos los enemigos, incluso a altas velocidades. La frecuencia de actualización de 144 Hz elimina el retraso y el desenfoque de movimiento para un juego emocionante con acción ultrasuave. Tiempo de respuesta de 1 ms: Haz que cada movimiento cuente con un tiempo de respuesta de 1 ms. Salta sobre los enemigos tan pronto como los veas y mantente delante con movimientos precisos del mouse. Tu rendimiento en pantalla es tan rápido como tus propios reflejos. AMD FreeSync Premium: Juego suave sin esfuerzo. AMD FreeSync Premium cuenta con tecnología de sincronización adaptativa, que reduce el desgarro de la pantalla, el tartamudeo y la latencia de entrada. La baja compensación de fotogramas garantiza que cada escena fluya sin problemas. Mira tu juego a tu manera: Alcanza la altura de ganar. Gira, inclina y ajusta tu monitor hasta que todos los enemigos estén perfectamente a la vista. Tu pantalla se puede mover libremente para que puedas encontrar la comodidad total de juego. Diseño de pantalla completa: Tu legado no tiene límites. El diseño sin bordes de 3 lados revela el máximo espacio para un juego más grande y audaz. Alinea dos pantallas con precisión en una configuración de doble monitor, para que ningún enemigo se deslice a través de la grieta.",
+    "specs": [{ "name": "Tamaño de pantalla", "value": "24″" },
+        { "name": "Relación de aspecto", "value": "16:09" },
+        { "name": "Tipo de panel", "value": "VA" },
+        { "name": "Resolución", "value": "1920 x 1080" },
+        { "name": "Marca", "value": "Samsung" },
+        { "name": "Brillo", "value": "250cd/m²" },
+        { "name": "Ángulo de visión", "value": "178(I/D), 178(Arr./Ab.)" },
+        { "name": "Frecuencia de actualización", "value": "144 Hz" },
+        { "name": "Tipos de conexión", "value": "HDMI 2.0, Jack 3.5 mm, DisplayPort 1.2, VGA/D-Sub" }],
+    "stock": 5,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669307764/TechStore/twnbm2orwyzhk4cbuvay.png",
+    "category": "Monitores"
+};
+const SamsungC24 = {
+    "name": "Monitor Gaming 24″ C24RG50",
+    "price": 1250000,
+    "discount": 10,
+    "type": "Samsung",
+    "description": "El lider en monitores curvos. Sumergite en tus juegos con la profunda curvatura del monitor 1800R. Una pantalla que te permite concentrarte al máximo para que ganes más veces. Jugarás más tiempo con menor fatiga visual. La acción se ve nítida y fluida en todo momento. Su tasa de refresco de 144 Hz te permite jugar con ventaja incluso en las partidas más exigentes. Encontrá al enemigo al instante y percibí los pequeños cambios que marcan la diferencia. La tasa de refresco puede cambiarse fácilmente a 60 Hz, 100 Hz o 120 Hz. Se acabaron los juegos entrecortados. La tecnología FreeSync elimina los saltos en la imagen para un juego excepcionalmente fluido y rápido. La tasa de refresco de adaptación dinámica asegura que hasta las escenas de juego más complejas se vean fluidas. El Modo Eye Saver minimiza la emisión de luz azul para relajar tu vista incluso en períodos prolongados. La tecnología Flicker Free elimina constantemente el fastidioso parpadeo en la pantalla para que puedas jugar sin distracciones ni fatiga visual.",
+    "specs": [{ "name": "Tamaño de pantalla", "value": "24″" },
+        { "name": "Tipo de pantalla", "value": "Curva" },
+        { "name": "Relación de aspecto", "value": "16:09" },
+        { "name": "Tipo de panel", "value": "VA" },
+        { "name": "Curvatura", "value": "1800R" },
+        { "name": "Resolución", "value": "1920 x 1080" },
+        { "name": "Tiempo de respuesta", "value": "4ms (GTG)" },
+        { "name": "Marca", "value": "Samsung" },
+        { "name": "Brillo", "value": "200cd/m²" },
+        { "name": "Ángulo de visión", "value": "178°(H)/178°(V)" },
+        { "name": "Frecuencia de actualización", "value": "144 Hz" },
+        { "name": "Tipos de conexión", "value": "HDMI 2.0, Jack 3.5 mm, DisplayPort 1.2, VGA/D-Sub" }],
+    "stock": 5,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669308201/TechStore/c5ddsbkmgtla9ifchsqy.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669388085/TechStore/grgw0tog9k1zkmzzoirl.png",
+    "category": "Monitores"
+};
+const Aorus = {
+    "name": "Monitor Gamer Gigabyte Aorus FI27Q-P LCD 27″ 100V/240V",
+    "price": 3200000,
+    "discount": 20,
+    "type": "Aorus",
+    "description": "Disfruta de todas las cualidades que el monitor Gigabyte FI27Q-P tiene para ofrecerte. Percibe las imágenes de una manera completamente diferente y complementa cualquier espacio ya sea en tu hogar u oficina. Un monitor a la medida gracias a su pantalla LCD obtendrás gráficas con gran nitidez, colores vivos y atractivos. Una experiencia visual de calidad. Este monitor de 27″ te proporcionará comodidad para estudiar, trabajar o ver una película en tus tiempos de ocio. Asimismo, su resolución de 2560 x 1440 te permitirá disfrutar de momentos únicos gracias a una imagen de alta fidelidad. Una de sus virtudes es que posee pantalla antirreflejo, de esta manera no verás reflejado lo que está detrás de ti y evitarás forzar tu vista para enfocar el contenido. Su tiempo de respuesta de un milisegundo lo hace ideal para gamers y cinéfilos porque es capaz de mostrar imágenes en movimiento sin halos o bordes borrosos.",
+    "specs": [{ "name": "Marca", "value": "Gigabyte" },
+        { "name": "Familia", "value": "Aorus" },
+        { "name": "Modelo", "value": "FI27Q-SA" },
+        { "name": "Tamaño de pantalla", "value": "27″" },
+        { "name": "Tipo de pantalla", "value": "Curva" },
+        { "name": "Relación de aspecto", "value": "16:09" },
+        { "name": "Tipo de panel", "value": "IPS" },
+        { "name": "Resolución", "value": "Quad HD (2560×1440)" },
+        { "name": "Tiempo de respuesta", "value": "1ms (MPRT)" },
+        { "name": "Frecuencia de actualización", "value": "165 Hz" }],
+    "stock": 8,
+    "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669308225/TechStore/drj4sgpcekowygfqe6ru.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669389028/TechStore/blf4ymvkldbatzecyrnt.png",
+    "category": "Monitores"
+};
 //CELULARES
 const MotoG22 = {
     "name": "Motorola G22 128GB",
@@ -448,6 +570,7 @@ const MarioKart = {
         { "name": "Tipo", "value": "Videojuegos" }],
     "stock": 7,
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665071195/TechStore/jfjnfk7a5mgrm4fh4mwx.png",
+    "imageOffer": "https://res.cloudinary.com/dnc21abpp/image/upload/v1669383649/TechStore/dybhlmvnpmtzonqrdw9b.png",
     "category": "Videojuegos"
 };
 const Pokemon = {
@@ -737,6 +860,6 @@ const Horizon = {
     "image": "https://res.cloudinary.com/dnc21abpp/image/upload/v1665465706/TechStore/vlixntuqbzgbdo86cgxq.png",
     "category": "Videojuegos"
 };
-const Games = [HpPavilion, HpPavilion2, Hp15, AsusTuf, AsusRogZ, MotoG22, MotoG31, MotoG60, SamsungS21, Xiaomi11L, XiaomiMi8L, XiaomiRN10P, XiaomiPocoF3, XiaomiRN11, Xiaomi12, XiaomiRN9T, MarioParty, LuigiMansion, Crash, MarioKart, Pokemon, CaptainTsubasa, Zelda, MarioOdyssey, Kirby, Cyberpunk, CODV, MortalKombat, Ark, GTAV, ResidentVilage, CODCW, FarCryPrimal, TheDivision, RainbowSix, WatchDogs, GodOfWar, Horizon];
+const Games = [HpPavilion, HpPavilion2, Hp15, AsusTuf, AsusRogZ, LG, LG2, LG3, Samsung, SamsungC24, Aorus, MotoG22, MotoG31, MotoG60, SamsungS21, Xiaomi11L, XiaomiMi8L, XiaomiRN10P, XiaomiPocoF3, XiaomiRN11, Xiaomi12, XiaomiRN9T, MarioParty, LuigiMansion, Crash, MarioKart, Pokemon, CaptainTsubasa, Zelda, MarioOdyssey, Kirby, Cyberpunk, CODV, MortalKombat, Ark, GTAV, ResidentVilage, CODCW, FarCryPrimal, TheDivision, RainbowSix, WatchDogs, GodOfWar, Horizon];
 exports.default = Games;
 //# sourceMappingURL=Data.js.map

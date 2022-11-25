@@ -138,6 +138,12 @@ router.get("/search/",async (req, res) => {
                                 mode: "insensitive"
                             }
                         }
+                    },
+                    {
+                        type:{
+                            contains: `${query}`,
+                            mode: "insensitive"
+                        }
                     }
                 ]
             },

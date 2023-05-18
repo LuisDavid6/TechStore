@@ -17,16 +17,16 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const router = (0, express_1.default)();
 // localhost:3001/products/
-router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allProducts = yield prisma.product.findMany({
             include: {
                 category: {
                     include: {
-                        subCategories: true
-                    }
-                }
-            }
+                        subCategories: true,
+                    },
+                },
+            },
         });
         res.json(allProducts);
     }
@@ -35,29 +35,29 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 // localhost:3001/products/details
-router.get("/details/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/details/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         const product = yield prisma.product.findUnique({
             where: {
-                id
-            }
+                id,
+            },
         });
         res.json(product);
     }
     catch (error) {
-        res.json("ERROR");
+        res.json('ERROR');
     }
 }));
 // localhost:3001/products/
-router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, price, discount, type, stock, image, category, description, specs } = req.body;
-    const totalPrice = price - (price * (Number(discount) / 100));
+router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, price, discount, type, stock, image, imageOffer, category, description, specs } = req.body;
+    const totalPrice = price - price * (Number(discount) / 100);
     try {
         const categ = yield prisma.category.findFirst({
             where: {
-                name: category
-            }
+                name: category,
+            },
         });
         if (categ) {
             const newProduct = yield prisma.product.create({
@@ -70,58 +70,59 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     specs,
                     stock,
                     image,
+                    imageOffer,
                     category: {
-                        connect: { id: categ.id }
+                        connect: { id: categ.id },
                     },
-                    totalPrice
-                }
+                    totalPrice,
+                },
             });
-            return res.json("product created");
+            return res.json('product created');
         }
     }
     catch ({ message }) {
         // console.log({message})
-        res.json("Error");
+        res.json('Error');
         // res.json(message)
     }
 }));
 // localhost:3001/products/update/
-router.put("/update/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/update/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     if (req.body.price || req.body.discount) {
-        const totalPrice = req.body.price - (req.body.price * (Number(req.body.discount) / 100));
+        const totalPrice = req.body.price - req.body.price * (Number(req.body.discount) / 100);
         req.body.totalPrice = totalPrice;
     }
     try {
         yield prisma.product.update({
             where: {
-                id: id
+                id: id,
             },
-            data: req.body
+            data: req.body,
         });
-        res.json("Update success");
+        res.json('Update success');
     }
     catch (error) {
         // console.log(error.message)
-        res.json("ERROR");
+        res.json('ERROR');
     }
 }));
 // localhost:3001/products/delete/
-router.delete("/delete/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         const product = yield prisma.product.delete({
             where: {
-                id: id
-            }
+                id: id,
+            },
         });
         res.json(product);
     }
     catch ({ message }) {
-        res.json("Error");
+        res.json('Error');
     }
 }));
-router.get("/search/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/search/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query } = req.query;
     try {
         const products = yield prisma.product.findMany({
@@ -130,33 +131,33 @@ router.get("/search/", (req, res) => __awaiter(void 0, void 0, void 0, function*
                     {
                         name: {
                             contains: `${query}`,
-                            mode: "insensitive"
-                        }
+                            mode: 'insensitive',
+                        },
                     },
                     {
                         category: {
                             name: {
                                 contains: `${query}`,
-                                mode: "insensitive"
-                            }
-                        }
+                                mode: 'insensitive',
+                            },
+                        },
                     },
                     {
                         type: {
                             contains: `${query}`,
-                            mode: "insensitive"
-                        }
-                    }
-                ]
+                            mode: 'insensitive',
+                        },
+                    },
+                ],
             },
         });
         res.json(products);
     }
     catch (error) {
-        res.json("Error");
+        res.json('Error');
     }
 }));
-router.get("/pages/:page", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/pages/:page', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page } = req.params;
     const { offer } = req.query;
     try {
@@ -164,42 +165,42 @@ router.get("/pages/:page", (req, res) => __awaiter(void 0, void 0, void 0, funct
             const cant = yield prisma.product.count({
                 where: {
                     imageOffer: {
-                        contains: "http"
-                    }
-                }
+                        contains: 'http',
+                    },
+                },
             });
             const allProducts = yield prisma.product.findMany({
                 include: {
-                    category: true
+                    category: true,
                 },
                 where: {
                     imageOffer: {
-                        contains: "http"
-                    }
+                        contains: 'http',
+                    },
                 },
                 orderBy: {
-                    name: "asc"
-                }
+                    name: 'asc',
+                },
             });
             //@ts-ignore
-            const products = allProducts.slice((page * 8) - 8, page * 8);
+            const products = allProducts.slice(page * 8 - 8, page * 8);
             return res.json({ cant, products });
         }
         const cant = yield prisma.product.count({});
         const allProducts = yield prisma.product.findMany({
             include: {
-                category: true
+                category: true,
             },
             orderBy: {
-                name: "asc"
-            }
+                name: 'asc',
+            },
         });
         //@ts-ignore
-        const products = allProducts.slice((page * 8) - 8, page * 8);
+        const products = allProducts.slice(page * 8 - 8, page * 8);
         res.json({ cant, products });
     }
     catch ({ message }) {
-        res.json("Error");
+        res.json('Error');
     }
 }));
 exports.default = router;

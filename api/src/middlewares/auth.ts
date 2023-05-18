@@ -15,7 +15,7 @@ export const verifyToken = async (req:Request, res:Response, next:NextFunction) 
         // @ts-ignore
         const decoded = jwt.verify(token, process.env.JWT_SECRET || "")
         // @ts-ignore
-        if(!token || !decoded.id) return res.status(401).status(401).json("invalid token")
+        if(!token || !decoded.id) return res.status(401).json("invalid token")
 
         // @ts-ignore
         req.userId =  decoded.id

@@ -28,7 +28,7 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET || "");
         // @ts-ignore
         if (!token || !decoded.id)
-            return res.status(401).status(401).json("invalid token");
+            return res.status(401).json("invalid token");
         // @ts-ignore
         req.userId = decoded.id;
         next();

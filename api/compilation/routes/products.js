@@ -86,6 +86,44 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // res.json(message)
     }
 }));
+router.post('/addProducts', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const products = req.body;
+    let cont = 0;
+    try {
+        products === null || products === void 0 ? void 0 : products.map(({ name, price, discount, type, stock, image, imageOffer, category, description, specs, }) => __awaiter(void 0, void 0, void 0, function* () {
+            const totalPrice = price - price * (Number(discount) / 100);
+            const categ = yield prisma.category.findFirst({
+                where: {
+                    name: category,
+                },
+            });
+            if (categ) {
+                const newProduct = yield prisma.product.create({
+                    data: {
+                        name,
+                        price,
+                        discount,
+                        type,
+                        description,
+                        specs,
+                        stock,
+                        image,
+                        imageOffer,
+                        category: {
+                            connect: { id: categ.id },
+                        },
+                        totalPrice,
+                    },
+                });
+                cont += 1;
+            }
+        }));
+        res.json(`${cont} products created`);
+    }
+    catch ({ message }) {
+        res.json({ error: message });
+    }
+}));
 // localhost:3001/products/update/
 router.put('/update/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;

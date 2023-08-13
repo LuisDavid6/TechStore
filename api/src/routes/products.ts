@@ -77,6 +77,76 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.post('/addProducts', async (req, res) => {
+  const products = req.body
+
+  interface Product {
+    name: string
+    price: number
+    discount: number
+    type: string
+    description: string
+    specs: []
+    stock: number
+    image: string
+    imageOffer?: string
+    category: string
+  }
+
+  let cont = 0
+
+  try {
+    products?.map(
+      async ({
+        name,
+        price,
+        discount,
+        type,
+        stock,
+        image,
+        imageOffer,
+        category,
+        description,
+        specs,
+      }: Product) => {
+        const totalPrice = price - price * (Number(discount) / 100)
+
+        const categ = await prisma.category.findFirst({
+          where: {
+            name: category,
+          },
+        })
+
+        if (categ) {
+          const newProduct = await prisma.product.create({
+            data: {
+              name,
+              price,
+              discount,
+              type,
+              description,
+              specs,
+              stock,
+              image,
+              imageOffer,
+              category: {
+                connect: { id: categ.id },
+              },
+              totalPrice,
+            },
+          })
+
+          cont += 1
+        }
+      }
+    )
+
+    res.json(`${cont} products created`)
+  } catch ({ message }: any) {
+    res.json({ error: message })
+  }
+})
+
 // localhost:3001/products/update/
 router.put('/update/:id', async (req, res) => {
   const { id } = req.params

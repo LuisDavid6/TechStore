@@ -93,9 +93,8 @@ router.post('/addProducts', async (req, res) => {
     category: string
   }
 
-  let cont = 0
-
   try {
+    let cont = 0
     products?.map(
       async ({
         name,
@@ -111,36 +110,39 @@ router.post('/addProducts', async (req, res) => {
       }: Product) => {
         const totalPrice = price - price * (Number(discount) / 100)
 
-        const categ = await prisma.category.findFirst({
-          where: {
-            name: category,
-          },
-        })
-
-        if (categ) {
-          const newProduct = await prisma.product.create({
-            data: {
-              name,
-              price,
-              discount,
-              type,
-              description,
-              specs,
-              stock,
-              image,
-              imageOffer,
-              category: {
-                connect: { id: categ.id },
-              },
-              totalPrice,
+        try {
+          const categ = await prisma.category.findFirst({
+            where: {
+              name: category,
             },
           })
 
-          cont += 1
+          if (categ) {
+            const newProduct = await prisma.product.create({
+              data: {
+                name,
+                price,
+                discount,
+                type,
+                description,
+                specs,
+                stock,
+                image,
+                imageOffer,
+                category: {
+                  connect: { id: categ.id },
+                },
+                totalPrice,
+              },
+            })
+
+            cont += 1
+          }
+        } catch (error: any) {
+          return res.json({ error: error.message })
         }
       }
     )
-
     res.json(`${cont} products created`)
   } catch ({ message }: any) {
     res.json({ error: message })

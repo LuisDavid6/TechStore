@@ -17,8 +17,8 @@ router.get('/', async (req, res) => {
       },
     })
     res.json(allProducts)
-  } catch (e: any) {
-    res.json(e.message)
+  } catch (error) {
+    res.json(error)
   }
 })
 
@@ -39,8 +39,7 @@ router.get('/details/:id', async (req, res) => {
 
 // localhost:3001/products/
 router.post('/', async (req, res) => {
-  const { name, price, discount, type, stock, image, imageOffer, category, description, specs } =
-    req.body
+  const { name, price, discount, type, stock, image, imageOffer, category, description, specs } = req.body
   const totalPrice = price - price * (Number(discount) / 100)
 
   try {
@@ -70,10 +69,8 @@ router.post('/', async (req, res) => {
       })
       return res.json('product created')
     }
-  } catch ({ message }: any) {
-    // console.log({message})
+  } catch (error) {
     res.json('Error')
-    // res.json(message)
   }
 })
 
@@ -95,57 +92,44 @@ router.post('/addProducts', async (req, res) => {
 
   try {
     let cont = 0
-    products?.map(
-      async ({
-        name,
-        price,
-        discount,
-        type,
-        stock,
-        image,
-        imageOffer,
-        category,
-        description,
-        specs,
-      }: Product) => {
-        const totalPrice = price - price * (Number(discount) / 100)
+    products?.map(async ({ name, price, discount, type, stock, image, imageOffer, category, description, specs }: Product) => {
+      const totalPrice = price - price * (Number(discount) / 100)
 
-        try {
-          const categ = await prisma.category.findFirst({
-            where: {
-              name: category,
+      try {
+        const categ = await prisma.category.findFirst({
+          where: {
+            name: category,
+          },
+        })
+
+        if (categ) {
+          const newProduct = await prisma.product.create({
+            data: {
+              name,
+              price,
+              discount,
+              type,
+              description,
+              specs,
+              stock,
+              image,
+              imageOffer,
+              category: {
+                connect: { id: categ.id },
+              },
+              totalPrice,
             },
           })
 
-          if (categ) {
-            const newProduct = await prisma.product.create({
-              data: {
-                name,
-                price,
-                discount,
-                type,
-                description,
-                specs,
-                stock,
-                image,
-                imageOffer,
-                category: {
-                  connect: { id: categ.id },
-                },
-                totalPrice,
-              },
-            })
-
-            cont += 1
-          }
-        } catch (error: any) {
-          return res.json({ error: error.message })
+          cont += 1
         }
+      } catch (error) {
+        return res.json('error')
       }
-    )
+    })
     res.json(`${cont} products created`)
-  } catch ({ message }: any) {
-    res.json({ error: message })
+  } catch (error) {
+    res.json('error')
   }
 })
 
@@ -165,9 +149,8 @@ router.put('/update/:id', async (req, res) => {
       data: req.body,
     })
     res.json('Update success')
-  } catch (error: any) {
-    // console.log(error.message)
-    res.json('ERROR')
+  } catch (error) {
+    res.json('error')
   }
 })
 
@@ -181,8 +164,8 @@ router.delete('/delete/:id', async (req, res) => {
       },
     })
     res.json(product)
-  } catch ({ message }: any) {
-    res.json('Error')
+  } catch (error) {
+    res.json('error')
   }
 })
 
@@ -249,8 +232,8 @@ router.get('/pages/:page', async (req, res) => {
           name: 'asc',
         },
       })
-      //@ts-ignore
-      const products = allProducts.slice(page * 8 - 8, page * 8)
+
+      const products = allProducts.slice(Number(page) * 8 - 8, Number(page) * 8)
 
       return res.json({ cant, products })
     }
@@ -265,12 +248,12 @@ router.get('/pages/:page', async (req, res) => {
         name: 'asc',
       },
     })
-    //@ts-ignore
-    const products = allProducts.slice(page * 8 - 8, page * 8)
+
+    const products = allProducts.slice(Number(page) * 8 - 8, Number(page) * 8)
 
     res.json({ cant, products })
-  } catch ({ message }: any) {
-    res.json('Error')
+  } catch (error) {
+    res.json('error')
   }
 })
 

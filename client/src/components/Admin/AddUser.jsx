@@ -1,130 +1,149 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { createUser, getUsers } from '../../redux/actions';
-// import NavBar from "./NavBar"
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { createUser, getUsers } from '../../redux/actions'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useEffect } from 'react'
 
-export default function AddUser(){
-
+export default function AddUser() {
   const dispatch = useDispatch()
-  const users = useSelector(state=> state.users)
-  const refresh = useSelector(state=> state.refresh)
+  const users = useSelector((state) => state.users)
+  const refresh = useSelector((state) => state.refresh)
 
-  const registerNotify = () =>{
+  const registerNotify = () => {
     toast.success('Usuario creado exitosamente', {
-      position: "top-center",
+      position: 'top-center',
       autoClose: 1000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: false,
-      theme:"dark",
-    });
-  } 
+      theme: 'dark',
+    })
+  }
 
-  const errorNotify = () =>{
+  const errorNotify = () => {
     toast.error('El email ya se encuentra registrado', {
-      position: "top-center",
+      position: 'top-center',
       autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: false,
-      theme:"dark",
-    });
-  } 
+      theme: 'dark',
+    })
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getUsers())
-  },[refresh])
-  
-  return(
+  }, [refresh])
+
+  return (
     <div>
-      {/* <NavBar/> */}
-      <Formik 
-        initialValues = {{
+      <Formik
+        initialValues={{
           userName: '',
           email: '',
           password: '',
           passwordConfirm: '',
-          role: "user"
+          role: 'user',
         }}
-
-        validate = {values=>{
-          let errors = {};
+        validate={(values) => {
+          let errors = {}
           if (!values.userName) {
-            errors.userName = "Debes ingresar un nombre de usuario";
+            errors.userName = 'Debes ingresar un nombre de usuario'
           }
-          
+
           if (!values.email) {
-            errors.email = "Debes ingresar un email";
-            
-          } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) errors.email = "Formato de email no válido"
+            errors.email = 'Debes ingresar un email'
+          } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) errors.email = 'Formato de email no válido'
 
           if (!values.password) {
-            errors.password = "La contraseña no puede estar vacia";
+            errors.password = 'La contraseña no puede estar vacia'
+          } else if (values.password.length < 3) errors.password = 'La contraseña debe tener al menos 3 caracteres'
 
-          } else if (values.password.length<3) errors.password = "La contraseña debe tener al menos 3 caracteres"
-          
           if (!values.passwordConfirm) {
-            errors.passwordConfirm = "Debes confirmar la contraseña";
-
-          } else if(values.passwordConfirm !== values.password) errors.passwordConfirm = "Las contraseñas no coinciden"
+            errors.passwordConfirm = 'Debes confirmar la contraseña'
+          } else if (values.passwordConfirm !== values.password) errors.passwordConfirm = 'Las contraseñas no coinciden'
 
           return errors
         }}
-          
-        onSubmit ={ (values, {resetForm}) => {
-          const email = users.find(e=> e.email === values.email)
-          if(!email){
+        onSubmit={(values, { resetForm }) => {
+          const email = users.find((e) => e.email === values.email)
+          if (!email) {
             resetForm()
             dispatch(createUser(values))
             registerNotify()
-          }
-          else errorNotify()
+          } else errorNotify()
         }}
       >
-        {({values, errors}) => (
-
-          <Form className="container-sm my-0 bg-black p-4 text-start" style={{maxWidth:"450px",borderRadius:"25px", border:" solid 6px grey"}}>
-          {/* <h3 className='text-white my-2'>Regístrate</h3> */}
+        {({ values, errors }) => (
+          <Form className='container-sm my-0 bg-black p-4 text-start' style={{ maxWidth: '450px', borderRadius: '25px', border: ' solid 6px grey' }}>
+            {/* <h3 className='text-white my-2'>Regístrate</h3> */}
             <div className='form-floating my-3 w-75 mx-auto'>
-              <Field type="text" name="userName" className="form-control" id="userValue" placeholder="usuario" style={{maxWidth:"360px"}}/>
-              <label for="userValue" className='text-secondary'>Nombre de usuario</label>
-              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='userName' component="div"/>
+              <Field type='text' name='userName' className='form-control' id='userValue' placeholder='usuario' style={{ maxWidth: '360px' }} />
+              <label for='userValue' className='text-secondary'>
+                Nombre de usuario
+              </label>
+              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='userName' component='div' />
             </div>
             <div className='form-floating my-3 w-75 mx-auto'>
-              <Field type="text" name="email" className="form-control" id="emailValue" placeholder="email" style={{maxWidth:"380px"}}/>
-              <label for="emailValue" className='text-secondary'>Email</label>
-              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='email' component="div"/>
+              <Field type='text' name='email' className='form-control' id='emailValue' placeholder='email' style={{ maxWidth: '380px' }} />
+              <label for='emailValue' className='text-secondary'>
+                Email
+              </label>
+              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='email' component='div' />
             </div>
             <div className='form-floating my-3 w-75 mx-auto'>
-              <Field type="password" name="password"className="form-control" id="passwordValue" placeholder="contraseña" style={{maxWidth:"360px"}}/>
-              <label for="passwordValue" className='text-secondary'>Contraseña</label>
-              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='password' component="div"/>
+              <Field
+                type='password'
+                name='password'
+                className='form-control'
+                id='passwordValue'
+                placeholder='contraseña'
+                style={{ maxWidth: '360px' }}
+              />
+              <label for='passwordValue' className='text-secondary'>
+                Contraseña
+              </label>
+              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='password' component='div' />
             </div>
             <div className='form-floating my-3 w-75 mx-auto'>
-              <Field type="password" name="passwordConfirm" className="form-control" id="confirmValue" placeholder="Confirma tu contraseña" style={{maxWidth:"360px"}}/>
-              <label for="confirmValue" className='text-secondary'>Confirma la contraseña</label>
-              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='passwordConfirm' component="div"/>
+              <Field
+                type='password'
+                name='passwordConfirm'
+                className='form-control'
+                id='confirmValue'
+                placeholder='Confirma tu contraseña'
+                style={{ maxWidth: '360px' }}
+              />
+              <label for='confirmValue' className='text-secondary'>
+                Confirma la contraseña
+              </label>
+              <ErrorMessage className='text-danger fs-6 fst-italic text-wrap' name='passwordConfirm' component='div' />
             </div>
             <div className='my-3 w-75 mx-auto'>
-              <label htmlFor="role" className="text-white">Seleccione un rol:</label><br/>
-									<select id="role" className="form-select w-50 p-2" name='role' onChange={e=> values.role = e.target.value}>
-										<option value="user" className="outline-secondary">Usuario</option>
-										<option value="admin" className="outline-secondary">Admin</option>
-									</select> 
+              <label htmlFor='role' className='text-white'>
+                Seleccione un rol:
+              </label>
+              <br />
+              <select id='role' className='form-select w-50 p-2' name='role' onChange={(e) => (values.role = e.target.value)}>
+                <option value='user' className='outline-secondary'>
+                  Usuario
+                </option>
+                <option value='admin' className='outline-secondary'>
+                  Admin
+                </option>
+              </select>
             </div>
-            <div className="d-flex align-items-center">
-              <button type="submit" className='btn btn-secondary my-3 p-2 mx-auto align-self-center w-50' style={{maxWidth:"230px"}}>Registrar</button>
+            <div className='d-flex align-items-center'>
+              <button type='submit' className='btn btn-secondary my-3 p-2 mx-auto align-self-center w-50' style={{ maxWidth: '230px' }}>
+                Registrar
+              </button>
             </div>
-            
-          </Form>         
+          </Form>
         )}
       </Formik>
     </div>

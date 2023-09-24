@@ -8,15 +8,18 @@ import { updateProduct } from '../../redux/actions'
 export default function ModifyProduct({ data }) {
   const dispatch = useDispatch()
   const [image, setImage] = useState(data.image)
+
   const uploadImage = async (e) => {
     const files = e.target.files
     const data = new FormData()
 
     data.append('file', files[0])
     data.append('upload_preset', 'ophfn9bj')
+
     try {
       const res = await fetch('https://api.cloudinary.com/v1_1/dnc21abpp/image/upload', { method: 'POST', body: data })
       const file = await res.json()
+
       setImage(file.secure_url)
     } catch (error) {
       // console.log(error)
@@ -76,6 +79,8 @@ export default function ModifyProduct({ data }) {
             values.price = Number(values.price)
             values.discount = Number(values.discount)
             values.stock = Number(values.stock)
+            values.image = image
+
             dispatch(updateProduct(values, data.id))
             resetForm()
             successNotify()
